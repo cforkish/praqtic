@@ -5,7 +5,7 @@ describe "Static pages" do
   let(:base_title) { "Primer" }
 
   describe "Home page" do
-    before { visit '/pages/home' }
+    before { visit root_path }
 
     it "should have the content 'Primer'" do
       expect(page).to have_content('Primer')
@@ -21,7 +21,7 @@ describe "Static pages" do
   end
 
   describe "Help page" do
-    before { visit '/pages/help' }
+    before { visit help_path }
 
     it "should have the content 'Help'" do
       expect(page).to have_content('Help')
@@ -33,7 +33,7 @@ describe "Static pages" do
   end
 
   describe "About page" do
-    before { visit '/pages/about' }
+    before { visit about_path }
 
     it "should have the content 'About'" do
       expect(page).to have_content('About')
@@ -45,7 +45,7 @@ describe "Static pages" do
   end
 
   describe "Contact page" do
-    before { visit '/pages/contact' }
+    before { visit contact_path }
 
     it "should have the content 'Contact'" do
       expect(page).to have_content('Contact')
