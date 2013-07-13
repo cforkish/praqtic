@@ -1,5 +1,5 @@
 Primer::Application.routes.draw do
-  resources :users
+  resources :users, except: :new
 
   root 'pages#home'
   get '/signup'  => 'users#new'
