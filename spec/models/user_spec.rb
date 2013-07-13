@@ -92,7 +92,7 @@ describe User do
       usernames.each do |invalid_username|
         @user.username = invalid_username
         expect(@user).not_to be_valid
-      end      
+      end
     end
   end
 
@@ -102,7 +102,7 @@ describe User do
       usernames.each do |valid_username|
         @user.username = valid_username
         expect(@user).to be_valid
-      end      
+      end
     end
   end
 
