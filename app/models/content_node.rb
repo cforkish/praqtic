@@ -10,4 +10,6 @@ class ContentNode < ActiveRecord::Base
   # dependency associations
   has_and_belongs_to_many :needs, class_name: "ContentNode", foreign_key: "enable_id", join_table: "dependency", association_foreign_key: "need_id"
   has_and_belongs_to_many :enables, class_name: "ContentNode", foreign_key: "need_id", join_table: "dependency", association_foreign_key: "enable_id"
+  
+  validates :name,  presence: true, length: { maximum: 50 }
 end
