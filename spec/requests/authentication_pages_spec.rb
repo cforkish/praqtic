@@ -82,16 +82,45 @@ describe "Authentication" do
     describe "as wrong user" do
       let(:user) { FactoryGirl.create(:user) }
       let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com", username: "wrong") }
-      before { sign_in user, no_capybara: true }
 
       describe "visiting Users#edit page" do
-        before { visit edit_user_path(wrong_user) }
+        before do
+          sign_in user
+          visit edit_user_path(wrong_user)
+        end
+
         it { should_not have_title(full_title('Edit user')) }
       end
 
       describe "submitting a PATCH request to the Users#update action" do
-        before { patch user_path(wrong_user) }
+        before do
+          sign_in user, no_capybara: true
+          patch user_path(wrong_user)
+        end
+
         specify { expect(response).to redirect_to(root_path) }
+      end
+    end
+
+    describe "as correct user" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "visiting Users#edit page" do
+        before do
+          sign_in user
+          visit edit_user_path(user)
+        end
+
+        it { should have_title(full_title('Edit user')) }
+      end
+
+      describe "submitting a PATCH request to the Users#update action" do
+        before do
+          sign_in user, no_capybara: true
+          patch user_path(user), {user: {name: "user"} }
+        end
+
+        specify { expect(response).to be_success }
       end
     end
   end
