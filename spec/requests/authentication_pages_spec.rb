@@ -76,6 +76,38 @@ describe "Authentication" do
           before { patch user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
         end
+
+        describe "visiting the signup page" do
+          before { visit signup_path }
+          it { should have_title('Sign up') }
+        end
+
+        describe "submitting to the create action" do
+          before { post users_path, {user: {name: "user"} } }
+          specify { expect(response).to be_success }
+        end
+
+        describe "after signing in" do
+          let(:user) { FactoryGirl.create(:user) }
+
+          describe "visiting the signup page" do
+            before do
+              sign_in user
+              visit signup_path
+            end
+
+            it { should_not have_title('Sign up') }
+          end
+
+          describe "submitting to the create action" do
+            before do
+              sign_in user, no_capybara: true
+              post users_path, {user: {name: "user"} }
+            end
+
+            specify { expect(response).to redirect_to(root_path) }
+          end
+        end
       end
     end
 
