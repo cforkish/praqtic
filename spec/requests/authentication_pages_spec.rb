@@ -45,4 +45,126 @@ describe "Authentication" do
       end
     end
   end
+
+  describe "authorization" do
+
+    describe "for non-signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "when attempting to visit a protected page" do
+        before do
+          visit edit_user_path(user)
+          sign_in user
+        end
+
+        describe "after signing in" do
+
+          it "should render the desired protected page" do
+            expect(page).to have_title('Edit user')
+          end
+
+          describe "when signing in again" do
+            before do
+              delete signout_path
+              sign_in user
+            end
+
+            it "should render the default (profile) page" do
+              expect(page).to have_title(user.name)
+            end
+          end
+        end
+      end
+
+      describe "in the Users controller" do
+
+        describe "visiting the edit page" do
+          before { visit edit_user_path(user) }
+          it { should have_title('Sign in') }
+        end
+
+        describe "submitting to the update action" do
+          before { patch user_path(user) }
+          specify { expect(response).to redirect_to(signin_path) }
+        end
+
+        describe "visiting the signup page" do
+          before { visit signup_path }
+          it { should have_title('Sign up') }
+        end
+
+        describe "submitting to the create action" do
+          before { post users_path, {user: {name: "user"} } }
+          specify { expect(response).to be_success }
+        end
+
+        describe "after signing in" do
+          let(:user) { FactoryGirl.create(:user) }
+
+          describe "visiting the signup page" do
+            before do
+              sign_in user
+              visit signup_path
+            end
+
+            it { should_not have_title('Sign up') }
+          end
+
+          describe "submitting to the create action" do
+            before do
+              sign_in user, no_capybara: true
+              post users_path, {user: {name: "user"} }
+            end
+
+            specify { expect(response).to redirect_to(root_path) }
+          end
+        end
+      end
+    end
+
+    describe "as wrong user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com", username: "wrong") }
+
+      describe "visiting Users#edit page" do
+        before do
+          sign_in user
+          visit edit_user_path(wrong_user)
+        end
+
+        it { should_not have_title(full_title('Edit user')) }
+      end
+
+      describe "submitting a PATCH request to the Users#update action" do
+        before do
+          sign_in user, no_capybara: true
+          patch user_path(wrong_user)
+        end
+
+        specify { expect(response).to redirect_to(root_path) }
+      end
+    end
+
+    describe "as correct user" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "visiting Users#edit page" do
+        before do
+          sign_in user
+          visit edit_user_path(user)
+        end
+
+        it { should have_title(full_title('Edit user')) }
+      end
+
+      describe "submitting a PATCH request to the Users#update action" do
+        before do
+          sign_in user, no_capybara: true
+          patch user_path(user), {user: {name: "user"} }
+        end
+
+        specify { expect(response).to be_success }
+      end
+    end
+  end
 end
