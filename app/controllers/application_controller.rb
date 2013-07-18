@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
 
+  # Enforce authorization with CanCan
+  check_authorization
+
   # Handle Unauthorized Access with CanCan
   # See: https://github.com/ryanb/cancan/blob/master/README.rdoc
   rescue_from CanCan::AccessDenied do |exception|
