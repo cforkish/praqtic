@@ -28,5 +28,10 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+
+    can :create, User if user.nil?
+    can :read, User
+    can :update, User, id: user.id if !user.nil?
+
   end
 end
