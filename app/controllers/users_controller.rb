@@ -1,18 +1,13 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :new_user,       only: [:new, :create]
+  load_and_authorize_resource find_by: :username
 
   def show
-    @user = User.find_by_username!(params[:id])
   end
 
   def new
-    @user = User.new
   end
 
   def create
-    @user = User.new(user_params)
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to Primer!"
@@ -40,23 +35,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :username,
                                    :password, :password_confirmation)
-    end
-
-    # Before filters
-
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-    end
-
-    def correct_user
-      @user = User.find_by_username!(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
-    end
-
-    def new_user
-      redirect_to root_path if signed_in?
     end
 end
