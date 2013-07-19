@@ -1,6 +1,10 @@
 class CreateEvaluators < ActiveRecord::Migration
   def change
-    create_table :evaluators do |t|
+    enable_extension "uuid-ossp"
+
+    create_table :evaluators, id: :uuid do |t|
+      t.uuid :content_node_id
+
       t.timestamps
     end
   end

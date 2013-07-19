@@ -5,12 +5,12 @@ class StructureNode < ActiveRecord::Base
   
   # friend associaton
   has_many :node_friendships
-  has_many :friend_nodes, :through => :node_friendships
-  has_many :inverse_node_friendships, :class_name => "NodeFriendship", :foreign_key => "friend_node_id"
-  has_many :inverse_friends_nodes, :through => :inverse_node_friendships, :source => :structureNode
+  has_many :friends, :through => :node_friendships
+  has_many :inverse_node_friendships, :class_name => "NodeFriendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_node_friendships, :source => :structure_node
 
   # content association
-  has_and_belongs_to_many :contentNodes, class_name: "ContentNode", foreign_key: "parent_structure_node_id", 
+  has_and_belongs_to_many :content_nodes, class_name: "ContentNode", foreign_key: "parent_structure_node_id", 
   	join_table: "structure_content", association_foreign_key: "child_content_node_id"
 
   validates :name,  presence: true, length: { maximum: 50 }
