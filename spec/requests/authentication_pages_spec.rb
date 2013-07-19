@@ -89,6 +89,11 @@ describe "Authentication" do
           specify { expect(response).to redirect_to(signin_path) }
         end
 
+        describe "visiting the user index" do
+          before { visit users_path }
+          it { should have_title('Sign in') }
+        end
+
         describe "visiting the signup page" do
           before { visit signup_path }
           it { should have_title('Sign up') }
@@ -101,6 +106,15 @@ describe "Authentication" do
 
         describe "after signing in" do
           let(:user) { FactoryGirl.create(:user) }
+
+          describe "visiting the user index" do
+            before do
+              sign_in user
+              visit users_path
+            end
+
+            it { should have_title('All users') }
+          end
 
           describe "visiting the signup page" do
             before do

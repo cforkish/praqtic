@@ -31,6 +31,7 @@ class Ability
 
     can :create, User if user.nil?
     can :read, User
+    cannot :index, User if user.nil?
     can :update, User, id: user.id if !user.nil?
 
   end
