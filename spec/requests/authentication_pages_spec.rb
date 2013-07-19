@@ -181,5 +181,42 @@ describe "Authentication" do
         specify { expect(response).to be_success }
       end
     end
+
+    describe "as non-admin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:non_admin) { FactoryGirl.create(:user) }
+
+      before { sign_in non_admin, no_capybara: true }
+
+      describe "submitting a DELETE request to the Users#destroy action" do
+        before { delete user_path(user) }
+        specify { expect(response).to redirect_to(root_path) }
+      end
+    end
+
+    describe "as admin user" do
+      let(:admin) { FactoryGirl.create(:admin) }
+      let(:non_admin) { FactoryGirl.create(:user) }
+
+      before { sign_in admin, no_capybara: true }
+
+      describe "submitting a DELETE request to the Users#destroy action" do
+        before { delete user_path(non_admin) }
+        specify { expect(response).to redirect_to(users_path) }
+      end
+
+      describe "submitting a DELETE request to the Users#destroy action for oneself" do
+        describe "should redirect" do
+          before { delete user_path(admin) }
+          specify { expect(response).to redirect_to(root_path) }
+        end
+
+        specify do
+          expect do
+            delete user_path(admin)
+          end.to change(User, :count).by(0)
+        end
+      end
+    end
   end
 end
