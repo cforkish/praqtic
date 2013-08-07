@@ -8,7 +8,7 @@ class CreateContentNodes < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :dependencies do |t|
+    create_table :dependencies, id: :uuid do |t|
       t.uuid :enable_id
       t.uuid :need_id
 

@@ -17,26 +17,55 @@ ActiveRecord::Schema.define(version: 20130719033031) do
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "content_nodes", force: true do |t|
+  create_table "content_nodes", id: :uuid, force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "evaluators", force: true do |t|
+  create_table "dependencies", id: :uuid, force: true do |t|
+    t.uuid     "enable_id"
+    t.uuid     "need_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  create_table "lessons", force: true do |t|
+  create_table "evaluators", id: :uuid, force: true do |t|
+    t.uuid     "content_node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lessons", id: :uuid, force: true do |t|
+    t.string   "name"
+    t.uuid     "content_node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "node_friendships", id: :uuid, force: true do |t|
+    t.uuid     "structure_node_id"
+    t.uuid     "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "structure_content", id: :uuid, force: true do |t|
+    t.uuid     "parent_structure_node_id"
+    t.uuid     "child_content_node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "structure_nodes", id: :uuid, force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "node_friendships", force: true do |t|
-  end
-
-  create_table "structure_nodes", force: true do |t|
-    t.string   "name"
+  create_table "structure_parent_child", id: :uuid, force: true do |t|
+    t.uuid     "parent_id"
+    t.uuid     "child_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
