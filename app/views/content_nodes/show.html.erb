@@ -7,4 +7,30 @@
   <h1>
     <%= @content_node.name %>
   </h1>
+
+  <% if @content_node.needs.count > 0 %>
+    <% if @content_node.enables.count > 0 %>
+      <section class="span4 offset2">
+    <% else %>
+      <section class="span4 offset4">
+    <% end %>
+      <h2>Needs:</h2>
+      <ul class="content_nodes">
+        <%= render @content_node.needs %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if @content_node.enables.count > 0 %>
+    <% if @content_node.needs.count > 0 %>
+      <section class="span4">
+    <% else %>
+      <section class="span4 offset4">
+    <% end %>
+      <h2>Enables:</h2>
+      <ul class="content_nodes">
+        <%= render @content_node.enables %>
+      </ul>
+    </section>
+  <% end %>
 </div>
