@@ -18,7 +18,7 @@ describe NodeFriendship do
   it { should be_valid }
 
   describe "when doesn't belong to a structure node" do
-    before do 
+    before do
       @friendship.structure_node = nil
     end
 
@@ -26,7 +26,7 @@ describe NodeFriendship do
   end
 
   describe "when doesn't belong to a friend node" do
-    before do 
+    before do
       @friendship.friend = nil
     end
 
@@ -34,4 +34,3 @@ describe NodeFriendship do
   end
 
 end
-

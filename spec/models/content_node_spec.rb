@@ -30,8 +30,8 @@ describe ContentNode do
   end
 
   describe "when doesn't belong to a structure node" do
-    before do 
-      @cnode.structure_nodes.clear 
+    before do
+      @cnode.structure_nodes.clear
       @cnode.save
     end
 
