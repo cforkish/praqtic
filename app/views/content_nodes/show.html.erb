@@ -34,3 +34,31 @@
     </section>
   <% end %>
 </div>
+
+<div class="row">
+  <% if @content_node.lessons.count > 0 %>
+    <% if @content_node.evaluators.count > 0 %>
+      <section class="span4 offset2">
+    <% else %>
+      <section class="span4 offset4">
+    <% end %>
+      <h2>Lessons:</h2>
+      <ul class="lessons">
+        <%= render @content_node.lessons %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if @content_node.evaluators.count > 0 %>
+    <% if @content_node.lessons.count > 0 %>
+      <section class="span4">
+    <% else %>
+      <section class="span4 offset4">
+    <% end %>
+      <h2>Evaluators:</h2>
+      <ul class="content_nodes">
+        <%= render @content_node.evaluators %>
+      </ul>
+    </section>
+  <% end %>
+</div>
