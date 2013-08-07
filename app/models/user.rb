@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+
+  has_many :lessons, :foreign_key => :creator_id
+  has_many :interactions, :class_name => "LessonInteraction"
+
   before_save do
     email.downcase!
     username.downcase!

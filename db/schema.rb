@@ -11,27 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130719033031) do
+ActiveRecord::Schema.define(version: 20130807063815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "content_nodes", id: :uuid, force: true do |t|
+  create_table "content_nodes", id: false, force: true do |t|
+    t.uuid     "id",         null: false
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "dependencies", id: :uuid, force: true do |t|
+  create_table "dependencies", id: false, force: true do |t|
+    t.uuid     "id",         null: false
     t.uuid     "enable_id"
     t.uuid     "need_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "evaluators", id: :uuid, force: true do |t|
+  create_table "evaluators", id: false, force: true do |t|
+    t.uuid     "id",              null: false
     t.uuid     "content_node_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.uuid     "creator_id"
+  end
+
+  add_index "evaluators", ["creator_id"], name: "index_evaluators_on_creator_id", using: :btree
+
+  create_table "lesson_interactions", id: :uuid, force: true do |t|
+    t.uuid     "id",         null: false
+    t.uuid     "lesson_id"
+    t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -41,7 +55,10 @@ ActiveRecord::Schema.define(version: 20130719033031) do
     t.uuid     "content_node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.uuid     "creator_id"
   end
+
+  add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
 
   create_table "node_friendships", id: :uuid, force: true do |t|
     t.uuid     "structure_node_id"

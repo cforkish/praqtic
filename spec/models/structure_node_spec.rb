@@ -31,9 +31,6 @@ describe StructureNode do
       @fnode = StructureNode.create(name: "Friend Structure Node")
       @friendship = @snode.node_friendships.build(:friend_id => @fnode.id)
       @friendship.save!
-      @snode.save!
-      @fnode.save!
-      puts "snode #{@snode.id} fnode #{@friendship.friend_id}"
     end
 
     specify { expect(@snode.node_friendships.size).to eq(1) }
