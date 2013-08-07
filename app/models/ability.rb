@@ -38,5 +38,6 @@ class Ability
       cannot :destroy, User, id: user.id
     end
 
+    can :manage, StructureNode
   end
 end
