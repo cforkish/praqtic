@@ -1,6 +1,7 @@
 Primer::Application.routes.draw do
   resources :users, except: :new
   resources :sessions, only: [:new, :create, :destroy]
+  resources :categories, controller: 'structure_nodes'
 
   root 'pages#home'
 

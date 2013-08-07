@@ -14,4 +14,7 @@ class StructureNode < ActiveRecord::Base
     join_table: "structure_content", association_foreign_key: "child_content_node_id"
 
   validates :name,  presence: true, length: { maximum: 50 }
+
+  # sorting
+  default_scope { order(created_at: :asc) }
 end
