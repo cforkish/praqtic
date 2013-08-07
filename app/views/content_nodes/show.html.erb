@@ -1,0 +1,10 @@
+<% provide(:title, @content_node.name) %>
+<div class="row">
+  <% @content_node.structure_nodes.each do |parent| %>
+    <%= link_to "&uparrow;".html_safe + parent.name, category_path(parent) %>
+  <% end %>
+
+  <h1>
+    <%= @content_node.name %>
+  </h1>
+</div>

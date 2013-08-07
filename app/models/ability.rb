@@ -39,5 +39,6 @@ class Ability
     end
 
     can :manage, StructureNode
+    can :manage, ContentNode
   end
 end
