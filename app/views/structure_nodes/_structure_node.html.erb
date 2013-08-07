@@ -1,7 +1,10 @@
+<% recursive ||= false %>
 <li>
   <%= link_to structure_node.name, category_path(structure_node) %>
 
-  <ul class="categories">
-    <%= render structure_node.children %>
-  </ul>
+  <% if recursive %>
+    <ul class="categories">
+      <%= render structure_node.children, recursive: recursive %>
+    </ul>
+  <% end %>
 </li>

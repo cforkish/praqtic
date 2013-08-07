@@ -1,0 +1,36 @@
+<% provide(:title, @structure_node.name) %>
+<div class="row">
+  <% @structure_node.parents.each do |parent| %>
+    <%= link_to "&uparrow;".html_safe + parent.name, category_path(parent) %>
+  <% end %>
+
+  <h1>
+    <%= @structure_node.name %>
+  </h1>
+
+  <% if @structure_node.content_nodes.count > 0 %>
+    <% if @structure_node.children.count > 0 %>
+      <section class="span4 offset2">
+    <% else %>
+      <section class="span4 offset4">
+    <% end %>
+      <h2>Content:</h2>
+      <ul class="content_nodes">
+        <%= render @structure_node.content_nodes %>
+      </ul>
+    </section>
+  <% end %>
+
+  <% if @structure_node.children.count > 0 %>
+    <% if @structure_node.content_nodes.count > 0 %>
+      <section class="span4">
+    <% else %>
+      <section class="span4 offset4">
+    <% end %>
+      <h2>Subcategories:</h2>
+      <ul class="categories">
+        <%= render @structure_node.children %>
+      </ul>
+    </section>
+  <% end %>
+</div>

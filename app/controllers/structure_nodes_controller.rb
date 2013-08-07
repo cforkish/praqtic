@@ -4,4 +4,7 @@ class StructureNodesController < ApplicationController
   def index
     @root_node = StructureNode.first
   end
+
+  def show
+  end
 end
