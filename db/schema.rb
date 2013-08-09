@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20130809013129) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "creator_id"
+    t.string   "link"
   end
 
   add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree

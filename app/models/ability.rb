@@ -40,5 +40,7 @@ class Ability
 
     can :manage, StructureNode
     can :manage, ContentNode
+    can :manage, Lesson
+    can :manage, Evaluator
   end
 end

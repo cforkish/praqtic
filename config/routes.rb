@@ -3,6 +3,8 @@ Primer::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :categories, controller: 'structure_nodes'
   resources :topics, controller: 'content_nodes'
+  resources :lessons
+  resources :evaluators
 
   root 'pages#home'
 

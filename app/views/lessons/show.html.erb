@@ -1,0 +1,13 @@
+<% provide(:title, @lesson.name) %>
+<div class="row">
+  <%= link_to "&uparrow;".html_safe + @lesson.content_node.name, topic_path(@lesson.content_node) %>
+
+  <h1>
+    <%= @lesson.name %>
+  </h1>
+
+  <h2>
+    <%= @lesson.link %>
+  </h2>
+
+</div>

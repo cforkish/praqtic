@@ -1,6 +1,10 @@
 <% provide(:title, 'All Categories') %>
 <h1>All Categories</h1>
 
+
+
+<% if @root_node %>
 <ul class="categories">
   <%= render @root_node, recursive: true %>
 </ul>
+<% end %>
