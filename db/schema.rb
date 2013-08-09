@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130719033031) do
+ActiveRecord::Schema.define(version: 20130809013129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 20130719033031) do
     t.uuid     "content_node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.uuid     "creator_id"
+    t.string   "question"
+    t.string   "answer"
+  end
+
+  add_index "evaluators", ["creator_id"], name: "index_evaluators_on_creator_id", using: :btree
+
+  create_table "lesson_interactions", id: :uuid, force: true do |t|
+    t.uuid     "lesson_id"
+    t.uuid     "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "lessons", id: :uuid, force: true do |t|
@@ -41,7 +53,10 @@ ActiveRecord::Schema.define(version: 20130719033031) do
     t.uuid     "content_node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.uuid     "creator_id"
   end
+
+  add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
 
   create_table "node_friendships", id: :uuid, force: true do |t|
     t.uuid     "structure_node_id"

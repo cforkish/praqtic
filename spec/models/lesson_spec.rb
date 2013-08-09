@@ -4,14 +4,19 @@ describe Lesson do
 
   before do
     @lesson = Lesson.new(name: "Test Lesson")
+    @creator = User.new(name: "Test User")
     @cnode = ContentNode.new(name: "Test Content Node")
     @lesson.content_node = @cnode
+    @lesson.creator = @creator
   end
 
   subject { @lesson }
 
   it { should respond_to(:name) }
   it { should respond_to(:content_node) }
+  it { should respond_to(:creator) }
+  it { should respond_to(:interactions) }
+  it { should respond_to(:users) }
 
   it { should be_valid }
 
