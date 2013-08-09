@@ -4,4 +4,6 @@ class Evaluator < ActiveRecord::Base
 
   validates_presence_of :content_node
   validates_presence_of :creator
+  validates_presence_of :question
+  validates_presence_of :answer
 end

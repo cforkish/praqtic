@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Evaluator do
 
   before do
-    @eval = Evaluator.new()
+    @eval = Evaluator.new(question: "What is 2+2?", answer: "4")
     
     @cnode = ContentNode.new(name: "Test Content Node")
     @eval.content_node = @cnode
