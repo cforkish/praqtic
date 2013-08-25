@@ -5,10 +5,18 @@ class ContentNodesController < ApplicationController
   end
 
   def new
-    @content_node.structure_nodes << StructureNode.find(params[:category])
+    @category = StructureNode.find(params[:category])
   end
 
   def create
+
+    category = StructureNode.find(params[:category])
+    if category.nil?
+      @content_node.structure_nodes << StructureNode.first
+    else
+      @content_node.structure_nodes << category
+    end
+
     if @content_node.save
       flash[:success] = "Topic added!"
       redirect_to topic_path(@content_node)

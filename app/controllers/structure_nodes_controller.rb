@@ -9,13 +9,17 @@ class StructureNodesController < ApplicationController
   end
 
   def new
-    @structure_node.parents << StructureNode.find(params[:parent])
+    @parent = StructureNode.find(params[:parent])
   end
 
   def create
-    if @structure_node.parents.size == 0
+    parent = StructureNode.find(params[:parent])
+    if parent.nil?
       @structure_node.parents << StructureNode.first
+    else
+      @structure_node.parents << parent
     end
+    
     if @structure_node.save
       flash[:success] = "Category created!"
       redirect_to category_path(@structure_node)

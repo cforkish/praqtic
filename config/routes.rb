@@ -5,6 +5,7 @@ Primer::Application.routes.draw do
   resources :topics, controller: 'content_nodes'
   resources :lessons
   resources :evaluators
+  resources :graph
 
   root 'pages#home'
 
