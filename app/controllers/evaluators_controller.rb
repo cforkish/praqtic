@@ -9,7 +9,7 @@ class EvaluatorsController < ApplicationController
   end
 
   def new
-    @structure_node.parents << StructureNode.find(params[:parent])
+    @parent = StructureNode.find(params[:parent])
   end
 
   def create

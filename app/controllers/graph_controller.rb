@@ -37,23 +37,8 @@ class GraphController < ApplicationController
     
   end
 
-
-  # def createNodes
-  #   nodeMap = Hash.new
-  #   nodes = Array.new
-  #   id = 0
-  #   StructureNode.all.each do |snode|
-  #     nodeMap << {snode => id}
-  #     nodes << { :name => snode.name, :id => id}
-  #     id++
-  #   end
-  # end
-
-  def createLinks(node, links, nodeMap)
-    node.children.each do |child|
-      links << { :source => node, :target => child, :value => 1 }
-      createLinks(child, links)
-    end
+  def tree
+    @mydata = StructureNode.first.to_node.to_json
   end
 
 
