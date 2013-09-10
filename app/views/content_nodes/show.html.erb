@@ -10,9 +10,9 @@
 
   <section class="span4 offset2">
     <h2 style="text-align:left;">Prerequisites:</h2>
-    <% if @content_node.needs.count > 0 %>
+    <% if @content_node.prereqs.count > 0 %>
       <ul class="content_nodes">
-        <%= render @content_node.needs %>
+        <%= render @content_node.prereqs %>
       </ul>
     <% else %>
       <p>This topic has no prerequisites.</p>
@@ -23,9 +23,9 @@
 
   <section class="span4">
     <h2 style="text-align:left;">Next Steps:</h2>
-    <% if @content_node.enables.count > 0 %>
+    <% if @content_node.postreqs.count > 0 %>
       <ul class="content_nodes">
-        <%= render @content_node.enables %>
+        <%= render @content_node.postreqs %>
       </ul>
     <% else %>
       <p>This topic leads to no next steps.</p>

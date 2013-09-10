@@ -14,8 +14,8 @@ describe ContentNode do
   it { should respond_to(:structure_nodes) }
   it { should respond_to(:lessons) }
   it { should respond_to(:evaluators) }
-  it { should respond_to(:needs) }
-  it { should respond_to(:enables) }
+  it { should respond_to(:prereqs) }
+  it { should respond_to(:postreqs) }
 
   it { should be_valid }
 
@@ -39,4 +39,5 @@ describe ContentNode do
     specify { expect(@cnode.errors[:structure_nodes]).to_not eq(nil) }
   end
 
+  pending "test dependency relationships"
 end

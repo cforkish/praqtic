@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910150928) do
+ActiveRecord::Schema.define(version: 20130910160047) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(version: 20130910150928) do
   end
 
   create_table "dependencies", id: :uuid, force: true do |t|
-    t.uuid     "enable_id"
-    t.uuid     "need_id"
+    t.uuid     "postreq_id"
+    t.uuid     "prereq_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

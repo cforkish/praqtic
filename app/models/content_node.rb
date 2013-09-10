@@ -24,8 +24,8 @@ class ContentNode < ActiveRecord::Base
   has_many :evaluators
 
   # dependency associations
-  has_and_belongs_to_many :needs, class_name: "ContentNode", foreign_key: "enable_id", join_table: "dependencies", association_foreign_key: "need_id"
-  has_and_belongs_to_many :enables, class_name: "ContentNode", foreign_key: "need_id", join_table: "dependencies", association_foreign_key: "enable_id"
+  has_and_belongs_to_many :prereqs, class_name: "ContentNode", foreign_key: "postreq_id", join_table: "dependencies", association_foreign_key: "prereq_id"
+  has_and_belongs_to_many :postreqs, class_name: "ContentNode", foreign_key: "prereq_id", join_table: "dependencies", association_foreign_key: "postreq_id"
 
   validates :name,  presence: true, length: { maximum: 50 }
 
