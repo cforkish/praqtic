@@ -44,4 +44,5 @@ describe StructureNode do
   end
 
   pending "test parent-child relationships"
+  pending "test content node relationships"
 end

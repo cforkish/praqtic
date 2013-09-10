@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910041856) do
+ActiveRecord::Schema.define(version: 20130910051203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20130910041856) do
   add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
 
   create_table "structure_content", id: :uuid, force: true do |t|
-    t.uuid     "parent_structure_node_id"
-    t.uuid     "child_content_node_id"
+    t.uuid     "structure_node_id"
+    t.uuid     "content_node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
