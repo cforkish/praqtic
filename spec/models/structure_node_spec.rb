@@ -29,12 +29,12 @@ describe StructureNode do
   describe "when node has a friend" do
     before do
       @fnode = StructureNode.create(name: "Friend Structure Node")
-      @friendship = @snode.node_friendships.build(:friend_id => @fnode.id)
+      @friendship = @snode.structure_friendships.build(:friend_id => @fnode.id)
       @friendship.save!
     end
 
-    specify { expect(@snode.node_friendships.size).to eq(1) }
-    specify { expect(@fnode.inverse_node_friendships.size).to eq(1) }
+    specify { expect(@snode.structure_friendships.size).to eq(1) }
+    specify { expect(@fnode.inverse_structure_friendships.size).to eq(1) }
     specify { expect(@snode.friends.size).to eq(1) }
     specify { expect(@fnode.inverse_friends.size).to eq(1) }
     specify { expect(@snode.inverse_friends.size).to eq(0) }

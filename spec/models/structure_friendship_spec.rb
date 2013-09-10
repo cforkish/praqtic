@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe NodeFriendship do
+describe StructureFriendship do
 
   before do
-    @friendship = NodeFriendship.new()
+    @friendship = StructureFriendship.new()
     @snode = StructureNode.new(name: "Node A")
     @fnode = StructureNode.new(name: "Node B")
     @friendship.structure_node = @snode

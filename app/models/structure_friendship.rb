@@ -1,7 +1,7 @@
-# A node friendship object represents the frienship relationship between two structure nodes.
+# A structure friendship object represents the friendship relationship between two structure nodes.
 # See structure_node.rb for an explanation of that relationship.
 
-class NodeFriendship < ActiveRecord::Base
+class StructureFriendship < ActiveRecord::Base
   belongs_to :structure_node
   belongs_to :friend, :class_name => "StructureNode"
 
