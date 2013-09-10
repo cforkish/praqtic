@@ -30,7 +30,8 @@ class StructureNode < ActiveRecord::Base
   has_many :inverse_friends, through: :inverse_friendships, source: :structure_node
 
   # content association
-  has_and_belongs_to_many :content_nodes, join_table: "content_classifications"
+  has_many :content_classifications
+  has_many :content_nodes, through: :content_classifications
 
   validates :name,  presence: true, length: { maximum: 50 }
 

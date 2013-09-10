@@ -3,8 +3,8 @@ require 'spec_helper'
 describe ContentNode do
 
   before do
-    @cnode = ContentNode.new(name: "Test Content Node")
-    @snode = StructureNode.new(name: "Test Structure Node")
+    @cnode = ContentNode.create(name: "Test Content Node")
+    @snode = StructureNode.create(name: "Test Structure Node")
     @cnode.structure_nodes << @snode
   end
 

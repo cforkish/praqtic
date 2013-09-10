@@ -16,7 +16,8 @@
 
 class ContentNode < ActiveRecord::Base
 	# structure node association
-  has_and_belongs_to_many :structure_nodes, join_table: "content_classifications"
+  has_many :classifications, class_name: "ContentClassification"
+  has_many :structure_nodes, through: :classifications
 
   # content associations
   has_many :lessons
