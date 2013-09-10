@@ -11,7 +11,7 @@
 # on the relevant material.
 #
 # A content node may depend on one or more other content nodes, and may have one or more other
-# content nodes which depend on it. This dependency graph creates a systems of prerequisites for
+# content nodes which depend on it. This dependency graph creates a system of prerequisites for
 # content nodes.
 
 class ContentNode < ActiveRecord::Base
@@ -24,9 +24,13 @@ class ContentNode < ActiveRecord::Base
   has_many :evaluators
 
   # dependency associations
-  has_and_belongs_to_many :prereqs, class_name: "ContentNode", foreign_key: "postreq_id", join_table: "dependencies", association_foreign_key: "prereq_id"
-  has_and_belongs_to_many :postreqs, class_name: "ContentNode", foreign_key: "prereq_id", join_table: "dependencies", association_foreign_key: "postreq_id"
+  has_many :dependencies, foreign_key: "postreq_id"
+  has_many :prereqs, through: :dependencies, class_name: "ContentNode"
 
+  has_many :post_dependencies, class_name: "Dependency", foreign_key: "prereq_id"
+  has_many :postreqs, through: :post_dependencies, class_name: "ContentNode"
+
+  # validations
   validates :name,  presence: true, length: { maximum: 50 }
 
   after_save :validate_has_structure_node
