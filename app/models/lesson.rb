@@ -8,4 +8,5 @@ class Lesson < ActiveRecord::Base
   validates :name,  presence: true, length: { maximum: 50 }
   validates_presence_of :content_node
   validates_presence_of :creator
+  validates_presence_of :link
 end

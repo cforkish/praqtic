@@ -15,6 +15,12 @@ class ContentNode < ActiveRecord::Base
 
   after_save :validate_has_structure_node
 
+  def to_node
+  { "name" => self.name,
+    "size"   => self.lessons.size + self.evaluators.size
+  }
+  end
+
 private
   def validate_has_structure_node
     if structure_nodes.count < 1

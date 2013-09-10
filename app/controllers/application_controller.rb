@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   # See: https://github.com/ryanb/cancan/blob/master/README.rdoc
   rescue_from CanCan::AccessDenied do |exception|
     if signed_in?
-      redirect_to root_url
+      redirect_to root_url, notice: "You can't do that."
     else
       store_location
       redirect_to signin_url, notice: "Please sign in."

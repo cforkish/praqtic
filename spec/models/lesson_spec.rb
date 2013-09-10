@@ -8,6 +8,7 @@ describe Lesson do
     @cnode = ContentNode.new(name: "Test Content Node")
     @lesson.content_node = @cnode
     @lesson.creator = @creator
+    @lesson.link = "www.wikipedia.org"
   end
 
   subject { @lesson }
@@ -15,6 +16,7 @@ describe Lesson do
   it { should respond_to(:name) }
   it { should respond_to(:content_node) }
   it { should respond_to(:creator) }
+  it { should respond_to(:link) }
   it { should respond_to(:interactions) }
   it { should respond_to(:users) }
 

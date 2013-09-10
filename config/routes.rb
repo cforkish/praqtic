@@ -3,6 +3,9 @@ Primer::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :categories, controller: 'structure_nodes'
   resources :topics, controller: 'content_nodes'
+  resources :lessons
+  resources :evaluators
+  resources :graph
 
   root 'pages#home'
 
@@ -13,6 +16,8 @@ Primer::Application.routes.draw do
   get '/help'    => 'pages#help'
   get '/about'   => 'pages#about'
   get '/contact' => 'pages#contact'
+
+  get '/tree' => 'graph#tree'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

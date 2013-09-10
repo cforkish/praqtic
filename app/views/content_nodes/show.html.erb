@@ -8,57 +8,57 @@
     <%= @content_node.name %>
   </h1>
 
-  <% if @content_node.needs.count > 0 %>
-    <% if @content_node.enables.count > 0 %>
-      <section class="span4 offset2">
-    <% else %>
-      <section class="span4 offset4">
-    <% end %>
-      <h2>Needs:</h2>
+  <section class="span4 offset2">
+    <h2 style="text-align:left;">Prerequisites:</h2>
+    <% if @content_node.needs.count > 0 %>
       <ul class="content_nodes">
         <%= render @content_node.needs %>
       </ul>
-    </section>
-  <% end %>
-
-  <% if @content_node.enables.count > 0 %>
-    <% if @content_node.needs.count > 0 %>
-      <section class="span4">
     <% else %>
-      <section class="span4 offset4">
+      <p>This topic has no prerequisites.</p>
     <% end %>
-      <h2>Enables:</h2>
+
+    <%#= link_to "+ Add Prerequisite", new_category_path(parent: @content_node) %>
+  </section>
+
+  <section class="span4">
+    <h2 style="text-align:left;">Next Steps:</h2>
+    <% if @content_node.enables.count > 0 %>
       <ul class="content_nodes">
         <%= render @content_node.enables %>
       </ul>
-    </section>
-  <% end %>
+    <% else %>
+      <p>This topic leads to no next steps.</p>
+    <% end %>
+
+    <%#= link_to "+ Add Next Step", new_category_path(parent: @content_node) %>
+  </section>
 </div>
 
 <div class="row">
-  <% if @content_node.lessons.count > 0 %>
-    <% if @content_node.evaluators.count > 0 %>
-      <section class="span4 offset2">
-    <% else %>
-      <section class="span4 offset4">
-    <% end %>
-      <h2>Lessons:</h2>
+  <section class="span4 offset2">
+    <h2 style="text-align:left;">Lessons:</h2>
+    <% if @content_node.lessons.count > 0 %>
       <ul class="lessons">
         <%= render @content_node.lessons %>
       </ul>
-    </section>
-  <% end %>
-
-  <% if @content_node.evaluators.count > 0 %>
-    <% if @content_node.lessons.count > 0 %>
-      <section class="span4">
     <% else %>
-      <section class="span4 offset4">
+      <p>This topic has no lessons.</p>
     <% end %>
-      <h2>Evaluators:</h2>
+
+    <%= link_to "+ Add Lesson", new_lesson_path(node: @content_node) %>
+  </section>
+
+  <section class="span4">
+    <h2 style="text-align:left;">Evaluators:</h2>
+    <% if @content_node.evaluators.count > 0 %>
       <ul class="content_nodes">
         <%= render @content_node.evaluators %>
       </ul>
-    </section>
-  <% end %>
+    <% else %>
+      <p>This topic has no evaluators.</p>
+    <% end %>
+
+    <%= link_to "+ Add Evaluator", new_evaluator_path(node: @content_node) %>
+  </section>
 </div>

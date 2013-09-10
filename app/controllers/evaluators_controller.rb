@@ -1,4 +1,4 @@
-class StructureNodesController < ApplicationController
+class EvaluatorsController < ApplicationController
   load_and_authorize_resource
 
   def index
@@ -13,13 +13,9 @@ class StructureNodesController < ApplicationController
   end
 
   def create
-    parent = StructureNode.find(params[:parent])
-    if parent.nil?
+    if @structure_node.parents.size == 0
       @structure_node.parents << StructureNode.first
-    else
-      @structure_node.parents << parent
     end
-    
     if @structure_node.save
       flash[:success] = "Category created!"
       redirect_to category_path(@structure_node)
