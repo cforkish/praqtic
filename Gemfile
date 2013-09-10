@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
-gem 'rails', '4.0.0'
+gem 'rails', git: 'git://github.com/rails/rails.git', branch: '4-0-stable'
+# gem 'rails', '4.0.0'
 gem 'pg', '0.15.1'
-gem 'bcrypt-ruby', '3.0.1'
+gem 'bcrypt-ruby', '3.1.0'
 gem 'cancan', '1.6.10'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
