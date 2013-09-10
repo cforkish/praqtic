@@ -17,8 +17,8 @@
 
 class StructureNode < ActiveRecord::Base
   # parent-child association
-  has_and_belongs_to_many :parents, class_name: "StructureNode", foreign_key: "child_id", join_table: "structure_parent_child", association_foreign_key: "parent_id"
-  has_and_belongs_to_many :children, class_name: "StructureNode", foreign_key: "parent_id", join_table: "structure_parent_child", association_foreign_key: "child_id"
+  has_and_belongs_to_many :parents, class_name: "StructureNode", foreign_key: "child_id", join_table: "structure_relations", association_foreign_key: "parent_id"
+  has_and_belongs_to_many :children, class_name: "StructureNode", foreign_key: "parent_id", join_table: "structure_relations", association_foreign_key: "child_id"
 
   # friend associaton
   has_many :structure_friendships

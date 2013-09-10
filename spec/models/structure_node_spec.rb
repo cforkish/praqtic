@@ -43,4 +43,5 @@ describe StructureNode do
     specify { expect(@fnode.inverse_friends[0]).to eq(@snode) }
   end
 
+  pending "test parent-child relationships"
 end

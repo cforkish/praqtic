@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910040237) do
+ActiveRecord::Schema.define(version: 20130910041856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20130910040237) do
     t.datetime "updated_at"
   end
 
-  create_table "structure_parent_child", id: :uuid, force: true do |t|
+  create_table "structure_relations", id: :uuid, force: true do |t|
     t.uuid     "parent_id"
     t.uuid     "child_id"
     t.datetime "created_at"
