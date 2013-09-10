@@ -24,10 +24,10 @@ class StructureNode < ActiveRecord::Base
   has_many :children, through: :child_relations, class_name: "StructureNode"
 
   # friend associaton
-  has_many :structure_friendships
-  has_many :friends, :through => :structure_friendships
-  has_many :inverse_structure_friendships, :class_name => "StructureFriendship", :foreign_key => "friend_id"
-  has_many :inverse_friends, :through => :inverse_structure_friendships, :source => :structure_node
+  has_many :friendships, class_name: "StructureFriendship"
+  has_many :friends, through: :friendships
+  has_many :inverse_friendships, class_name: "StructureFriendship", foreign_key: "friend_id"
+  has_many :inverse_friends, through: :inverse_friendships, source: :structure_node
 
   # content association
   has_and_belongs_to_many :content_nodes, class_name: "ContentNode", foreign_key: "parent_structure_node_id",
