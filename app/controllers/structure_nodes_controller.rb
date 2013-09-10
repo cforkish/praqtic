@@ -19,7 +19,7 @@ class StructureNodesController < ApplicationController
     else
       @structure_node.parents << parent
     end
-    
+
     if @structure_node.save
       flash[:success] = "Category created!"
       redirect_to category_path(@structure_node)

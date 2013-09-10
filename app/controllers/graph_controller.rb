@@ -27,14 +27,14 @@ class GraphController < ApplicationController
     curIndex = nodes.size
     nodes << { :name => snode.name, :id => snode.id }
 
-    if curIndex > 0 
+    if curIndex > 0
       links << { :source => parentIndex, :target => curIndex, :value => 1 }
     end
 
     snode.children.each do |child|
       createNodes(nodes, links, child, curIndex)
     end
-    
+
   end
 
   def tree
