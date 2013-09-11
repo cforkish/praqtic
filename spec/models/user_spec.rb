@@ -33,6 +33,13 @@ describe User do
     it { should be_admin }
   end
 
+  describe "param for user_path" do
+    it "should be username" do
+      new_username = "new_user"
+      @user.username = new_username
+      expect(@user.to_param).to eq new_username
+    end
+  end
 
   describe "when name is not present" do
     before { @user.name = " " }
