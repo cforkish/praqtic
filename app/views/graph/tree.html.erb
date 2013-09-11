@@ -1,8 +1,87 @@
-<h1>Graph#tree</h1>
 <p>Find me in app/views/graph/tree.html.erb</p>
 
-<!DOCTYPE html>
-<meta charset="utf-8">
+
+<style>
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+</style>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var margin = {top: 80, right: 120, bottom: 80, left: 120},
+    width = 960 - margin.right - margin.left,
+    height = 800 - margin.top - margin.bottom;
+
+var tree = d3.layout.tree()
+    .size([width, height]);
+
+var diagonal = d3.svg.diagonal()
+    .projection(function(d) { return [d.x, height - d.y]; });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+var json = <%= raw(@mydata) %>
+
+var nodes = tree.nodes(json),
+    links = tree.links(nodes);
+
+var link = svg.selectAll("path.link")
+    .data(links)
+  .enter().append("path")
+    .attr("class", "link")
+    .attr("d", diagonal);
+
+var node = svg.selectAll("g.node")
+    .data(nodes)
+  .enter().append("g")
+    .attr("class", "node")
+    .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; })
+
+node.append("circle")
+    .attr("r", 35);
+
+// node.append("foreignObject")
+//     // .attr("x", function(d) { return d._children ? -8 : -48; }) /*the position of the text (left to right)*/
+//     // .attr("y", 3) the position of the text (Up and Down)
+//     .attr("width", 40)
+//     .attr("height", 40)
+//     .append("xhtml:body")
+//     // .append("p")
+//     .text(function(d) { return d.name; });
+
+node.append("text")
+    // .attr("dx", 3)
+    // .attr("dy", function(d) { return d.children ? 8 : -8; })
+    .attr("text-anchor", "middle")
+    .text(function(d) { return d.name; });
+
+d3.select(self.frameElement).style("height", height + "px");
+
+</script>
+
+<!-- old
+
 <style>
 
 .node {
@@ -28,6 +107,7 @@
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="application.js"></script>
 <script>
 
 var margin = {top: 20, right: 120, bottom: 20, left: 120},
@@ -40,6 +120,10 @@ var i = 0,
 
 var tree = d3.layout.tree()
     .size([height, width]);
+
+
+// tooltip used to display details
+var tooltip = Tooltip("vis-tooltip", 230)
 
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
@@ -86,7 +170,11 @@ function update(source) {
   var nodeEnter = node.enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+      .on("mouseover", showDetails)
+      .on("mouseout", hideDetails)
       .on("click", click);
+      // .on("mouseup", showDetails)
+      // .on("mouseout", hideDetails);
 
   nodeEnter.append("circle")
       .attr("r", 1e-6)
@@ -168,4 +256,48 @@ function click(d) {
   update(d);
 }
 
-</script>
+// Mouseover tooltip function
+function showDetails(d) {
+    var content = '<p class="main">' + d.name + '</span></p>';
+    // content += '<hr class="tooltip-hr">'
+    // content += '<p class="main">Lessons: ' + d.artist + '</span></p>'
+    tooltip.showTooltip(content,d3.event);
+
+    // // higlight connected links
+    // if link
+    //   link.attr("stroke", (l) ->
+    //     if l.source == d or l.target == d then "#555" else "#ddd"
+    //   )
+    //     .attr("stroke-opacity", (l) ->
+    //       if l.source == d or l.target == d then 1.0 else 0.5
+    //     )
+
+    //   # link.each (l) ->
+    //   #   if l.source == d or l.target == d
+    //   #     d3.select(this).attr("stroke", "#555")
+
+    // // highlight neighboring nodes
+    // // watch out - don't mess with node if search is currently matching
+    // node.style("stroke", (n) ->
+    //   if (n.searched or neighboring(d, n)) then "#555" else strokeFor(n))
+    //   .style("stroke-width", (n) ->
+    //     if (n.searched or neighboring(d, n)) then 2.0 else 1.0)
+
+    // # highlight the node being moused over
+    // d3.select(this).style("stroke","black")
+    //   .style("stroke-width", 2.0)
+}
+
+// Mouseout function
+function hideDetails(d) {
+    tooltip.hideTooltip()
+    // # watch out - don't mess with node if search is currently matching
+    // node.style("stroke", (n) -> if !n.searched then strokeFor(n) else "#555")
+    //   .style("stroke-width", (n) -> if !n.searched then 1.0 else 2.0)
+    // if link
+    //   link.attr("stroke", "#ddd")
+    //     .attr("stroke-opacity", 0.8)
+}
+
+
+</script> -->
