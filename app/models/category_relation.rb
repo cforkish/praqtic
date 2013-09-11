@@ -1,4 +1,4 @@
-# A category relation object represents the parent-child relationship between two categories.
+# A CategoryRelation represents the parent-child relationship between two categories.
 # See category.rb for an explanation of that relationship.
 
 class CategoryRelation < ActiveRecord::Base
