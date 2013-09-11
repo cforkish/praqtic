@@ -17,7 +17,7 @@
 class ContentNode < ActiveRecord::Base
 	# structure node association
   has_many :classifications, class_name: "ContentClassification"
-  has_many :structure_nodes, through: :classifications
+  has_many :categories, through: :classifications
 
   # content associations
   has_many :lessons
@@ -33,7 +33,7 @@ class ContentNode < ActiveRecord::Base
   # validations
   validates :name,  presence: true, length: { maximum: 50 }
 
-  after_save :validate_has_structure_node
+  after_save :validate_has_category
 
   def to_node
   { "name" => self.name,
@@ -42,9 +42,9 @@ class ContentNode < ActiveRecord::Base
   end
 
 private
-  def validate_has_structure_node
-    if structure_nodes.count < 1
-      errors.add(:structure_nodes, "must belong to at least one structure node")
+  def validate_has_category
+    if categories.count < 1
+      errors.add(:categories, "must belong to at least one structure node")
       return false
     end
   end

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe StructureNode do
+describe Category do
 
   before do
-    @snode = StructureNode.create(name: "Test Structure Node")
+    @snode = Category.create(name: "Test Structure Node")
   end
 
   subject { @snode }
@@ -28,7 +28,7 @@ describe StructureNode do
 
   describe "when node has a friend" do
     before do
-      @fnode = StructureNode.create(name: "Friend Structure Node")
+      @fnode = Category.create(name: "Friend Structure Node")
       @friendship = @snode.friendships.build(:friend_id => @fnode.id)
       @friendship.save!
     end

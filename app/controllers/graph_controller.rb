@@ -13,7 +13,7 @@ class GraphController < ApplicationController
 
     nodes = Array.new
     links = Array.new
-    root = StructureNode.first
+    root = Category.first
     nodes << { :name => root.name, :id => root.id }
     createNodes(nodes, links, root, 0)
     data = { :nodes => nodes, :links => links }
@@ -38,7 +38,7 @@ class GraphController < ApplicationController
   end
 
   def tree
-    @mydata = StructureNode.first.to_node.to_json
+    @mydata = Category.first.to_node.to_json
   end
 
 

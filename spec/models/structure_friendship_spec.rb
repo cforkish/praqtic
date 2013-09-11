@@ -4,22 +4,22 @@ describe StructureFriendship do
 
   before do
     @friendship = StructureFriendship.new()
-    @snode = StructureNode.new(name: "Node A")
-    @fnode = StructureNode.new(name: "Node B")
-    @friendship.structure_node = @snode
+    @snode = Category.new(name: "Node A")
+    @fnode = Category.new(name: "Node B")
+    @friendship.category = @snode
     @friendship.friend = @fnode
   end
 
   subject { @friendship }
 
-  it { should respond_to(:structure_node) }
+  it { should respond_to(:category) }
   it { should respond_to(:friend) }
 
   it { should be_valid }
 
   describe "when doesn't belong to a structure node" do
     before do
-      @friendship.structure_node = nil
+      @friendship.category = nil
     end
 
     it { should_not be_valid }

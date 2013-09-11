@@ -11,14 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130910160047) do
+ActiveRecord::Schema.define(version: 20130911001057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
+  create_table "categories", id: :uuid, force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "content_classifications", id: :uuid, force: true do |t|
-    t.uuid     "structure_node_id"
+    t.uuid     "category_id"
     t.uuid     "content_node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -67,14 +73,8 @@ ActiveRecord::Schema.define(version: 20130910160047) do
   add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
 
   create_table "structure_friendships", id: :uuid, force: true do |t|
-    t.uuid     "structure_node_id"
+    t.uuid     "category_id"
     t.uuid     "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "structure_nodes", id: :uuid, force: true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

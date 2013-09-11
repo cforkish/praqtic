@@ -5,16 +5,16 @@ class ContentNodesController < ApplicationController
   end
 
   def new
-    @category = StructureNode.find(params[:category])
+    @category = Category.find(params[:category])
   end
 
   def create
 
-    category = StructureNode.find(params[:category])
+    category = Category.find(params[:category])
     if category.nil?
-      @content_node.structure_nodes << StructureNode.first
+      @content_node.categories << Category.first
     else
-      @content_node.structure_nodes << category
+      @content_node.categories << category
     end
 
     if @content_node.save

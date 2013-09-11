@@ -4,8 +4,8 @@
 
 class ContentClassification < ActiveRecord::Base
   belongs_to :content_node
-  belongs_to :structure_node
+  belongs_to :category
 
   validates_presence_of :content_node
-  validates_presence_of :structure_node
+  validates_presence_of :category
 end

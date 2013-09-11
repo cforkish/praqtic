@@ -15,19 +15,19 @@
 # category "leaves," it is possible for a category to have subcategories and to also have its own
 # content which fits in the category but not in any of its subcategories.
 
-class StructureNode < ActiveRecord::Base
+class Category < ActiveRecord::Base
   # parent-child association
   has_many :parent_relations, class_name: "StructureRelation", foreign_key: "child_id"
-  has_many :parents, through: :parent_relations, class_name: "StructureNode"
+  has_many :parents, through: :parent_relations, class_name: "Category"
 
   has_many :child_relations, class_name: "StructureRelation", foreign_key: "parent_id"
-  has_many :children, through: :child_relations, class_name: "StructureNode"
+  has_many :children, through: :child_relations, class_name: "Category"
 
   # friend associaton
   has_many :friendships, class_name: "StructureFriendship"
   has_many :friends, through: :friendships
   has_many :inverse_friendships, class_name: "StructureFriendship", foreign_key: "friend_id"
-  has_many :inverse_friends, through: :inverse_friendships, source: :structure_node
+  has_many :inverse_friends, through: :inverse_friendships, source: :category
 
   # content association
   has_many :content_classifications

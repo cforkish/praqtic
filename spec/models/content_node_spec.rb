@@ -4,14 +4,14 @@ describe ContentNode do
 
   before do
     @cnode = ContentNode.create(name: "Test Content Node")
-    @snode = StructureNode.create(name: "Test Structure Node")
-    @cnode.structure_nodes << @snode
+    @snode = Category.create(name: "Test Structure Node")
+    @cnode.categories << @snode
   end
 
   subject { @cnode }
 
   it { should respond_to(:name) }
-  it { should respond_to(:structure_nodes) }
+  it { should respond_to(:categories) }
   it { should respond_to(:lessons) }
   it { should respond_to(:evaluators) }
   it { should respond_to(:prereqs) }
@@ -31,12 +31,12 @@ describe ContentNode do
 
   describe "when doesn't belong to a structure node" do
     before do
-      @cnode.structure_nodes.clear
+      @cnode.categories.clear
       @cnode.save
     end
 
     specify { expect(@cnode.errors.count).to eq(1) }
-    specify { expect(@cnode.errors[:structure_nodes]).to_not eq(nil) }
+    specify { expect(@cnode.errors[:categories]).to_not eq(nil) }
   end
 
   pending "test dependency relationships"

@@ -1,0 +1,10 @@
+<% recursive ||= false %>
+<li>
+  <%= link_to category.name, category_path(category) %>
+
+  <% if recursive %>
+    <ul class="categories">
+      <%= render category.children, recursive: recursive %>
+    </ul>
+  <% end %>
+</li>

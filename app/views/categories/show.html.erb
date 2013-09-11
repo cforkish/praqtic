@@ -1,38 +1,38 @@
-<% provide(:title, @structure_node.name) %>
+<% provide(:title, @category.name) %>
 <div class="row">
-  <% @structure_node.parents.each do |parent| %>
+  <% @category.parents.each do |parent| %>
     <%= link_to "&uparrow;".html_safe + parent.name, category_path(parent) %>
   <% end %>
 
   <h1>
-    <%= @structure_node.name %>
+    <%= @category.name %>
   </h1>
 
   <section class="span4 offset2">
     <h2 style="text-align:left;">Content:</h2>
 
-    <% if @structure_node.content_nodes.count > 0 %>
+    <% if @category.content_nodes.count > 0 %>
       <ul class="content_nodes">
-        <%= render @structure_node.content_nodes %>
+        <%= render @category.content_nodes %>
       </ul>
     <% else %>
       <p>No Content</p>
     <% end %>
 
-      <%= link_to "+ Add Topic", new_topic_path(category: @structure_node) %>
+      <%= link_to "+ Add Topic", new_topic_path(category: @category) %>
   </section>
 
   <section class="span4">
     <h2 style="text-align:left;">Subcategories:</h2>
-    <% if @structure_node.children.count > 0 %>
+    <% if @category.children.count > 0 %>
       <ul class="categories">
-        <%= render @structure_node.children %>
+        <%= render @category.children %>
       </ul>
     <% else %>
       <p>No Subcategories</p>
     <% end %>
 
-      <%= link_to "+ Add Subcategory", new_category_path(parent: @structure_node) %>
+      <%= link_to "+ Add Subcategory", new_category_path(parent: @category) %>
     </section>
 
 </div>
