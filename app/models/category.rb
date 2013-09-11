@@ -30,8 +30,8 @@ class Category < ActiveRecord::Base
   has_many :inverse_friends, through: :inverse_friendships, source: :category
 
   # content association
-  has_many :content_classifications
-  has_many :concepts, through: :content_classifications
+  has_many :classifications
+  has_many :concepts, through: :classifications
 
   validates :name,  presence: true, length: { maximum: 50 }
 

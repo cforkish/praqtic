@@ -16,7 +16,7 @@
 
 class Concept < ActiveRecord::Base
 	# category association
-  has_many :classifications, class_name: "ContentClassification"
+  has_many :classifications
   has_many :categories, through: :classifications
 
   # content associations

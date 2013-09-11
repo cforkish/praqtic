@@ -2,7 +2,7 @@
 # relationship between a concept and a category object.
 # See concept.rb for an explanation of that relationship.
 
-class ContentClassification < ActiveRecord::Base
+class Classification < ActiveRecord::Base
   belongs_to :concept
   belongs_to :category
 
