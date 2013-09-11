@@ -18,8 +18,8 @@ class ConceptsController < ApplicationController
     end
 
     if @concept.save
-      flash[:success] = "Topic added!"
-      redirect_to topic_path(@concept)
+      flash[:success] = "Concept added!"
+      redirect_to @concept
     else
       render 'new'
     end

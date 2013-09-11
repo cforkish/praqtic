@@ -15,7 +15,7 @@
         <%= render @concept.prereqs %>
       </ul>
     <% else %>
-      <p>This topic has no prerequisites.</p>
+      <p>This concept has no prerequisites.</p>
     <% end %>
 
     <%#= link_to "+ Add Prerequisite", new_category_path(parent: @concept) %>
@@ -28,7 +28,7 @@
         <%= render @concept.postreqs %>
       </ul>
     <% else %>
-      <p>This topic leads to no next steps.</p>
+      <p>This concept leads to no next steps.</p>
     <% end %>
 
     <%#= link_to "+ Add Next Step", new_category_path(parent: @concept) %>
@@ -43,7 +43,7 @@
         <%= render @concept.lessons %>
       </ul>
     <% else %>
-      <p>This topic has no lessons.</p>
+      <p>This concept has no lessons.</p>
     <% end %>
 
     <%= link_to "+ Add Lesson", new_lesson_path(node: @concept) %>
@@ -56,7 +56,7 @@
         <%= render @concept.evaluators %>
       </ul>
     <% else %>
-      <p>This topic has no evaluators.</p>
+      <p>This concept has no evaluators.</p>
     <% end %>
 
     <%= link_to "+ Add Evaluator", new_evaluator_path(node: @concept) %>
