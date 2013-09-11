@@ -33,6 +33,7 @@ class Category < ActiveRecord::Base
   has_many :classifications
   has_many :concepts, through: :classifications
 
+  # validations
   validates :name,  presence: true, length: { maximum: 50 }
 
   # sorting

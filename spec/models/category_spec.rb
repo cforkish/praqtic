@@ -9,9 +9,15 @@ describe Category do
   subject { @snode }
 
   it { should respond_to(:name) }
+  it { should respond_to(:parent_relations) }
   it { should respond_to(:parents) }
+  it { should respond_to(:child_relations) }
   it { should respond_to(:children) }
+  it { should respond_to(:friendships) }
   it { should respond_to(:friends) }
+  it { should respond_to(:inverse_friendships) }
+  it { should respond_to(:inverse_friends) }
+  it { should respond_to(:classifications) }
   it { should respond_to(:concepts) }
 
   it { should be_valid }
@@ -24,6 +30,54 @@ describe Category do
   describe "when name is too long" do
     before { @snode.name = "a" * 51 }
     it { should_not be_valid }
+  end
+
+  describe "parents association" do
+    let(:other_category) { Category.new(name: "Category") }
+    before do
+      @snode.parents << other_category
+    end
+
+    its(:parents) { should include other_category }
+
+    describe "relation" do
+      subject { @snode.parent_relations.where(parent_id: other_category.id) }
+      it { should_not be_empty }
+    end
+
+    describe "inverse" do
+      subject { other_category }
+      its(:children) { should include @snode }
+
+      describe "relation" do
+        subject { other_category.child_relations.where(child_id: @snode.id) }
+        it { should_not be_empty }
+      end
+    end
+  end
+
+  describe "children association" do
+    let(:other_category) { Category.new(name: "Category") }
+    before do
+      @snode.children << other_category
+    end
+
+    its(:children) { should include other_category }
+
+    describe "relation" do
+      subject { @snode.child_relations.where(child_id: other_category.id) }
+      it { should_not be_empty }
+    end
+
+    describe "inverse" do
+      subject { other_category }
+      its(:parents) { should include @snode }
+
+      describe "relation" do
+        subject { other_category.parent_relations.where(parent_id: @snode.id) }
+        it { should_not be_empty }
+      end
+    end
   end
 
   describe "when node has a friend" do
@@ -43,6 +97,5 @@ describe Category do
     specify { expect(@fnode.inverse_friends[0]).to eq(@snode) }
   end
 
-  pending "test parent-child relationships"
   pending "test concept relationships"
 end
