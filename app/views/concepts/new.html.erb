@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for(@content_node, url: topics_path) do |f| %>
+    <%= form_for(@concept, url: topics_path) do |f| %>
       <%= render 'fields', f: f %>
       <%= f.submit "Add Topic", class: "btn btn-large btn-primary" %>
     <% end %>

@@ -12,7 +12,7 @@ describe Category do
   it { should respond_to(:parents) }
   it { should respond_to(:children) }
   it { should respond_to(:friends) }
-  it { should respond_to(:content_nodes) }
+  it { should respond_to(:concepts) }
 
   it { should be_valid }
 
@@ -44,5 +44,5 @@ describe Category do
   end
 
   pending "test parent-child relationships"
-  pending "test content node relationships"
+  pending "test concept relationships"
 end

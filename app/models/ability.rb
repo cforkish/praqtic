@@ -39,7 +39,7 @@ class Ability
     end
 
     can :manage, Category
-    can :manage, ContentNode
+    can :manage, Concept
     can :manage, Lesson
     can :manage, Evaluator
   end

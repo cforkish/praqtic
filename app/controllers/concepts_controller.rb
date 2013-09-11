@@ -1,4 +1,4 @@
-class ContentNodesController < ApplicationController
+class ConceptsController < ApplicationController
   load_and_authorize_resource
 
   def show
@@ -12,14 +12,14 @@ class ContentNodesController < ApplicationController
 
     category = Category.find(params[:category])
     if category.nil?
-      @content_node.categories << Category.first
+      @concept.categories << Category.first
     else
-      @content_node.categories << category
+      @concept.categories << category
     end
 
-    if @content_node.save
+    if @concept.save
       flash[:success] = "Topic added!"
-      redirect_to topic_path(@content_node)
+      redirect_to topic_path(@concept)
     else
       render 'new'
     end
@@ -29,7 +29,7 @@ class ContentNodesController < ApplicationController
 
   private
 
-    def content_node_params
-      params.require(:content_node).permit(:name)
+    def concept_params
+      params.require(:concept).permit(:name)
     end
 end

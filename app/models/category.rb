@@ -11,7 +11,7 @@
 # knowledge of another.
 #    - learning (resonance [physics]) enriches knowledge of (harmonic series [music])
 #
-# Each category may contain one or more content nodes. While most content nodes will be contained by
+# Each category may contain one or more concepts. While most concepts will be contained by
 # category "leaves," it is possible for a category to have subcategories and to also have its own
 # content which fits in the category but not in any of its subcategories.
 
@@ -31,7 +31,7 @@ class Category < ActiveRecord::Base
 
   # content association
   has_many :content_classifications
-  has_many :content_nodes, through: :content_classifications
+  has_many :concepts, through: :content_classifications
 
   validates :name,  presence: true, length: { maximum: 50 }
 
@@ -40,7 +40,7 @@ class Category < ActiveRecord::Base
 
   def to_node
     { "name" => self.name,
-      "children"   => self.children.map { |c| c.to_node } + self.content_nodes.map { |c| c.to_node }
+      "children"   => self.children.map { |c| c.to_node } + self.concepts.map { |c| c.to_node }
     }
   end
 

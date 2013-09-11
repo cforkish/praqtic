@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130911005300) do
+ActiveRecord::Schema.define(version: 20130911015749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,15 +37,15 @@ ActiveRecord::Schema.define(version: 20130911005300) do
     t.datetime "updated_at"
   end
 
-  create_table "content_classifications", id: :uuid, force: true do |t|
-    t.uuid     "category_id"
-    t.uuid     "content_node_id"
+  create_table "concepts", id: :uuid, force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "content_nodes", id: :uuid, force: true do |t|
-    t.string   "name"
+  create_table "content_classifications", id: :uuid, force: true do |t|
+    t.uuid     "category_id"
+    t.uuid     "concept_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20130911005300) do
   end
 
   create_table "evaluators", id: :uuid, force: true do |t|
-    t.uuid     "content_node_id"
+    t.uuid     "concept_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "creator_id"
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20130911005300) do
 
   create_table "lessons", id: :uuid, force: true do |t|
     t.string   "name"
-    t.uuid     "content_node_id"
+    t.uuid     "concept_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "creator_id"

@@ -11,9 +11,9 @@
   <section class="span4 offset2">
     <h2 style="text-align:left;">Content:</h2>
 
-    <% if @category.content_nodes.count > 0 %>
-      <ul class="content_nodes">
-        <%= render @category.content_nodes %>
+    <% if @category.concepts.count > 0 %>
+      <ul class="concepts">
+        <%= render @category.concepts %>
       </ul>
     <% else %>
       <p>No Content</p>

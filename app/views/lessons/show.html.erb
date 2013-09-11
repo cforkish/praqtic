@@ -1,6 +1,6 @@
 <% provide(:title, @lesson.name) %>
 <div class="row">
-  <%= link_to "&uparrow;".html_safe + @lesson.content_node.name, topic_path(@lesson.content_node) %>
+  <%= link_to "&uparrow;".html_safe + @lesson.concept.name, topic_path(@lesson.concept) %>
 
   <h1>
     <%= @lesson.name %>

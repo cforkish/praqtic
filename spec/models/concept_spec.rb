@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe ContentNode do
+describe Concept do
 
   before do
-    @cnode = ContentNode.create(name: "Test Content Node")
+    @cnode = Concept.create(name: "Test Concept")
     @snode = Category.create(name: "Test Structure Node")
     @cnode.categories << @snode
   end
