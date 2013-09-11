@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130911001057) do
+ActiveRecord::Schema.define(version: 20130911005300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(version: 20130911001057) do
 
   create_table "categories", id: :uuid, force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "category_friendships", id: :uuid, force: true do |t|
+    t.uuid     "category_id"
+    t.uuid     "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "category_relations", id: :uuid, force: true do |t|
+    t.uuid     "parent_id"
+    t.uuid     "child_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,20 +85,6 @@ ActiveRecord::Schema.define(version: 20130911001057) do
   end
 
   add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
-
-  create_table "structure_friendships", id: :uuid, force: true do |t|
-    t.uuid     "category_id"
-    t.uuid     "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "structure_relations", id: :uuid, force: true do |t|
-    t.uuid     "parent_id"
-    t.uuid     "child_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", id: :uuid, force: true do |t|
     t.string   "name"

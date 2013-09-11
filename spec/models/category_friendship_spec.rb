@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe StructureFriendship do
+describe CategoryFriendship do
 
   before do
-    @friendship = StructureFriendship.new()
+    @friendship = CategoryFriendship.new()
     @snode = Category.new(name: "Node A")
     @fnode = Category.new(name: "Node B")
     @friendship.category = @snode

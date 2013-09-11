@@ -17,16 +17,16 @@
 
 class Category < ActiveRecord::Base
   # parent-child association
-  has_many :parent_relations, class_name: "StructureRelation", foreign_key: "child_id"
+  has_many :parent_relations, class_name: "CategoryRelation", foreign_key: "child_id"
   has_many :parents, through: :parent_relations, class_name: "Category"
 
-  has_many :child_relations, class_name: "StructureRelation", foreign_key: "parent_id"
+  has_many :child_relations, class_name: "CategoryRelation", foreign_key: "parent_id"
   has_many :children, through: :child_relations, class_name: "Category"
 
   # friend associaton
-  has_many :friendships, class_name: "StructureFriendship"
+  has_many :friendships, class_name: "CategoryFriendship"
   has_many :friends, through: :friendships
-  has_many :inverse_friendships, class_name: "StructureFriendship", foreign_key: "friend_id"
+  has_many :inverse_friendships, class_name: "CategoryFriendship", foreign_key: "friend_id"
   has_many :inverse_friends, through: :inverse_friendships, source: :category
 
   # content association
