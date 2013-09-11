@@ -1,5 +1,5 @@
 # A content classification object represents a categorization of a piece of content, forming the
-# relationship between a content node and a structure node.
+# relationship between a content node and a category object.
 # See content_node.rb for an explanation of that relationship.
 
 class ContentClassification < ActiveRecord::Base

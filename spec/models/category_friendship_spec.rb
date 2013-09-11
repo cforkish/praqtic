@@ -17,7 +17,7 @@ describe CategoryFriendship do
 
   it { should be_valid }
 
-  describe "when doesn't belong to a structure node" do
+  describe "when doesn't belong to a category" do
     before do
       @friendship.category = nil
     end

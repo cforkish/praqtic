@@ -1,5 +1,5 @@
-# A structure node represents a category of knowledge. Through categories, we can represent the
-# hierarchical fields of knowledge, and allow the user to browse the tree of knowledge.
+# A category object represents a named collection of related concepts. Through categories, we can
+# represent hierarchical fields of knowledge, and allow the user to browse the tree of knowledge.
 #
 # Each category may belong to one or more parent categories, and may have one or more subcategories.
 #    - when you are learning (spanish conjugation) you are learning (spanish language)

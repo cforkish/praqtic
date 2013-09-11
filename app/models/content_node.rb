@@ -2,7 +2,7 @@
 # evaluated atomically. Breaking an area of study down to its component content nodes enables a
 # subject to be taught in incremental steps.
 #
-# A content node belongs to at least one structure node, which denotes the topic or category of the
+# A content node belongs to at least one category object, which denotes the topic or category of the
 # content. If content is relevant to multiple disciplines, it may belong to multiple categories.
 #    - (harmonics) are an element of (physics)
 #    - (harmonics) are an element of (music)
@@ -15,7 +15,7 @@
 # content nodes.
 
 class ContentNode < ActiveRecord::Base
-	# structure node association
+	# category association
   has_many :classifications, class_name: "ContentClassification"
   has_many :categories, through: :classifications
 
@@ -44,7 +44,7 @@ class ContentNode < ActiveRecord::Base
 private
   def validate_has_category
     if categories.count < 1
-      errors.add(:categories, "must belong to at least one structure node")
+      errors.add(:categories, "must belong to at least one category")
       return false
     end
   end

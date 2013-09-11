@@ -29,7 +29,7 @@ describe ContentNode do
     it { should_not be_valid }
   end
 
-  describe "when doesn't belong to a structure node" do
+  describe "when doesn't belong to a category" do
     before do
       @cnode.categories.clear
       @cnode.save

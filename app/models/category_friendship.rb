@@ -1,4 +1,4 @@
-# A structure friendship object represents the friendship relationship between two structure nodes.
+# A category friendship object represents the friendship relationship between two categories.
 # See category.rb for an explanation of that relationship.
 
 class CategoryFriendship < ActiveRecord::Base
