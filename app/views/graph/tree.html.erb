@@ -61,20 +61,14 @@ var node = svg.selectAll("g.node")
 node.append("circle")
     .attr("r", 35);
 
-// node.append("foreignObject")
-//     // .attr("x", function(d) { return d._children ? -8 : -48; }) /*the position of the text (left to right)*/
-//     // .attr("y", 3) the position of the text (Up and Down)
-//     .attr("width", 40)
-//     .attr("height", 40)
-//     .append("xhtml:body")
-//     // .append("p")
-//     .text(function(d) { return d.name; });
+node.append("foreignObject")
+    .attr("x", -20)
+    .attr("y", -20)
+    .attr("width", 40)
+    .attr("height", 40)
+    .append("xhtml")
+      .html(function(d) { return "<a href=\"www.google.com\" class=\"node-label\">" + d.name + "</a>"; });
 
-node.append("text")
-    // .attr("dx", 3)
-    // .attr("dy", function(d) { return d.children ? 8 : -8; })
-    .attr("text-anchor", "middle")
-    .text(function(d) { return d.name; });
 
 d3.select(self.frameElement).style("height", height + "px");
 
