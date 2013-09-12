@@ -67,7 +67,7 @@ node.append("foreignObject")
     .attr("width", 40)
     .attr("height", 40)
     .append("xhtml")
-      .html(function(d) { return "<a href=\"www.google.com\" class=\"node-label\">" + d.name + "</a>"; });
+      .html(function(d) { return "<a href=\"" + d.url + "\" class=\"node-label\">" + d.name + "</a>"; });
 
 
 d3.select(self.frameElement).style("height", height + "px");
