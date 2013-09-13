@@ -40,6 +40,7 @@ class Category < ActiveRecord::Base
 
   def to_node
     { "name" => self.name,
+      "url" => "/categories/" + self.id, #todo: how do i use category_path(self.id) here?
       "children"   => self.children.map { |c| c.to_node } + self.concepts.map { |c| c.to_node }
     }
   end
