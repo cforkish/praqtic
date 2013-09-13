@@ -1,5 +1,8 @@
 class GraphController < ApplicationController
   skip_authorization_check
+
+  include GraphHelper
+
   def index
     # p1 = { :name => "Damien", :id => "a" }
     # p2 = { :name => "Bob", :id => "b" }
@@ -38,7 +41,7 @@ class GraphController < ApplicationController
   end
 
   def tree
-    @mydata = Category.first.to_node.to_json
+    @mydata = category_to_node(Category.first).to_json
   end
 
 
