@@ -1,5 +1,6 @@
 <p>Find me in app/views/graph/tree.html.erb</p>
-
+<!-- <iframe marginwidth="0" marginheight="0" scrolling="no"></iframe> -->
+<object class="tree"></object>
 
 <style>
 
@@ -34,7 +35,10 @@ var tree = d3.layout.tree()
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.x, height - d.y]; });
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("object.tree").append("svg")
+    .attr("display", "block")
+    .attr("margin", "auto")
+    .attr("preserveAspectRatio", "xMidYMin")
     .attr("width", width + margin.right + margin.left)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
