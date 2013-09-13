@@ -20,3 +20,7 @@
 
 # Ignore simplecov output
 /coverage/
+
+.floo
+.flooignore
+.sublime-project
