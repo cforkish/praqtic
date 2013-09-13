@@ -3,7 +3,7 @@ module GraphHelper
   def category_to_node(category)
     { "name" => category.name,
       "url" => category_path(category.id),
-      "children"   => category.children.map { |c| category_to_node(c) } + category.concepts.map { |c| concept_to_node(c) }
+      "children"   => category.children.map { |c| category_to_node(c) } # uncomment to add concept leafs # + category.concepts.map { |c| concept_to_node(c) }
     }
   end
 

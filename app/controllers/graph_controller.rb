@@ -41,7 +41,7 @@ class GraphController < ApplicationController
   end
 
   def tree
-    @mydata = category_to_node(Category.first).to_json
+    @jsonNodes = category_to_node(Category.first).to_json
   end
 
 

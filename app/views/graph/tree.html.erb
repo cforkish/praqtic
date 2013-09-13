@@ -44,7 +44,7 @@ var svg = d3.select("object.tree").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-var json = <%= raw(@mydata) %>
+var json = <%= raw(@jsonNodes) %>
 
 var nodes = tree.nodes(json),
     links = tree.links(nodes);

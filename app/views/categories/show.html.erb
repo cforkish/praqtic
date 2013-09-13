@@ -8,7 +8,7 @@
     <%= @category.name %>
   </h1>
 
-  <section class="span4 offset2">
+  <section class="span4 offset1">
     <h2 style="text-align:left;">Content:</h2>
 
     <% if @category.concepts.count > 0 %>
@@ -33,6 +33,19 @@
     <% end %>
 
       <%= link_to "+ Add Subcategory", new_category_path(parent: @category) %>
+    </section>
+
+  <section class="span3">
+    <h2 style="text-align:left;">Friend Categories:</h2>
+    <% if @category.friends.count > 0 %>
+      <ul class="friends">
+        <%= render @category.friends %>
+      </ul>
+    <% else %>
+      <p>No Friend Categories</p>
+    <% end %>
+
+      <%= link_to "+ Add Friendship", new_category_friend_path(@category) %>
     </section>
 
 </div>

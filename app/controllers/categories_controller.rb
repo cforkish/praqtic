@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   load_and_authorize_resource
 
+  include GraphHelper
+
   def index
     @root_node = Category.first
   end
@@ -27,7 +29,6 @@ class CategoriesController < ApplicationController
       render 'new'
     end
   end
-
 
 
   private

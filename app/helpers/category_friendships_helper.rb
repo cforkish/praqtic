@@ -1,0 +1,2 @@
+module CategoryFriendshipsHelper
+end
