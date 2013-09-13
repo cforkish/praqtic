@@ -1,0 +1,48 @@
+require 'spec_helper'
+
+describe Category do
+
+  before do
+    @snode = Category.create(name: "Test Structure Node")
+  end
+
+  subject { @snode }
+
+  it { should respond_to(:name) }
+  it { should respond_to(:parents) }
+  it { should respond_to(:children) }
+  it { should respond_to(:friends) }
+  it { should respond_to(:concepts) }
+
+  it { should be_valid }
+
+  describe "when name is not present" do
+    before { @snode.name = " " }
+    it { should_not be_valid }
+  end
+
+  describe "when name is too long" do
+    before { @snode.name = "a" * 51 }
+    it { should_not be_valid }
+  end
+
+  describe "when node has a friend" do
+    before do
+      @fnode = Category.create(name: "Friend Structure Node")
+      @friendship = @snode.friendships.build(:friend_id => @fnode.id)
+      @friendship.save!
+    end
+
+    specify { expect(@snode.friendships.size).to eq(1) }
+    specify { expect(@fnode.inverse_friendships.size).to eq(1) }
+    specify { expect(@snode.friends.size).to eq(1) }
+    specify { expect(@fnode.inverse_friends.size).to eq(1) }
+    specify { expect(@snode.inverse_friends.size).to eq(0) }
+    specify { expect(@fnode.friends.size).to eq(0) }
+    specify { expect(@snode.friends[0]).to eq(@fnode) }
+    specify { expect(@fnode.inverse_friends[0]).to eq(@snode) }
+  end
+
+  pending "test parent-child relationships"
+  pending "test concept relationships"
+end

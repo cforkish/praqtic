@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 
-gem 'rails', '4.0.0'
+gem 'rails', git: 'git://github.com/rails/rails.git', branch: '4-0-stable'
+# gem 'rails', '4.0.0'
 gem 'pg', '0.15.1'
-gem 'bcrypt-ruby', '3.0.1'
+gem 'bcrypt-ruby', '3.1.0'
 gem 'cancan', '1.6.10'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
@@ -20,6 +21,7 @@ group :test do
   gem 'capybara', '2.1.0'
   gem 'growl', '1.0.3'
   gem 'factory_girl_rails', '4.2.1'
+  gem 'simplecov', '0.7.1', require: false
 end
 
 gem 'sass-rails', '4.0.0'

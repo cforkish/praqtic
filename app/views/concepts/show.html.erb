@@ -1,0 +1,64 @@
+<% provide(:title, @concept.name) %>
+<div class="row">
+  <% @concept.categories.each do |parent| %>
+    <%= link_to "&uparrow;".html_safe + parent.name, category_path(parent) %>
+  <% end %>
+
+  <h1>
+    <%= @concept.name %>
+  </h1>
+
+  <section class="span4 offset2">
+    <h2 style="text-align:left;">Prerequisites:</h2>
+    <% if @concept.prereqs.count > 0 %>
+      <ul class="concepts">
+        <%= render @concept.prereqs %>
+      </ul>
+    <% else %>
+      <p>This concept has no prerequisites.</p>
+    <% end %>
+
+    <%#= link_to "+ Add Prerequisite", new_category_path(parent: @concept) %>
+  </section>
+
+  <section class="span4">
+    <h2 style="text-align:left;">Next Steps:</h2>
+    <% if @concept.postreqs.count > 0 %>
+      <ul class="concepts">
+        <%= render @concept.postreqs %>
+      </ul>
+    <% else %>
+      <p>This concept leads to no next steps.</p>
+    <% end %>
+
+    <%#= link_to "+ Add Next Step", new_category_path(parent: @concept) %>
+  </section>
+</div>
+
+<div class="row">
+  <section class="span4 offset2">
+    <h2 style="text-align:left;">Lessons:</h2>
+    <% if @concept.lessons.count > 0 %>
+      <ul class="lessons">
+        <%= render @concept.lessons %>
+      </ul>
+    <% else %>
+      <p>This concept has no lessons.</p>
+    <% end %>
+
+    <%= link_to "+ Add Lesson", new_lesson_path(node: @concept) %>
+  </section>
+
+  <section class="span4">
+    <h2 style="text-align:left;">Evaluators:</h2>
+    <% if @concept.evaluators.count > 0 %>
+      <ul class="concepts">
+        <%= render @concept.evaluators %>
+      </ul>
+    <% else %>
+      <p>This concept has no evaluators.</p>
+    <% end %>
+
+    <%= link_to "+ Add Evaluator", new_evaluator_path(node: @concept) %>
+  </section>
+</div>

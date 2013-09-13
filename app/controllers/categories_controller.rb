@@ -1,4 +1,4 @@
-class EvaluatorsController < ApplicationController
+class CategoriesController < ApplicationController
   load_and_authorize_resource
 
   def index
@@ -13,9 +13,13 @@ class EvaluatorsController < ApplicationController
   end
 
   def create
-    if @category.parents.size == 0
+    parent = Category.find(params[:parent])
+    if parent.nil?
       @category.parents << Category.first
+    else
+      @category.parents << parent
     end
+
     if @category.save
       flash[:success] = "Category created!"
       redirect_to category_path(@category)

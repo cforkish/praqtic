@@ -11,27 +11,70 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130809013129) do
+ActiveRecord::Schema.define(version: 20130911022525) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "content_nodes", id: :uuid, force: true do |t|
+  create_table "categories", id: :uuid, force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "category_friendships", id: :uuid, force: true do |t|
+    t.uuid     "category_id"
+    t.uuid     "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "category_friendships", ["category_id", "friend_id"], name: "index_category_friendships_on_category_id_and_friend_id", unique: true, using: :btree
+  add_index "category_friendships", ["category_id"], name: "index_category_friendships_on_category_id", using: :btree
+  add_index "category_friendships", ["friend_id"], name: "index_category_friendships_on_friend_id", using: :btree
+
+  create_table "category_relations", id: :uuid, force: true do |t|
+    t.uuid     "parent_id"
+    t.uuid     "child_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "category_relations", ["child_id"], name: "index_category_relations_on_child_id", using: :btree
+  add_index "category_relations", ["parent_id", "child_id"], name: "index_category_relations_on_parent_id_and_child_id", unique: true, using: :btree
+  add_index "category_relations", ["parent_id"], name: "index_category_relations_on_parent_id", using: :btree
+
+  create_table "classifications", id: :uuid, force: true do |t|
+    t.uuid     "category_id"
+    t.uuid     "concept_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "classifications", ["category_id", "concept_id"], name: "index_classifications_on_category_id_and_concept_id", unique: true, using: :btree
+  add_index "classifications", ["category_id"], name: "index_classifications_on_category_id", using: :btree
+  add_index "classifications", ["concept_id"], name: "index_classifications_on_concept_id", using: :btree
+
+  create_table "concepts", id: :uuid, force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "dependencies", id: :uuid, force: true do |t|
-    t.uuid     "enable_id"
-    t.uuid     "need_id"
+    t.uuid     "postreq_id"
+    t.uuid     "prereq_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "dependencies", ["postreq_id"], name: "index_dependencies_on_postreq_id", using: :btree
+  add_index "dependencies", ["prereq_id", "postreq_id"], name: "index_dependencies_on_prereq_id_and_postreq_id", unique: true, using: :btree
+  add_index "dependencies", ["prereq_id"], name: "index_dependencies_on_prereq_id", using: :btree
+
   create_table "evaluators", id: :uuid, force: true do |t|
-    t.uuid     "content_node_id"
+    t.uuid     "concept_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "creator_id"
@@ -50,7 +93,7 @@ ActiveRecord::Schema.define(version: 20130809013129) do
 
   create_table "lessons", id: :uuid, force: true do |t|
     t.string   "name"
-    t.uuid     "content_node_id"
+    t.uuid     "concept_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "creator_id"
@@ -58,33 +101,6 @@ ActiveRecord::Schema.define(version: 20130809013129) do
   end
 
   add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
-
-  create_table "node_friendships", id: :uuid, force: true do |t|
-    t.uuid     "structure_node_id"
-    t.uuid     "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "structure_content", id: :uuid, force: true do |t|
-    t.uuid     "parent_structure_node_id"
-    t.uuid     "child_content_node_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "structure_nodes", id: :uuid, force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "structure_parent_child", id: :uuid, force: true do |t|
-    t.uuid     "parent_id"
-    t.uuid     "child_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "users", id: :uuid, force: true do |t|
     t.string   "name"
