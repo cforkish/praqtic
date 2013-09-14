@@ -1,1 +1,14 @@
 <h1>Select Friend Category</h1>
+
+<!-- this is the element our script attaches the SVG element to -->
+<div id="graph"></div>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var data = <%= raw(@jsonNodes) %>
+
+var graph = CategoryGraph();
+graph("#graph", data);
+
+</script>

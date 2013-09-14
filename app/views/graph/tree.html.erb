@@ -1,33 +1,17 @@
 <!-- this is the element our script attaches the SVG element to -->
 <div id="graph"></div>
 
-<style>
-
-.node circle {
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-.node {
-  font: 10px sans-serif;
-}
-
-.link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
-}
-
-</style>
-
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-
 var data = <%= raw(@jsonNodes) %>
+
+function clickFunction(d) {
+  window.location.href = d.url;
+};
 
 var graph = CategoryGraph();
 graph("#graph", data);
+graph.nodeOnClick(clickFunction);
 
 </script>

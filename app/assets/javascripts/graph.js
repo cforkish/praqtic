@@ -4,7 +4,9 @@
 
 function CategoryGraph() {
 
-  return function graph(selection, data) {
+  var svg;
+
+  function graph(selection, data) {
 
     var margin = {top: 80, right: 120, bottom: 80, left: 120},
         width = 960 - margin.right - margin.left,
@@ -16,7 +18,7 @@ function CategoryGraph() {
     var diagonal = d3.svg.diagonal()
         .projection(function(d) { return [d.x, height - d.y]; });
 
-    var svg = d3.select(selection).append("svg")
+    svg = d3.select(selection).append("svg")
         .attr("display", "block")
         .attr("margin", "auto")
         .attr("preserveAspectRatio", "xMidYMin")
@@ -38,7 +40,8 @@ function CategoryGraph() {
         .data(nodes)
       .enter().append("g")
         .attr("class", "node")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; })
+        .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
+        // .on("click", myFunction);
 
     node.append("circle")
         .attr("r", 35);
@@ -48,10 +51,17 @@ function CategoryGraph() {
         .attr("y", -20)
         .attr("width", 40)
         .attr("height", 40)
-        .append("xhtml")
-          .html(function(d) { return "<a href=\"" + d.url + "\" class=\"node-label\">" + d.name + "</a>"; });
+        .append("xhtml") // use HTML to get word wrapping
+          .html(function(d) { return "<p class=\"node-label\">" + d.name + "</p>"; });
 
 
     d3.select(self.frameElement).style("height", height + "px");
   };
+
+  graph.nodeOnClick = function(clickFunction) {
+    svg.selectAll("g.node")
+      .on("click", clickFunction);
+  };
+
+  return graph;
 }
