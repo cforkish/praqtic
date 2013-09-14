@@ -57,6 +57,10 @@ line.link {
   stroke-width: 1.5px;
 }
 
+.node.active circle {
+  fill: #BCF5A9;
+}
+
 .node {
   font: 10px sans-serif;
   cursor: pointer;
