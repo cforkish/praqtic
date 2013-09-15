@@ -89,6 +89,14 @@ path.link {
   cursor: default;
 }
 
+path.friendlink {
+  fill: none;
+  stroke: #A4A4A4;
+  stroke-width: 2px;
+  stroke-dasharray: 5,5;
+  cursor: default;
+}
+
 path.link.selected {
   stroke-dasharray: 10,2;
 }

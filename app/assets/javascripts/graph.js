@@ -19,9 +19,6 @@ function CategoryGraph() {
         .projection(function(d) { return [d.x, height - d.y]; });
 
     svg = d3.select(selection).append("svg")
-        .attr("display", "block")
-        .attr("margin", "auto")
-        .attr("preserveAspectRatio", "xMidYMin")
         .attr("width", width + margin.right + margin.left)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -29,6 +26,14 @@ function CategoryGraph() {
 
     var nodes = tree.nodes(data),
         links = tree.links(nodes);
+
+    var friendLinks = setupFriendLinks(nodes);
+
+    var friendLink = svg.selectAll("path.link")
+        .data(friendLinks)
+      .enter().append("path")
+        .attr("class", "friendlink")
+        .attr("d", diagonal);
 
     var link = svg.selectAll("path.link")
         .data(links)
@@ -41,7 +46,6 @@ function CategoryGraph() {
       .enter().append("g")
         .attr("class", "node")
         .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
-        // .on("click", myFunction);
 
     node.append("circle")
         .attr("r", 35);
@@ -57,6 +61,32 @@ function CategoryGraph() {
 
     d3.select(self.frameElement).style("height", height + "px");
   };
+
+  // Helper function to map node id's to node objects.
+  // Returns d3.map of ids -> nodes
+  function mapNodes(nodes) {
+    var nodesMap = d3.map();
+    for(var i = 0; i < nodes.length; i++) {
+      nodesMap.set(nodes[i].category_id, nodes[i]);
+    }
+    return nodesMap;
+  }
+
+  function setupFriendLinks(nodes) {
+    var nodeMap = mapNodes(nodes);
+    var friendLinks = [];
+
+    for(var i = 0; i < nodes.length; i++) {
+      var friends = nodes[i].friends;
+
+      for(var j = 0; j < friends.length; j++) {
+        var friend = friends[j];
+        friendLinks.push( {"source" : nodeMap.get(friend.source), "target" : nodeMap.get(friend.target)} );
+      }
+    }
+
+    return friendLinks;
+  }
 
   graph.nodeOnClick = function(clickFunction) {
     svg.selectAll("g.node")
