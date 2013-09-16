@@ -47,14 +47,16 @@ function CategoryGraph() {
         .attr("class", "node")
         .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
 
+    var nodeRadius = 35;
+
     node.append("circle")
-        .attr("r", 35);
+        .attr("r", nodeRadius);
 
     node.append("foreignObject")
-        .attr("x", -20)
-        .attr("y", -20)
-        .attr("width", 40)
-        .attr("height", 40)
+        .attr("x", -nodeRadius/2.0)
+        .attr("y", -nodeRadius/2.0)
+        .attr("width", nodeRadius)
+        .attr("height", nodeRadius)
         .append("xhtml") // use HTML to get word wrapping
           .html(function(d) { return "<p class=\"node-label\">" + d.name + "</p>"; });
 

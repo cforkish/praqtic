@@ -12,25 +12,24 @@
 <!-- this is the element our script attaches the SVG element to -->
 <div id="graph"></div>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-d3.selectAll("#submit-button").style("display", "none");
+  d3.selectAll("#submit-button").style("display", "none");
 
-var data = <%= raw(@jsonNodes) %>
+  var data = <%= raw(@jsonNodes) %>
 
-function clickFunction(d) {
-  d3.selectAll("#header").text("Create friendship with " + d.name + "?");
+  function clickFunction(d) {
+    d3.selectAll("#header").text("Create friendship with " + d.name + "?");
 
-  d3.selectAll("g.node").classed("active", false);
-  d3.select(this).classed("active", true);
+    d3.selectAll("g.node").classed("active", false);
+    d3.select(this).classed("active", true);
 
-  d3.selectAll("#category_friendship_friend").property("value", d.category_id);
-  d3.selectAll("#submit-button").style("display", "block");
-};
+    d3.selectAll("#category_friendship_friend").property("value", d.category_id);
+    d3.selectAll("#submit-button").style("display", "block");
+  };
 
-var graph = CategoryGraph();
-graph("#graph", data);
-graph.nodeOnClick(clickFunction);
+  var graph = CategoryGraph();
+  graph("#graph", data);
+  graph.nodeOnClick(clickFunction);
 
 </script>

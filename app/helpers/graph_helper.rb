@@ -10,9 +10,25 @@ module GraphHelper
   end
 
   def concept_to_node(concept)
-  { "name" => concept.name,
-    "size"   => concept.lessons.size + concept.evaluators.size
-  }
+    { "name" => concept.name,
+      "size"   => concept.lessons.size + concept.evaluators.size
+    }
+  end
+
+  def concept_prereq_graph(concept)
+    {
+      "name" => concept.name,
+      "concept_id" =>concept.id,
+      "children"   => concept.prereqs.map { |c| concept_prereq_graph(c) }
+    }
+  end
+
+  def concept_postreq_graph(concept)
+    {
+      "name" => concept.name,
+      "concept_id" =>concept.id,
+      "children"   => concept.postreqs.map { |c| concept_postreq_graph(c) }
+    }
   end
 
 end

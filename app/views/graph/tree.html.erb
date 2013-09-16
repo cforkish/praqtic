@@ -1,17 +1,17 @@
 <!-- this is the element our script attaches the SVG element to -->
 <div id="graph"></div>
 
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<!-- <script src="http://d3js.org/d3.v3.min.js"></script> -->
 <script>
 
-var data = <%= raw(@jsonNodes) %>
+  var data = <%= raw(@jsonNodes) %>
 
-function clickFunction(d) {
-  window.location.href = d.url;
-};
+  function clickFunction(d) {
+    window.location.href = d.url;
+  };
 
-var graph = CategoryGraph();
-graph("#graph", data);
-graph.nodeOnClick(clickFunction);
+  var graph = CategoryGraph();
+  graph("#graph", data);
+  graph.nodeOnClick(clickFunction);
 
 </script>
