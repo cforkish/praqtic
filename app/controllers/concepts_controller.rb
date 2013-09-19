@@ -1,6 +1,12 @@
 class ConceptsController < ApplicationController
   load_and_authorize_resource
 
+  include GraphHelper
+
+  def index
+    @jsonNodes = category_to_node(Category.first).to_json
+  end
+
   def show
   end
 

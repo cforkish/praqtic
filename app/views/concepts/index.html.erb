@@ -1,0 +1,31 @@
+<h1 id="header">Select a category to view topics</h1>
+
+<!-- this is the element our script attaches the SVG element to -->
+<div id="graph"></div>
+
+<script>
+
+  var data = <%= raw(@jsonNodes) %>
+
+  var graph = CategoryGraph();
+  graph("#graph", data);
+  graph.nodeOnClick(clickFunction);
+
+  function clickFunction(d) {
+    // d3.selectAll("#header").text(d.name + " has " + d.concepts.length + " concepts.");
+
+    d3.selectAll("g.node").classed("active", false);
+    d3.select(this).classed("active", true);
+
+    // if (!("children" in d)) {
+    //   d.children = [];
+    // }
+
+    // d._children = d.children;
+    // d.children = d.children.concat(d.concepts);
+
+    // graph.update();
+    graph.showConcepts(d);
+  };
+
+</script>
