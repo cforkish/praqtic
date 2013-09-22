@@ -7,15 +7,10 @@
   vertical-align: middle;
 }
 
-
-.node circle {
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-.node.active circle {
-  fill: #BCF5A9;
+.node-label.concept {
+  text-align: center;
+  vertical-align: middle;
+  font: 8px sans-serif;
 }
 
 .node {
@@ -23,8 +18,18 @@
   cursor: pointer;
 }
 
-.concept-node circle {
-  fill: #ccc;
+.node.category circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node.category.active circle {
+  fill: #BCF5A9;
+}
+
+.node.concept circle {
+  fill: #fff;
   stroke: steelblue;
   stroke-width: 1.5px;
 }
@@ -35,14 +40,11 @@
   stroke-width: 3px;
 }
 
-.concept-link {
-  fill: none;
-  stroke: #000;
+.link.concept {
   stroke-width: 1.5px;
 }
 
-.friendlink {
-  fill: none;
+.link.friend {
   stroke: #A4A4A4;
   stroke-width: 2px;
   stroke-dasharray: 5,5;

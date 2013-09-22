@@ -9,7 +9,7 @@
 
   var graph = CategoryGraph();
   graph("#graph", data);
-  graph.nodeOnClick(clickFunction);
+  graph.categoryNodeOnClick(clickFunction);
 
   function clickFunction(d) {
     // d3.selectAll("#header").text(d.name + " has " + d.concepts.length + " concepts.");

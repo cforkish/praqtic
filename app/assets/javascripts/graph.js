@@ -7,6 +7,8 @@ function CategoryGraph() {
   var svg,
       root;
 
+  var categoryForceNodes;
+
   var conceptNode,
       conceptLink;
 
@@ -39,28 +41,34 @@ function CategoryGraph() {
 
     d3.select(self.frameElement).style("height", height + "px");
 
-    graph.update();
+    graph.setupTree();
 
   };
 
-  graph.update = function() {
+  graph.setupTree = function() {
 
     var nodes = tree.nodes(root),
         links = tree.links(nodes);
 
+    force.nodes(nodes);
+    categoryForceNodes = force.nodes();
+    categoryForceNodes.forEach(function(o) {
+        o.fixed = true;
+    });
+
     // var friendLinks = setupFriendLinks(nodes);
 
-    // var friendLink = svg.selectAll("path.link")
+    // var friendLink = svg.selectAll("path.link.friend")
     //     .data(friendLinks)
     //   .enter().append("path")
-    //     .attr("class", "friendlink")
+    //     .attr("class", "link.friend")
     //     .attr("d", diagonal);
 
-    var node = svg.selectAll("g.node")
+    var node = svg.selectAll("g.node.category")
         .data(nodes);
 
     var nodeEnter = node.enter().append("g")
-        .attr("class", function (d) {return "concept_id" in d ? "concept-node" : "node"})
+        .attr("class", "node category")
         .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
 
     nodeEnter.append("circle")
@@ -72,7 +80,7 @@ function CategoryGraph() {
         .attr("width", nodeRadius)
         .attr("height", nodeRadius)
         .append("xhtml") // use HTML to get word wrapping
-          .html(function(d) { return "<p class=\"node-label\">" + d.name + "</p>"; });
+          .html(function(d) { return "<p class=\"node-label category\">" + d.name + "</p>"; });
 
     // Transition nodes to their new position.
     var nodeUpdate = node.transition()
@@ -80,11 +88,11 @@ function CategoryGraph() {
           .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
 
 
-    var link = svg.selectAll("path.link")
+    var link = svg.selectAll("path.link.category")
         .data(links);
 
     link.enter().insert("path", "g")
-        .attr("class", "link")
+        .attr("class", "link category")
         .attr("d", diagonal);
 
     // Transition links to their new position.
@@ -96,30 +104,8 @@ function CategoryGraph() {
 
   graph.showConcepts = function (node) {
     // var nodes = flatten(root);
-    // nodes.concat(node.concepts);
-        // links = d3.layout.tree().links(nodes);
 
-    // var conceptNode = svg.selectAll("g.concept-node")
-    //     .data(node.concepts);
-
-    // var conceptNodeEnter = conceptNode.enter.append("g")
-    //     .attr("class", "concept-node")
-    //     .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
-
-
-    // conceptNodeEnter.append("circle")
-    //     .attr("r", nodeRadius/2.0);
-
-    // conceptNodeEnter.append("foreignObject")
-    //     .attr("x", -nodeRadius/4.0)
-    //     .attr("y", -nodeRadius/4.0)
-    //     .attr("width", nodeRadius)
-    //     .attr("height", nodeRadius)
-    //     .append("xhtml") // use HTML to get word wrapping
-    //       .html(function(d) { return "<p class=\"node-label\">" + d.name + "</p>"; });
-
-    var nodes = node.concepts;
-    nodes.push(node);
+    var nodes = node.concepts.concat(categoryForceNodes);
     var links = conceptLinks(node);
 
     // Restart the force layout.
@@ -129,12 +115,12 @@ function CategoryGraph() {
         .start();
 
     // Update the links…
-    conceptLink = svg.selectAll("line.link")
+    conceptLink = svg.selectAll("path.link.concept")
         .data(links, function(d) { return d.target.id; });
 
     // Enter any new links.
-    conceptLink.enter().insert("svg:line", ".node")
-        .attr("class", "concept-link")
+    conceptLink.enter().insert("path", "g")
+        .attr("class", "link concept")
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
@@ -144,24 +130,33 @@ function CategoryGraph() {
     conceptLink.exit().remove();
 
     // Update the nodes…
-    conceptNode = svg.selectAll("circle.node")
-        .data(nodes, function(d) { return d.id; })
-        .style("fill", "#ccc");
+    conceptNode = svg.selectAll("g.node.concept")
+        .data(nodes, function(d) { return d.id; });
+        // .style("fill", "#ccc");
 
     // Enter any new nodes.
-    conceptNode.enter().append("svg:circle")
-        .attr("class", "node")
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-        .attr("r", function(d) { return Math.sqrt(d.size) / 10 || 4.5; })
-        .style("fill", "#ccc");
+    var conceptNodeEnter = conceptNode.enter().append("g")
+        .attr("class", "node.concept")
+        .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
+
+    conceptNodeEnter.append("circle")
+        .attr("r", nodeRadius/2.0);
+        // .style("fill", "#ccc");
         // .on("click", click)
         // .call(force.drag);
+
+    conceptNodeEnter.append("foreignObject")
+        .attr("x", -nodeRadius/4.0)
+        .attr("y", -nodeRadius/4.0)
+        .attr("width", nodeRadius/2.0)
+        .attr("height", nodeRadius/2.0)
+        .append("xhtml") // use HTML to get word wrapping
+          .html(function(d) { return "<p class=\"node-label.concept\">" + d.name + "</p>"; });
 
     // Exit any old nodes.
     conceptNode.exit().remove();
 
-    graph.update();
+    // graph.update();
   }
 
   function tick() {
@@ -170,8 +165,8 @@ function CategoryGraph() {
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return d.target.y; });
 
-    conceptNode.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
+    conceptNode.attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
+
   }
 
   // Helper function to map node id's to node objects.
@@ -227,12 +222,12 @@ function CategoryGraph() {
     return nodes;
   }
 
-  graph.nodeOnClick = function(clickFunction) {
+  graph.categoryNodeOnClick = function(clickFunction) {
     // function onClick(d) {
     //   clickFunction(d);
 
     // }
-    svg.selectAll("g.node")
+    svg.selectAll("g.node.category")
       .on("click", clickFunction);
   };
 
