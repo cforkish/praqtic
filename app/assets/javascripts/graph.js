@@ -206,8 +206,13 @@ function CategoryGraph() {
 
     links.forEach(function(link) {
       if (targetMap.has(link.target.id)) {
+        var prevTarget = targetMap.get(link.target.id);
+        if (link.target.depth > prevTarget.depth) {
+          prevTarget.depth = link.target.depth;
+          prevTarget.y = link.target.y;
+        }
         duplicateNodes.push(link.target);
-        link.target = targetMap.get(link.target.id);
+        link.target = prevTarget;
       }
       else {
         targetMap.set(link.target.id, link.target);
