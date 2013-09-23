@@ -24,7 +24,7 @@
     d3.selectAll("g.node").classed("active", false);
     d3.select(this).classed("active", true);
 
-    d3.selectAll("#category_friendship_friend").property("value", d.category_id);
+    d3.selectAll("#category_friendship_friend").property("value", d.id);
     d3.selectAll("#submit-button").style("display", "block");
   };
 

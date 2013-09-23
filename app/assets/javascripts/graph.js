@@ -24,7 +24,10 @@ function CategoryGraph() {
 
   var force = d3.layout.force()
     .on("tick", tick)
-    .size([width, height]);
+    .size([width, height])
+    .gravity(0)
+    .charge(-130)
+    .linkDistance(nodeRadius * 2);
 
   var diagonal = d3.svg.diagonal()
       .projection(function(d) { return [d.x, height - d.y]; });
@@ -55,14 +58,6 @@ function CategoryGraph() {
     categoryForceNodes.forEach(function(o) {
         o.fixed = true;
     });
-
-    // var friendLinks = setupFriendLinks(nodes);
-
-    // var friendLink = svg.selectAll("path.link.friend")
-    //     .data(friendLinks)
-    //   .enter().append("path")
-    //     .attr("class", "link.friend")
-    //     .attr("d", diagonal);
 
     var node = svg.selectAll("g.node.category")
         .data(nodes);
@@ -95,9 +90,14 @@ function CategoryGraph() {
         .attr("class", "link category")
         .attr("d", diagonal);
 
-    // Transition links to their new position.
-    link.transition()
-        .duration(duration)
+
+    var friendLinks = setupFriendLinks(nodes);
+
+    var friendLink = svg.selectAll("path.link.friend")
+        .data(friendLinks);
+
+    friendLink.enter().insert("path", "g")
+        .attr("class", "link friend")
         .attr("d", diagonal);
 
   }
@@ -105,45 +105,42 @@ function CategoryGraph() {
   graph.showConcepts = function (node) {
     // var nodes = flatten(root);
 
-    var nodes = node.concepts.concat(categoryForceNodes);
+    var conceptNodes = node.concepts;
+    var allNodes = conceptNodes.concat(categoryForceNodes);
     var links = conceptLinks(node);
 
     // Restart the force layout.
     force
-        .nodes(nodes)
+        .nodes(allNodes)
         .links(links)
         .start();
 
     // Update the links…
-    conceptLink = svg.selectAll("path.link.concept")
+    conceptLink = svg.selectAll("line.link.concept")
         .data(links, function(d) { return d.target.id; });
 
     // Enter any new links.
-    conceptLink.enter().insert("path", "g")
+    conceptLink.enter().insert("line", "g")
         .attr("class", "link concept")
         .attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
+        .attr("y1", function(d) { return height - d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
+        .attr("y2", function(d) { return height - d.target.y; });
 
     // Exit any old links.
     conceptLink.exit().remove();
 
     // Update the nodes…
     conceptNode = svg.selectAll("g.node.concept")
-        .data(nodes, function(d) { return d.id; });
-        // .style("fill", "#ccc");
+        .data(conceptNodes, function(d) { return d.id; });
 
     // Enter any new nodes.
     var conceptNodeEnter = conceptNode.enter().append("g")
-        .attr("class", "node.concept")
+        .attr("class", "node concept")
         .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
 
     conceptNodeEnter.append("circle")
         .attr("r", nodeRadius/2.0);
-        // .style("fill", "#ccc");
-        // .on("click", click)
-        // .call(force.drag);
 
     conceptNodeEnter.append("foreignObject")
         .attr("x", -nodeRadius/4.0)
@@ -151,19 +148,17 @@ function CategoryGraph() {
         .attr("width", nodeRadius/2.0)
         .attr("height", nodeRadius/2.0)
         .append("xhtml") // use HTML to get word wrapping
-          .html(function(d) { return "<p class=\"node-label.concept\">" + d.name + "</p>"; });
+          .html(function(d) { return "<p class=\"node-label concept\">" + d.name + "</p>"; });
 
     // Exit any old nodes.
     conceptNode.exit().remove();
-
-    // graph.update();
   }
 
   function tick() {
     conceptLink.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
+        .attr("y1", function(d) { return height - d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
+        .attr("y2", function(d) { return height - d.target.y; });
 
     conceptNode.attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
 
@@ -174,7 +169,7 @@ function CategoryGraph() {
   function mapNodes(nodes) {
     var nodesMap = d3.map();
     for(var i = 0; i < nodes.length; i++) {
-      nodesMap.set(nodes[i].category_id, nodes[i]);
+      nodesMap.set(nodes[i].id, nodes[i]);
     }
     return nodesMap;
   }
