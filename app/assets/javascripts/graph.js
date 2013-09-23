@@ -1,6 +1,3 @@
-// # Place all the behaviors and hooks related to the matching controller here.
-// # All this logic will automatically be available in application.js.
-// # You can use CoffeeScript in this file: http://coffeescript.org/
 
 function CategoryGraph() {
 
@@ -12,8 +9,13 @@ function CategoryGraph() {
   var categoryClickFunction,
       conceptClickFunction;
 
-  var conceptNode,
+  var categoryNode,
+      categoryLink,
+      conceptNode,
       conceptLink;
+
+  var categoryNodes,
+      categoryLinks;
 
   var nodeRadius = 35,
       duration = 750;
@@ -56,16 +58,30 @@ function CategoryGraph() {
     var nodes = tree.nodes(root),
         links = tree.links(nodes);
 
-    force.nodes(nodes);
-    categoryForceNodes = force.nodes();
-    categoryForceNodes.forEach(function(o) {
+    var filteredData = removeDuplicateParents(nodes, links);
+    categoryNodes = filteredData.nodes;
+    categoryLinks = filteredData.links;
+
+    // categoryNodes[0].fixed = true;
+    categoryNodes.forEach(function(o) {
         o.fixed = true;
     });
 
-    var node = svg.selectAll("g.node.category")
-        .data(nodes);
+    force
+        .nodes(categoryNodes)
+        .links(categoryLinks)
+        .start();
 
-    var nodeEnter = node.enter().append("g")
+    // force.nodes(nodes);
+    // categoryForceNodes = force.nodes();
+    // categoryForceNodes.forEach(function(o) {
+    //     o.fixed = true;
+    // });
+
+    categoryNode = svg.selectAll("g.node.category")
+        .data(categoryNodes);
+
+    var nodeEnter = categoryNode.enter().append("g")
         .attr("class", "node category")
         .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; })
         .on("click", categoryClickFunction);
@@ -81,28 +97,23 @@ function CategoryGraph() {
         .append("xhtml") // use HTML to get word wrapping
           .html(function(d) { return "<p class=\"node-label category\">" + d.name + "</p>"; });
 
-    // Transition nodes to their new position.
-    var nodeUpdate = node.transition()
-        .duration(duration)
-          .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
 
+    categoryLink = svg.selectAll("path.link.category")
+        .data(categoryLinks);
 
-    var link = svg.selectAll("path.link.category")
-        .data(links);
-
-    link.enter().insert("path", "g")
+    categoryLink.enter().insert("path", "g")
         .attr("class", "link category")
         .attr("d", diagonal);
 
 
-    var friendLinks = setupFriendLinks(nodes);
+    // var friendLinks = setupFriendLinks(nodes);
 
-    var friendLink = svg.selectAll("path.link.friend")
-        .data(friendLinks);
+    // var friendLink = svg.selectAll("path.link.friend")
+    //     .data(friendLinks);
 
-    friendLink.enter().insert("path", "g")
-        .attr("class", "link friend")
-        .attr("d", diagonal);
+    // friendLink.enter().insert("path", "g")
+    //     .attr("class", "link friend")
+    //     .attr("d", diagonal);
 
   }
 
@@ -110,7 +121,7 @@ function CategoryGraph() {
     // var nodes = flatten(root);
 
     var conceptNodes = node.concepts;
-    var allNodes = conceptNodes.concat(categoryForceNodes);
+    var allNodes = conceptNodes.concat(categoryNodes);
     var links = conceptLinks(node);
 
     // Restart the force layout.
@@ -159,16 +170,6 @@ function CategoryGraph() {
     conceptNode.exit().remove();
   }
 
-  function tick() {
-    conceptLink.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return height - d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return height - d.target.y; });
-
-    conceptNode.attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
-
-  }
-
   // Helper function to map node id's to node objects.
   // Returns d3.map of ids -> nodes
   function mapNodes(nodes) {
@@ -196,6 +197,35 @@ function CategoryGraph() {
     }
 
     return friendLinks;
+  }
+
+  function removeDuplicateParents(nodes, links) {
+    var targetMap = d3.map();
+    var duplicateNodes = [];
+    var duplicateLinks = [];
+
+    links.forEach(function(link) {
+      if (targetMap.has(link.target.id)) {
+        duplicateNodes.push(link.target);
+        link.target = targetMap.get(link.target.id);
+      }
+      else {
+        targetMap.set(link.target.id, link.target);
+      }
+    });
+
+    uniqueLinks = links.filter(function(link) {
+      return duplicateNodes.indexOf(link.source) === -1;
+    });
+    // todo: am i leaving duplicates of the duplicate children?
+    uniqueNodes = nodes.filter(function(node) {
+      return duplicateNodes.indexOf(node) === -1;
+    });
+
+    return {
+      nodes: uniqueNodes,
+      links: uniqueLinks
+    };
   }
 
   function conceptLinks(node) {
@@ -233,6 +263,32 @@ function CategoryGraph() {
     svg.selectAll("g.node.concept")
       .on("click", clickFunction);
   };
+
+
+  function tick(e) {
+
+    // // Push sources up and targets down to form a weak tree.
+    // var k = 6 * e.alpha;
+    // categoryLinks.forEach(function(d, i) {
+    //   d.source.y -= k;
+    //   d.target.y += k;
+    // });
+
+    // categoryNode.attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
+    // categoryLink.attr("d", diagonal);
+
+    if (conceptLink) {
+      conceptLink.attr("x1", function(d) { return d.source.x; })
+          .attr("y1", function(d) { return height - d.source.y; })
+          .attr("x2", function(d) { return d.target.x; })
+          .attr("y2", function(d) { return height - d.target.y; });
+    }
+
+    if (conceptNode) {
+      conceptNode.attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
+    }
+
+  }
 
   return graph;
 }
