@@ -9,6 +9,9 @@ function CategoryGraph() {
 
   var categoryForceNodes;
 
+  var categoryClickFunction,
+      conceptClickFunction;
+
   var conceptNode,
       conceptLink;
 
@@ -64,7 +67,8 @@ function CategoryGraph() {
 
     var nodeEnter = node.enter().append("g")
         .attr("class", "node category")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
+        .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; })
+        .on("click", categoryClickFunction);
 
     nodeEnter.append("circle")
         .attr("r", nodeRadius);
@@ -137,7 +141,8 @@ function CategoryGraph() {
     // Enter any new nodes.
     var conceptNodeEnter = conceptNode.enter().append("g")
         .attr("class", "node concept")
-        .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
+        .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; })
+        .on("click", conceptClickFunction);
 
     conceptNodeEnter.append("circle")
         .attr("r", nodeRadius/2.0);
@@ -218,11 +223,14 @@ function CategoryGraph() {
   }
 
   graph.categoryNodeOnClick = function(clickFunction) {
-    // function onClick(d) {
-    //   clickFunction(d);
-
-    // }
+    categoryClickFunction = clickFunction;
     svg.selectAll("g.node.category")
+      .on("click", clickFunction);
+  };
+
+  graph.conceptNodeOnClick = function(clickFunction) {
+    conceptClickFunction = clickFunction;
+    svg.selectAll("g.node.concept")
       .on("click", clickFunction);
   };
 

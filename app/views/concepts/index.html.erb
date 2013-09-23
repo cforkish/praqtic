@@ -9,23 +9,17 @@
 
   var graph = CategoryGraph();
   graph("#graph", data);
-  graph.categoryNodeOnClick(clickFunction);
+  graph.categoryNodeOnClick(categoryClickFunction);
+  graph.conceptNodeOnClick(conceptClickFunction);
 
-  function clickFunction(d) {
-    // d3.selectAll("#header").text(d.name + " has " + d.concepts.length + " concepts.");
-
+  function categoryClickFunction(d) {
     d3.selectAll("g.node").classed("active", false);
     d3.select(this).classed("active", true);
-
-    // if (!("children" in d)) {
-    //   d.children = [];
-    // }
-
-    // d._children = d.children;
-    // d.children = d.children.concat(d.concepts);
-
-    // graph.update();
     graph.showConcepts(d);
+  };
+
+  function conceptClickFunction(d) {
+    window.location.href = d.url;
   };
 
 </script>
