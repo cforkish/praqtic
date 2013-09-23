@@ -3,6 +3,7 @@ Primer::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :categories do
     resources :friends, controller: 'category_friendships'
+    resources :parents, controller: 'category_relations'
   end
   resources :concepts
   resources :lessons
