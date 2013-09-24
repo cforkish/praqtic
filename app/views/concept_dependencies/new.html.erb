@@ -1,12 +1,14 @@
 <h1 id="header">Select a category to show concepts</h1>
 
-<h1>Path: <%= request.fullpath %> </h1>
-
 <% if (request.fullpath.index('prereq')) %>
 
 <div class="row">
   <div class="span6 offset3">
-
+    <%= form_for([@dependency.prereq, @dependency], url: concept_prereqs_path) do |f| %>
+      <%= f.hidden_field :postreq, :value => @dependency.postreq.id %>
+      <%= f.hidden_field :prereq %>
+      <%= f.submit "Create Necessity", class: "btn btn-large btn-primary", id: "submit-button" %>
+    <% end %>
   </div>
 </div>
 
@@ -14,10 +16,10 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for([@dependency.prereq, @dependency], url: concept_postreqs_path) do |f| %>
-      <%= f.hidden_field :prereq, :value => @dependecy.prereq.id %>
+    <%= form_for([@dependency.postreq, @dependency], url: concept_postreqs_path) do |f| %>
+      <%= f.hidden_field :prereq, :value => @dependency.prereq.id %>
       <%= f.hidden_field :postreq %>
-      <%= f.submit "Create Postreq", class: "btn btn-large btn-primary", id: "submit-button" %>
+      <%= f.submit "Create Possibility", class: "btn btn-large btn-primary", id: "submit-button" %>
     <% end %>
   </div>
 </div>
@@ -38,21 +40,24 @@
 
     d3.selectAll("g.node").classed("active", false);
     d3.select(this).classed("active", true);
+
+    graph.showConcepts(d);
   };
 
   function conceptClickFunction(d) {
 
+    d3.selectAll("g.node").classed("active", false);
     d3.select(this).classed("active", true);
 
     <% if (request.fullpath.index('prereq')) %>
 
-    d3.selectAll("#header").text("Add " + d.name + "as a necessity to" + <%= @dependency.postreq.name %> + "?");
-    d3.selectAll("#concept_dependency_prereq").property("value", d.id);
+    d3.selectAll("#header").text("Add " + d.name + " as a necessity to <%= @dependency.postreq.name %>?");
+    d3.selectAll("#dependency_prereq").property("value", d.id);
 
     <% else %>
 
-    d3.selectAll("#header").text("Add " + d.name + "as a possibility to" + <%= @dependency.prereq.name %> + "?");
-    d3.selectAll("#concept_dependency_postreq").property("value", d.id);
+    d3.selectAll("#header").text("Add " + d.name + " as a possibility to <%= @dependency.prereq.name %>?");
+    d3.selectAll("#dependency_postreq").property("value", d.id);
 
     <% end %>
 
@@ -62,6 +67,6 @@
   var graph = CategoryGraph();
   graph("#graph", data);
   graph.categoryNodeOnClick(categoryClickFunction);
-  graph.categoryNodeOnClick(conceptClickFunction);
+  graph.conceptNodeOnClick(conceptClickFunction);
 
 </script>

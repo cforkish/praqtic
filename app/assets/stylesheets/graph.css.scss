@@ -24,14 +24,14 @@
   stroke-width: 1.5px;
 }
 
-.node.active circle {
-  fill: #BCF5A9;
-}
-
 .node.concept circle {
   fill: #fff;
   stroke: steelblue;
   stroke-width: 1.5px;
+}
+
+.node.active circle {
+  fill: #BCF5A9;
 }
 
 .link {

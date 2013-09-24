@@ -22,14 +22,14 @@ class ConceptDependenciesController < ApplicationController
 
     current_uri = request.fullpath
     if (current_uri.index('prereq'))
-      prereq = Concept.find(params[:concept_dependency][:prereq])
+      prereq = Concept.find(params[:dependency][:prereq])
       postreq = concept
     else
       prereq = concept
-      postreq = Concept.find(params[:concept_dependency][:postreq])
+      postreq = Concept.find(params[:dependency][:postreq])
     end
 
-    @dependency = Dependecy.new(:prereq => prereq, :postreq => postreq)
+    @dependency = Dependency.new(:prereq => prereq, :postreq => postreq)
 
     if (@dependency.save)
       flash[:success] = "Dependency created!"
