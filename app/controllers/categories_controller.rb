@@ -15,14 +15,16 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    parent = Category.find(params[:parent])
-    if parent.nil?
-      @category.parents << Category.first
-    else
-      @category.parents << parent
+    @parent = Category.find(params[:parent])
+    if @parent.nil?
+      @parent = Category.first
     end
 
-    if @category.save
+    @relation = CategoryRelation.new(:parent => @parent, :child => @category)
+
+    # puts 'Cat: ' + @category.name + ' Parent: ' + @parent.name
+
+    if @relation.save && @category.save
       flash[:success] = "Category created!"
       redirect_to category_path(@category)
     else

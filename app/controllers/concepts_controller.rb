@@ -16,14 +16,14 @@ class ConceptsController < ApplicationController
 
   def create
 
-    category = Category.find(params[:category])
-    if category.nil?
-      @concept.categories << Category.first
-    else
-      @concept.categories << category
+    @category = Category.find(params[:category])
+    if @category.nil?
+      @category = Category.first
     end
 
-    if @concept.save
+    classification = Classification.new(:concept => @concept, :category => @category)
+
+    if classification.save && @concept.save
       flash[:success] = "Concept added!"
       redirect_to @concept
     else
