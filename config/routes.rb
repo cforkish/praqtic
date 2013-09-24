@@ -1,11 +1,16 @@
 Primer::Application.routes.draw do
+  get "concept_dependencies/new"
+  get "concept_dependencies/create"
   resources :users, except: :new
   resources :sessions, only: [:new, :create, :destroy]
   resources :categories do
     resources :friends, controller: 'category_friendships'
     resources :parents, controller: 'category_relations'
   end
-  resources :concepts
+  resources :concepts do
+    resources :prereqs, controller: 'concept_dependencies'
+    resources :postreqs, controller: 'concept_dependencies'
+  end
   resources :lessons
   resources :evaluators
   resources :graph

@@ -18,7 +18,7 @@
       <p>This concept has no prerequisites.</p>
     <% end %>
 
-    <%#= link_to "+ Add Prerequisite", new_category_path(parent: @concept) %>
+    <%= link_to "+ Add Necessity", new_concept_prereq_path(@concept) %>
   </section>
 
   <section class="span4">
@@ -31,7 +31,7 @@
       <p>This concept leads to no next steps.</p>
     <% end %>
 
-    <%#= link_to "+ Add Next Step", new_category_path(parent: @concept) %>
+    <%= link_to "+ Add Possibility", new_concept_postreq_path(@concept) %>
   </section>
 </div>
 
