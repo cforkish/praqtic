@@ -12,7 +12,7 @@
         <%= render @category.parents %>
       </ul>
     <% else %>
-      <p>No Parent Categories</p>
+      <p>This is the root of all knowledge.</p>
     <% end %>
 
       <%= link_to "+ Add Parent", new_category_parent_path(@category) %>
@@ -25,7 +25,7 @@
         <%= render @category.children %>
       </ul>
     <% else %>
-      <p>No Subcategories</p>
+      <p>This category doesn't have any subcategories. Add one!</p>
     <% end %>
 
       <%= link_to "+ Add Subcategory", new_category_path(parent: @category) %>
@@ -38,7 +38,7 @@
         <%= render @category.friends %>
       </ul>
     <% else %>
-      <p>No Friend Categories</p>
+      <p>This category doesn't have any friend categories. Add one!</p>
     <% end %>
 
       <%= link_to "+ Add Friendship", new_category_friend_path(@category) %>
@@ -52,7 +52,7 @@
         <%= render @category.concepts %>
       </ul>
     <% else %>
-      <p>No Content</p>
+      <p>This category doesn't contain any concepts. Add one!</p>
     <% end %>
 
       <%= link_to "+ Add Concept", new_concept_path(category: @category) %>
