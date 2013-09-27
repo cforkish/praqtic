@@ -62,3 +62,22 @@
     <%= link_to "+ Add Evaluator", new_evaluator_path(node: @concept) %>
   </section>
 </div>
+
+<!-- this is the element our script attaches the SVG element to -->
+<div id="graph"></div>
+
+<script>
+
+  var prereqs = <%= raw(@prereqs) %>
+  var postreqs = <%= raw(@postreqs) %>
+  var conceptID = <%= raw(@concept.id.to_json) %>
+
+  function clickFunction(d) {
+    window.location.href = d.url;
+  };
+
+  var graph = ConceptGraph();
+  graph("#graph", prereqs, postreqs, conceptID);
+  graph.nodeOnClick(clickFunction);
+
+</script>

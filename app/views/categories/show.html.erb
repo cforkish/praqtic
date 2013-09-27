@@ -11,11 +11,10 @@
       <ul class="parents">
         <%= render @category.parents %>
       </ul>
+      <%= link_to "+ Add Parent", new_category_parent_path(@category) %>
     <% else %>
       <p>This is the root of all knowledge.</p>
     <% end %>
-
-      <%= link_to "+ Add Parent", new_category_parent_path(@category) %>
   </section>
 
   <section class="span3">

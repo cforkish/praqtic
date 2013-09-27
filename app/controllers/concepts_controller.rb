@@ -8,6 +8,8 @@ class ConceptsController < ApplicationController
   end
 
   def show
+    @prereqs = concept_prereq_graph(@concept).to_json
+    @postreqs = concept_postreq_graph(@concept).to_json
   end
 
   def new

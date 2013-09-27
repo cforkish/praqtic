@@ -22,6 +22,7 @@ module GraphHelper
     {
       "name" => concept.name,
       "id" =>concept.id,
+      "url" => concept_path(concept.id),
       "children"   => concept.prereqs.map { |c| concept_prereq_graph(c) }
     }
   end
@@ -30,6 +31,7 @@ module GraphHelper
     {
       "name" => concept.name,
       "id" =>concept.id,
+      "url" => concept_path(concept.id),
       "children"   => concept.postreqs.map { |c| concept_postreq_graph(c) }
     }
   end
