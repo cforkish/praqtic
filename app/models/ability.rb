@@ -38,8 +38,8 @@ class Ability
       cannot :destroy, User, id: user.id
     end
 
-    can :manage, StructureNode
-    can :manage, ContentNode
+    can :manage, Category
+    can :manage, Concept
     can :manage, Lesson
     can :manage, Evaluator
   end

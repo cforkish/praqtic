@@ -1,0 +1,11 @@
+<% provide(:title, 'New Concept') %>
+<h1>Create New Concept</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@concept, url: concepts_path) do |f| %>
+      <%= render 'fields', f: f %>
+      <%= f.submit "Add Concept", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </div>
+</div>

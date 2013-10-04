@@ -17,3 +17,6 @@
 
 # Ignore rvm gemset
 .ruby-gemset
+
+# Ignore simplecov output
+/coverage/

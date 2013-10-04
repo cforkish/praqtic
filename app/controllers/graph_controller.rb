@@ -13,7 +13,7 @@ class GraphController < ApplicationController
 
     nodes = Array.new
     links = Array.new
-    root = StructureNode.first
+    root = Category.first
     nodes << { :name => root.name, :id => root.id }
     createNodes(nodes, links, root, 0)
     data = { :nodes => nodes, :links => links }
@@ -27,18 +27,18 @@ class GraphController < ApplicationController
     curIndex = nodes.size
     nodes << { :name => snode.name, :id => snode.id }
 
-    if curIndex > 0 
+    if curIndex > 0
       links << { :source => parentIndex, :target => curIndex, :value => 1 }
     end
 
     snode.children.each do |child|
       createNodes(nodes, links, child, curIndex)
     end
-    
+
   end
 
   def tree
-    @mydata = StructureNode.first.to_node.to_json
+    @mydata = Category.first.to_node.to_json
   end
 
 
