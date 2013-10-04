@@ -39,10 +39,4 @@ class Category < ActiveRecord::Base
   # sorting
   default_scope { order(created_at: :asc) }
 
-  def to_node
-    { "name" => self.name,
-      "children"   => self.children.map { |c| c.to_node } + self.concepts.map { |c| c.to_node }
-    }
-  end
-
 end

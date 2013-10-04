@@ -1,0 +1,4 @@
+<%= render 'shared/error_messages', object: @relation  %>
+
+<%= f.hidden_field :child, :value => @relation.child.id %>
+<%= f.hidden_field :parent %>

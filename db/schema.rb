@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20130911022525) do
     t.datetime "updated_at"
   end
 
-  create_table "dependencies", id: :uuid, force: true do |t|
+  create_table "dependencies", force: true do |t|
     t.uuid     "postreq_id"
     t.uuid     "prereq_id"
     t.datetime "created_at"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20130911022525) do
     t.datetime "updated_at"
   end
 
-  create_table "lessons", id: :uuid, force: true do |t|
+  create_table "lessons", force: true do |t|
     t.string   "name"
     t.uuid     "concept_id"
     t.datetime "created_at"

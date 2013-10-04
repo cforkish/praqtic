@@ -1,7 +1,15 @@
 class ConceptsController < ApplicationController
   load_and_authorize_resource
 
+  include GraphHelper
+
+  def index
+    @jsonNodes = category_to_node(Category.first).to_json
+  end
+
   def show
+    @prereqs = concept_prereq_graph(@concept).to_json
+    @postreqs = concept_postreq_graph(@concept).to_json
   end
 
   def new
@@ -10,14 +18,14 @@ class ConceptsController < ApplicationController
 
   def create
 
-    category = Category.find(params[:category])
-    if category.nil?
-      @concept.categories << Category.first
-    else
-      @concept.categories << category
+    @category = Category.find(params[:category])
+    if @category.nil?
+      @category = Category.first
     end
 
-    if @concept.save
+    classification = Classification.new(:concept => @concept, :category => @category)
+
+    if classification.save && @concept.save
       flash[:success] = "Concept added!"
       redirect_to @concept
     else

@@ -1,14 +1,49 @@
 <% provide(:title, @category.name) %>
 <div class="row">
-  <% @category.parents.each do |parent| %>
-    <%= link_to "&uparrow;".html_safe + parent.name, category_path(parent) %>
-  <% end %>
 
   <h1>
     <%= @category.name %>
   </h1>
 
-  <section class="span4 offset2">
+  <section class="span3">
+    <h2 style="text-align:left;">Parent Categories:</h2>
+    <% if @category.parents.count > 0 %>
+      <ul class="parents">
+        <%= render @category.parents %>
+      </ul>
+      <%= link_to "+ Add Parent", new_category_parent_path(@category) %>
+    <% else %>
+      <p>This is the root of all knowledge.</p>
+    <% end %>
+  </section>
+
+  <section class="span3">
+    <h2 style="text-align:left;">Subcategories:</h2>
+    <% if @category.children.count > 0 %>
+      <ul class="categories">
+        <%= render @category.children %>
+      </ul>
+    <% else %>
+      <p>This category doesn't have any subcategories. Add one!</p>
+    <% end %>
+
+      <%= link_to "+ Add Subcategory", new_category_path(parent: @category) %>
+  </section>
+
+  <section class="span3">
+    <h2 style="text-align:left;">Friend Categories:</h2>
+    <% if @category.friends.count > 0 %>
+      <ul class="friends">
+        <%= render @category.friends %>
+      </ul>
+    <% else %>
+      <p>This category doesn't have any friend categories. Add one!</p>
+    <% end %>
+
+      <%= link_to "+ Add Friendship", new_category_friend_path(@category) %>
+  </section>
+
+  <section class="span3">
     <h2 style="text-align:left;">Content:</h2>
 
     <% if @category.concepts.count > 0 %>
@@ -16,23 +51,10 @@
         <%= render @category.concepts %>
       </ul>
     <% else %>
-      <p>No Content</p>
+      <p>This category doesn't contain any concepts. Add one!</p>
     <% end %>
 
       <%= link_to "+ Add Concept", new_concept_path(category: @category) %>
   </section>
-
-  <section class="span4">
-    <h2 style="text-align:left;">Subcategories:</h2>
-    <% if @category.children.count > 0 %>
-      <ul class="categories">
-        <%= render @category.children %>
-      </ul>
-    <% else %>
-      <p>No Subcategories</p>
-    <% end %>
-
-      <%= link_to "+ Add Subcategory", new_category_path(parent: @category) %>
-    </section>
 
 </div>

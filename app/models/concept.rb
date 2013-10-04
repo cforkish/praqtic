@@ -35,12 +35,6 @@ class Concept < ActiveRecord::Base
 
   after_save :validate_has_category
 
-  def to_node
-  { "name" => self.name,
-    "size"   => self.lessons.size + self.evaluators.size
-  }
-  end
-
 private
   def validate_has_category
     if categories.count < 1

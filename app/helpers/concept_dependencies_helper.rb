@@ -1,0 +1,2 @@
+module ConceptDependenciesHelper
+end

@@ -1,0 +1,35 @@
+<h1 id="header">Select Friend Category</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for([@friendship.category, @friendship], url: category_friends_path) do |f| %>
+      <%= render 'fields', f: f %>
+      <%= f.submit "Create Friendship", class: "btn btn-large btn-primary", id: "submit-button" %>
+    <% end %>
+  </div>
+</div>
+
+<!-- this is the element our script attaches the SVG element to -->
+<div id="graph"></div>
+
+<script>
+
+  d3.selectAll("#submit-button").style("display", "none");
+
+  var data = <%= raw(@jsonNodes) %>
+
+  function clickFunction(d) {
+    d3.selectAll("#header").text("Create friendship with " + d.name + "?");
+
+    d3.selectAll("g.node").classed("active", false);
+    d3.select(this).classed("active", true);
+
+    d3.selectAll("#category_friendship_friend").property("value", d.id);
+    d3.selectAll("#submit-button").style("display", "block");
+  };
+
+  var graph = CategoryGraph();
+  graph("#graph", data);
+  graph.categoryNodeOnClick(clickFunction);
+
+</script>
