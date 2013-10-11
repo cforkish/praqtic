@@ -7,7 +7,7 @@
   vertical-align: middle;
 }
 
-.node-label.concept {
+.node-label.quiz {
   text-align: center;
   vertical-align: middle;
   font: 8px sans-serif;
@@ -24,7 +24,7 @@
   stroke-width: 1.5px;
 }
 
-.node.concept circle {
+.node.quiz circle {
   fill: #fff;
   stroke: steelblue;
   stroke-width: 1.5px;
@@ -40,7 +40,7 @@
   stroke-width: 3px;
 }
 
-.link.concept {
+.link.quiz {
   stroke-width: 1.5px;
 }
 

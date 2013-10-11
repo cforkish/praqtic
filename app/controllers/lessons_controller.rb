@@ -5,7 +5,7 @@ class LessonsController < ApplicationController
   end
 
   def new
-    @lesson.concept = Concept.find(params[:node])
+    @lesson.quiz = Quiz.find(params[:node])
     @lesson.creator = current_user
   end
 

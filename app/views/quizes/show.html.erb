@@ -1,0 +1,30 @@
+<% provide(:title, @quiz.name) %>
+
+
+<div class="row">
+  <section class="span4 offset2">
+    <h2 style="text-align:left;">Lessons:</h2>
+    <% if @quiz.lessons.count > 0 %>
+      <ul class="lessons">
+        <%= render @quiz.lessons %>
+      </ul>
+    <% else %>
+      <p>This quiz has no lessons. Add one!</p>
+    <% end %>
+
+    <%= link_to "+ Add Lesson", new_lesson_path(node: @quiz) %>
+  </section>
+
+  <section class="span4">
+    <h2 style="text-align:left;">Questions:</h2>
+    <% if @quiz.questions.count > 0 %>
+      <ul class="quizes">
+        <%= render @quiz.questions %>
+      </ul>
+    <% else %>
+      <p>This quiz has no questions. Add one!</p>
+    <% end %>
+
+    <%= link_to "+ Add Question", new_question_path(node: @quiz) %>
+  </section>
+</div>

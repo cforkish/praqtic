@@ -47,16 +47,16 @@ ActiveRecord::Schema.define(version: 20130911022525) do
 
   create_table "classifications", id: :uuid, force: true do |t|
     t.uuid     "category_id"
-    t.uuid     "concept_id"
+    t.uuid     "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "classifications", ["category_id", "concept_id"], name: "index_classifications_on_category_id_and_concept_id", unique: true, using: :btree
+  add_index "classifications", ["category_id", "quiz_id"], name: "index_classifications_on_category_id_and_quiz_id", unique: true, using: :btree
   add_index "classifications", ["category_id"], name: "index_classifications_on_category_id", using: :btree
-  add_index "classifications", ["concept_id"], name: "index_classifications_on_concept_id", using: :btree
+  add_index "classifications", ["quiz_id"], name: "index_classifications_on_quiz_id", using: :btree
 
-  create_table "concepts", id: :uuid, force: true do |t|
+  create_table "quizes", id: :uuid, force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -73,8 +73,8 @@ ActiveRecord::Schema.define(version: 20130911022525) do
   add_index "dependencies", ["prereq_id", "postreq_id"], name: "index_dependencies_on_prereq_id_and_postreq_id", unique: true, using: :btree
   add_index "dependencies", ["prereq_id"], name: "index_dependencies_on_prereq_id", using: :btree
 
-  create_table "evaluators", id: :uuid, force: true do |t|
-    t.uuid     "concept_id"
+  create_table "questions", id: :uuid, force: true do |t|
+    t.uuid     "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "creator_id"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 20130911022525) do
     t.string   "answer"
   end
 
-  add_index "evaluators", ["creator_id"], name: "index_evaluators_on_creator_id", using: :btree
+  add_index "questions", ["creator_id"], name: "index_questions_on_creator_id", using: :btree
 
   create_table "lesson_interactions", id: :uuid, force: true do |t|
     t.uuid     "lesson_id"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20130911022525) do
 
   create_table "lessons", force: true do |t|
     t.string   "name"
-    t.uuid     "concept_id"
+    t.uuid     "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "creator_id"

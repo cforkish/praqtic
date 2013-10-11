@@ -5,34 +5,34 @@ module GraphHelper
       "id" =>category.id,
       "url" => category_path(category.id),
       "friends" => category.friends.map { |f| { "source" => category.id, "target" => f.id } },
-      "concepts" => category.concepts.map { |c| concept_to_node(c) },
-      "children"   => category.children.map { |c| category_to_node(c) } # uncomment to add concept leafs # + category.concepts.map { |c| concept_to_node(c) }
+      "quizes" => category.quizes.map { |c| quiz_to_node(c) },
+      "children"   => category.children.map { |c| category_to_node(c) } # uncomment to add quiz leafs # + category.quizes.map { |c| quiz_to_node(c) }
     }
   end
 
-  def concept_to_node(concept)
-    { "name" => concept.name,
-      "id" =>concept.id,
-      "url" => concept_path(concept.id),
-      "size"   => concept.lessons.size + concept.evaluators.size
+  def quiz_to_node(quiz)
+    { "name" => quiz.name,
+      "id" =>quiz.id,
+      "url" => quiz_path(quiz.id),
+      "size"   => quiz.lessons.size + quiz.questions.size
     }
   end
 
-  def concept_prereq_graph(concept)
+  def quiz_prereq_graph(quiz)
     {
-      "name" => concept.name,
-      "id" =>concept.id,
-      "url" => concept_path(concept.id),
-      "children"   => concept.prereqs.map { |c| concept_prereq_graph(c) }
+      "name" => quiz.name,
+      "id" =>quiz.id,
+      "url" => quiz_path(quiz.id),
+      "children"   => quiz.prereqs.map { |c| quiz_prereq_graph(c) }
     }
   end
 
-  def concept_postreq_graph(concept)
+  def quiz_postreq_graph(quiz)
     {
-      "name" => concept.name,
-      "id" =>concept.id,
-      "url" => concept_path(concept.id),
-      "children"   => concept.postreqs.map { |c| concept_postreq_graph(c) }
+      "name" => quiz.name,
+      "id" =>quiz.id,
+      "url" => quiz_path(quiz.id),
+      "children"   => quiz.postreqs.map { |c| quiz_postreq_graph(c) }
     }
   end
 

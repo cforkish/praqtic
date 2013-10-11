@@ -39,8 +39,8 @@ class Ability
     end
 
     can :manage, Category
-    can :manage, Concept
+    can :manage, Quiz
     can :manage, Lesson
-    can :manage, Evaluator
+    can :manage, Question
   end
 end

@@ -1,4 +1,4 @@
-# A category object represents a named collection of related concepts. Through categories, we can
+# A category object represents a named collection of related quizes. Through categories, we can
 # represent hierarchical fields of knowledge, and allow the user to browse the tree of knowledge.
 #
 # Each category may belong to one or more parent categories, and may have one or more subcategories.
@@ -11,7 +11,7 @@
 # knowledge of another.
 #    - learning (resonance [physics]) enriches knowledge of (harmonic series [music])
 #
-# Each category may contain one or more concepts. While most concepts will be contained by
+# Each category may contain one or more quizes. While most quizes will be contained by
 # category "leaves," it is possible for a category to have subcategories and to also have its own
 # content which fits in the category but not in any of its subcategories.
 
@@ -31,7 +31,7 @@ class Category < ActiveRecord::Base
 
   # content association
   has_many :classifications
-  has_many :concepts, through: :classifications
+  has_many :quizes, through: :classifications
 
   # validations
   validates :name,  presence: true, length: { maximum: 50 }

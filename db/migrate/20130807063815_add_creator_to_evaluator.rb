@@ -1,6 +1,6 @@
-class AddCreatorToEvaluator < ActiveRecord::Migration
+class AddCreatorToQuestion < ActiveRecord::Migration
   def change
-    add_column :evaluators, :creator_id, :uuid
-    add_index :evaluators, :creator_id
+    add_column :questions, :creator_id, :uuid
+    add_index :questions, :creator_id
   end
 end

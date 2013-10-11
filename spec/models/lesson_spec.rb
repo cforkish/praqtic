@@ -5,8 +5,8 @@ describe Lesson do
   before do
     @lesson = Lesson.new(name: "Test Lesson")
     @creator = User.new(name: "Test User")
-    @cnode = Concept.new(name: "Test Concept")
-    @lesson.concept = @cnode
+    @cnode = Quiz.new(name: "Test Quiz")
+    @lesson.quiz = @cnode
     @lesson.creator = @creator
     @lesson.link = "www.wikipedia.org"
   end
@@ -14,7 +14,7 @@ describe Lesson do
   subject { @lesson }
 
   it { should respond_to(:name) }
-  it { should respond_to(:concept) }
+  it { should respond_to(:quiz) }
   it { should respond_to(:creator) }
   it { should respond_to(:link) }
   it { should respond_to(:interactions) }
@@ -32,8 +32,8 @@ describe Lesson do
     it { should_not be_valid }
   end
 
-  describe "when doesn't belong to a concept" do
-    before { @lesson.concept = nil}
+  describe "when doesn't belong to a quiz" do
+    before { @lesson.quiz = nil}
     it { should_not be_valid }
   end
 

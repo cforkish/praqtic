@@ -4,19 +4,19 @@ describe Classification do
 
   before do
     @classification = Classification.new()
-    @classification.concept = Concept.new(name: "Addition")
+    @classification.quiz = Quiz.new(name: "Addition")
     @classification.category = Category.new(name: "Arithmetic")
   end
 
   subject { @classification }
 
-  it { should respond_to :concept }
+  it { should respond_to :quiz }
   it { should respond_to :category }
 
   it { should be_valid }
 
-  describe "without a concept" do
-    before { @classification.concept = nil }
+  describe "without a quiz" do
+    before { @classification.quiz = nil }
     it { should_not be_valid }
   end
 

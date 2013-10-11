@@ -4,8 +4,8 @@ describe Dependency do
 
   before do
     @dependency = Dependency.new()
-    @dependency.prereq = Concept.new(name: "Addition")
-    @dependency.postreq = Concept.new(name: "Subtraction")
+    @dependency.prereq = Quiz.new(name: "Addition")
+    @dependency.postreq = Quiz.new(name: "Subtraction")
   end
 
   subject { @dependency }

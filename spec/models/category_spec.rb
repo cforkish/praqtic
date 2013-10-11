@@ -18,7 +18,7 @@ describe Category do
   it { should respond_to(:inverse_friendships) }
   it { should respond_to(:inverse_friends) }
   it { should respond_to(:classifications) }
-  it { should respond_to(:concepts) }
+  it { should respond_to(:quizes) }
 
   it { should be_valid }
 
@@ -97,5 +97,5 @@ describe Category do
     specify { expect(@fnode.inverse_friends[0]).to eq(@snode) }
   end
 
-  pending "test concept relationships"
+  pending "test quiz relationships"
 end

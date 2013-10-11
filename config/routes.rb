@@ -5,13 +5,13 @@ Primer::Application.routes.draw do
     resources :friends, controller: 'category_friendships'
     resources :parents, controller: 'category_relations'
   end
-  resources :concepts do
-    resources :prereqs, controller: 'concept_dependencies'
-    resources :postreqs, controller: 'concept_dependencies'
+  resources :quizes do
+    resources :prereqs, controller: 'quiz_dependencies'
+    resources :postreqs, controller: 'quiz_dependencies'
   end
   resources :classifications
   resources :lessons
-  resources :evaluators
+  resources :questions
   resources :graph
 
   root 'pages#home'

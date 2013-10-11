@@ -7,12 +7,12 @@ function CategoryGraph() {
   var categoryForceNodes;
 
   var categoryClickFunction,
-      conceptClickFunction;
+      quizClickFunction;
 
   var categoryNode,
       categoryLink,
-      conceptNode,
-      conceptLink;
+      quizNode,
+      quizLink;
 
   var categoryNodes,
       categoryLinks;
@@ -117,12 +117,12 @@ function CategoryGraph() {
 
   }
 
-  graph.showConcepts = function (node) {
+  graph.showQuizes = function (node) {
     // var nodes = flatten(root);
 
-    var conceptNodes = node.concepts;
-    var allNodes = conceptNodes.concat(categoryNodes);
-    var links = conceptLinks(node);
+    var quizNodes = node.quizes;
+    var allNodes = quizNodes.concat(categoryNodes);
+    var links = quizLinks(node);
 
     // Restart the force layout.
     force
@@ -131,43 +131,43 @@ function CategoryGraph() {
         .start();
 
     // Update the links…
-    conceptLink = svg.selectAll("line.link.concept")
+    quizLink = svg.selectAll("line.link.quiz")
         .data(links, function(d) { return d.target.id; });
 
     // Enter any new links.
-    conceptLink.enter().insert("line", "g")
-        .attr("class", "link concept")
+    quizLink.enter().insert("line", "g")
+        .attr("class", "link quiz")
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return height - d.source.y; })
         .attr("x2", function(d) { return d.target.x; })
         .attr("y2", function(d) { return height - d.target.y; });
 
     // Exit any old links.
-    conceptLink.exit().remove();
+    quizLink.exit().remove();
 
     // Update the nodes…
-    conceptNode = svg.selectAll("g.node.concept")
-        .data(conceptNodes, function(d) { return d.id; });
+    quizNode = svg.selectAll("g.node.quiz")
+        .data(quizNodes, function(d) { return d.id; });
 
     // Enter any new nodes.
-    var conceptNodeEnter = conceptNode.enter().append("g")
-        .attr("class", "node concept")
+    var quizNodeEnter = quizNode.enter().append("g")
+        .attr("class", "node quiz")
         .attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; })
-        .on("click", conceptClickFunction);
+        .on("click", quizClickFunction);
 
-    conceptNodeEnter.append("circle")
+    quizNodeEnter.append("circle")
         .attr("r", nodeRadius/2.0);
 
-    conceptNodeEnter.append("foreignObject")
+    quizNodeEnter.append("foreignObject")
         .attr("x", -nodeRadius/4.0)
         .attr("y", -nodeRadius/4.0)
         .attr("width", nodeRadius/2.0)
         .attr("height", nodeRadius/2.0)
         .append("xhtml") // use HTML to get word wrapping
-          .html(function(d) { return "<p class=\"node-label concept\">" + d.name + "</p>"; });
+          .html(function(d) { return "<p class=\"node-label quiz\">" + d.name + "</p>"; });
 
     // Exit any old nodes.
-    conceptNode.exit().remove();
+    quizNode.exit().remove();
   }
 
   // Helper function to map node id's to node objects.
@@ -233,11 +233,11 @@ function CategoryGraph() {
     };
   }
 
-  function conceptLinks(node) {
+  function quizLinks(node) {
     var links = [];
 
-    node.concepts.forEach(function(concept) {
-      links.push( {"source" : node, "target" : concept} );
+    node.quizes.forEach(function(quiz) {
+      links.push( {"source" : node, "target" : quiz} );
     });
 
     return links;
@@ -263,9 +263,9 @@ function CategoryGraph() {
       .on("click", clickFunction);
   };
 
-  graph.conceptNodeOnClick = function(clickFunction) {
-    conceptClickFunction = clickFunction;
-    svg.selectAll("g.node.concept")
+  graph.quizNodeOnClick = function(clickFunction) {
+    quizClickFunction = clickFunction;
+    svg.selectAll("g.node.quiz")
       .on("click", clickFunction);
   };
 
@@ -282,15 +282,15 @@ function CategoryGraph() {
     // categoryNode.attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
     // categoryLink.attr("d", diagonal);
 
-    if (conceptLink) {
-      conceptLink.attr("x1", function(d) { return d.source.x; })
+    if (quizLink) {
+      quizLink.attr("x1", function(d) { return d.source.x; })
           .attr("y1", function(d) { return height - d.source.y; })
           .attr("x2", function(d) { return d.target.x; })
           .attr("y2", function(d) { return height - d.target.y; });
     }
 
-    if (conceptNode) {
-      conceptNode.attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
+    if (quizNode) {
+      quizNode.attr("transform", function(d) { return "translate(" + d.x + "," + (height - d.y) + ")"; });
     }
 
   }

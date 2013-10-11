@@ -1,0 +1,38 @@
+<% provide(:title, @category.name) %>
+<div class="row">
+  <% @category.parents.each do |parent| %>
+    <%= link_to "&uparrow;".html_safe + parent.name, category_path(parent) %>
+  <% end %>
+
+  <h1>
+    <%= @category.name %>
+  </h1>
+
+  <section class="span4 offset2">
+    <h2 style="text-align:left;">Content:</h2>
+
+    <% if @category.quizes.count > 0 %>
+      <ul class="quizes">
+        <%= render @category.quizes %>
+      </ul>
+    <% else %>
+      <p>No Content</p>
+    <% end %>
+
+      <%= link_to "+ Add Quiz", new_quiz_path(category: @category) %>
+  </section>
+
+  <section class="span4">
+    <h2 style="text-align:left;">Subcategories:</h2>
+    <% if @category.children.count > 0 %>
+      <ul class="categories">
+        <%= render @category.children %>
+      </ul>
+    <% else %>
+      <p>No Subcategories</p>
+    <% end %>
+
+      <%= link_to "+ Add Subcategory", new_category_path(parent: @category) %>
+    </section>
+
+</div>
