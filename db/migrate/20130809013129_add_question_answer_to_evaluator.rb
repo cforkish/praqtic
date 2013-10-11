@@ -1,6 +1,6 @@
-class AddQuestionAnswerToQuestion < ActiveRecord::Migration
+class AddEvaluatorAnswerToEvaluator < ActiveRecord::Migration
   def change
-    add_column :questions, :question, :string
-    add_column :questions, :answer, :string
+    add_column :evaluators, :evaluator, :string
+    add_column :evaluators, :answer, :string
   end
 end

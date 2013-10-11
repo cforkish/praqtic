@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130911022525) do
+ActiveRecord::Schema.define(version: 20131011070411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,13 +56,7 @@ ActiveRecord::Schema.define(version: 20130911022525) do
   add_index "classifications", ["category_id"], name: "index_classifications_on_category_id", using: :btree
   add_index "classifications", ["quiz_id"], name: "index_classifications_on_quiz_id", using: :btree
 
-  create_table "quizes", id: :uuid, force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "dependencies", force: true do |t|
+  create_table "dependencies", id: :uuid, force: true do |t|
     t.uuid     "postreq_id"
     t.uuid     "prereq_id"
     t.datetime "created_at"
@@ -72,6 +66,24 @@ ActiveRecord::Schema.define(version: 20130911022525) do
   add_index "dependencies", ["postreq_id"], name: "index_dependencies_on_postreq_id", using: :btree
   add_index "dependencies", ["prereq_id", "postreq_id"], name: "index_dependencies_on_prereq_id_and_postreq_id", unique: true, using: :btree
   add_index "dependencies", ["prereq_id"], name: "index_dependencies_on_prereq_id", using: :btree
+
+  create_table "lesson_interactions", id: :uuid, force: true do |t|
+    t.uuid     "lesson_id"
+    t.uuid     "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lessons", id: :uuid, force: true do |t|
+    t.string   "name"
+    t.uuid     "quiz_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.uuid     "creator_id"
+    t.string   "link"
+  end
+
+  add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
 
   create_table "questions", id: :uuid, force: true do |t|
     t.uuid     "quiz_id"
@@ -84,23 +96,11 @@ ActiveRecord::Schema.define(version: 20130911022525) do
 
   add_index "questions", ["creator_id"], name: "index_questions_on_creator_id", using: :btree
 
-  create_table "lesson_interactions", id: :uuid, force: true do |t|
-    t.uuid     "lesson_id"
-    t.uuid     "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "lessons", force: true do |t|
+  create_table "quizes", id: :uuid, force: true do |t|
     t.string   "name"
-    t.uuid     "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.uuid     "creator_id"
-    t.string   "link"
   end
-
-  add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
 
   create_table "users", id: :uuid, force: true do |t|
     t.string   "name"
