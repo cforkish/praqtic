@@ -1,10 +1,8 @@
-<% provide(:title, 'All Categories') %>
+<% provide(:title, 'All Quizzes') %>
 <h1>All Quizzes</h1>
 
-
-
-<% if @root_node %>
-<ul class="categories">
-  <%= render @root_node, recursive: true %>
+<ul class="quizzes">
+  <%= render @quizzes %>
 </ul>
-<% end %>
+
+<%= link_to "+ Create Quiz", new_quiz_path %>

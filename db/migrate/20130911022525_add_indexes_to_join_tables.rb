@@ -9,8 +9,8 @@ class AddIndexesToJoinTables < ActiveRecord::Migration
     add_index :category_relations, [:parent_id, :child_id], unique: true
 
     add_index :classifications, :category_id
-    add_index :classifications, :quiz_id
-    add_index :classifications, [:category_id, :quiz_id], unique: true
+    add_index :classifications, :concept_id
+    add_index :classifications, [:category_id, :concept_id], unique: true
 
     add_index :dependencies, :prereq_id
     add_index :dependencies, :postreq_id

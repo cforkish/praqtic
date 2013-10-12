@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20131012023618) do
 
   add_index "questions", ["creator_id"], name: "index_questions_on_creator_id", using: :btree
 
-  create_table "quizes", id: :uuid, force: true do |t|
+  create_table "quizzes", id: :uuid, force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
