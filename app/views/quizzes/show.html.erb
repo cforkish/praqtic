@@ -12,7 +12,7 @@
       <p>This quiz has no lessons. Add one!</p>
     <% end %>
 
-    <%= link_to "+ Add Lesson", new_lesson_path(node: @quiz) %>
+    <%= link_to "+ Add Lesson", new_quiz_lesson_path(@quiz) %>
   </section>
 
   <section class="span4">
@@ -25,6 +25,6 @@
       <p>This quiz has no questions. Add one!</p>
     <% end %>
 
-    <%= link_to "+ Add Question", new_question_path(node: @quiz) %>
+    <%= link_to "+ Add Question", new_quiz_question_path(@quiz) %>
   </section>
 </div>

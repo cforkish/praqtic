@@ -6,7 +6,4 @@ class GraphController < ApplicationController
   def index
     @jsonNodes = category_to_node(Category.first).to_json
   end
-
-  def edit
-  end
 end

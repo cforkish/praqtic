@@ -2,33 +2,32 @@ class QuestionsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @root_node = Category.first
   end
 
   def show
   end
 
   def new
-    @parent = Category.find(params[:parent])
+    @quiz = Quiz.find(params[:quiz_id])
+    @question = @quiz.questions.build
   end
 
   def create
-    if @category.parents.size == 0
-      @category.parents << Category.first
-    end
-    if @category.save
-      flash[:success] = "Category created!"
-      redirect_to category_path(@category)
+    @quiz = Quiz.find(params[:quiz_id])
+    @question = @quiz.questions.build(params[:question])
+    @question.creator = current_user
+
+    if @question.save
+      flash[:success] = "Question created!"
+      redirect_to quiz_path(@quiz)
     else
       render 'new'
     end
   end
 
-
-
   private
 
-    def category_params
-      params.require(:category).permit(:name)
+    def question_params
+      params.require(:question).permit(:question, :answer, :alt1, :alt2, :alt3, :alt4)
     end
 end

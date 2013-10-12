@@ -6,12 +6,12 @@ Primer::Application.routes.draw do
     resources :parents, controller: 'category_relations'
   end
   resources :quizzes do
+    resources :questions
+    resources :lessons
     resources :prereqs, controller: 'quiz_dependencies'
     resources :postreqs, controller: 'quiz_dependencies'
   end
   resources :classifications
-  resources :lessons
-  resources :questions
   resources :graph
 
   root 'pages#home'

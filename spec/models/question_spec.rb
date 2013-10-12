@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Question do
 
   before do
-    @eval = Question.new(question: "What is 2+2?", answer: "4")
+    @eval = Question.new(question: "What is 2+2?", answer: "4", alt1: "1", alt2: "2", alt3: "3", alt4: "5")
 
     @cnode = Quiz.new(name: "Test Quiz")
     @eval.quiz = @cnode

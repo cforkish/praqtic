@@ -33,9 +33,9 @@ describe Category do
   end
 
   describe "parents association" do
-    let(:other_category) { Category.new(name: "Category") }
+    let(:other_category) { Category.create(name: "Category") }
     before do
-      @snode.parents << other_category
+      CategoryRelation.create(:parent => other_category, :child => @snode)
     end
 
     its(:parents) { should include other_category }
