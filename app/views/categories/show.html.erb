@@ -46,12 +46,12 @@
   <section class="span3">
     <h2 style="text-align:left;">Content:</h2>
 
-    <% if @category.quizes.count > 0 %>
-      <ul class="quizes">
-        <%= render @category.quizes %>
+    <% if @category.quizzes.count > 0 %>
+      <ul class="quizzes">
+        <%= render @category.quizzes %>
       </ul>
     <% else %>
-      <p>This category doesn't contain any quizes. Add one!</p>
+      <p>This category doesn't contain any quizzes. Add one!</p>
     <% end %>
 
       <%= link_to "+ Add Quiz", new_quiz_path(category: @category) %>

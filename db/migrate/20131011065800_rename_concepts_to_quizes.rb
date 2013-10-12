@@ -1,6 +1,6 @@
-class RenameConceptsToQuizes < ActiveRecord::Migration
+class RenameConceptsToQuizzes < ActiveRecord::Migration
   def change
-    rename_table :concepts, :quizes
+    rename_table :concepts, :quizzes
 
     change_table :classifications do |t|
       t.rename :concept_id, :quiz_id

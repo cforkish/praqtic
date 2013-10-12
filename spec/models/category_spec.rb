@@ -18,7 +18,7 @@ describe Category do
   it { should respond_to(:inverse_friendships) }
   it { should respond_to(:inverse_friends) }
   it { should respond_to(:classifications) }
-  it { should respond_to(:quizes) }
+  it { should respond_to(:quizzes) }
 
   it { should be_valid }
 

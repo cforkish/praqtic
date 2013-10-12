@@ -117,10 +117,10 @@ function CategoryGraph() {
 
   }
 
-  graph.showQuizes = function (node) {
+  graph.showQuizzes = function (node) {
     // var nodes = flatten(root);
 
-    var quizNodes = node.quizes;
+    var quizNodes = node.quizzes;
     var allNodes = quizNodes.concat(categoryNodes);
     var links = quizLinks(node);
 
@@ -236,7 +236,7 @@ function CategoryGraph() {
   function quizLinks(node) {
     var links = [];
 
-    node.quizes.forEach(function(quiz) {
+    node.quizzes.forEach(function(quiz) {
       links.push( {"source" : node, "target" : quiz} );
     });
 

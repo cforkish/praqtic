@@ -1,4 +1,4 @@
-<h1 id="header">Select a category to show quizes</h1>
+<h1 id="header">Select a category to show quizzes</h1>
 
 <% if (request.fullpath.index('prereq')) %>
 
@@ -41,7 +41,7 @@
     d3.selectAll("g.node").classed("active", false);
     d3.select(this).classed("active", true);
 
-    graph.showQuizes(d);
+    graph.showQuizzes(d);
   };
 
   function quizClickFunction(d) {

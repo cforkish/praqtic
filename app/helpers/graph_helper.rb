@@ -5,8 +5,8 @@ module GraphHelper
       "id" =>category.id,
       "url" => category_path(category.id),
       "friends" => category.friends.map { |f| { "source" => category.id, "target" => f.id } },
-      "quizes" => category.quizes.map { |c| quiz_to_node(c) },
-      "children"   => category.children.map { |c| category_to_node(c) } # uncomment to add quiz leafs # + category.quizes.map { |c| quiz_to_node(c) }
+      "quizzes" => category.quizzes.map { |c| quiz_to_node(c) },
+      "children"   => category.children.map { |c| category_to_node(c) } # uncomment to add quiz leafs # + category.quizzes.map { |c| quiz_to_node(c) }
     }
   end
 

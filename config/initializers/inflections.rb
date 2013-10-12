@@ -16,5 +16,5 @@
 # end
 
 ActiveSupport::Inflector.inflections do |inflect|
- inflect.irregular 'quiz', 'quizes'
+ inflect.irregular 'quiz', 'quizzes'
 end

@@ -5,7 +5,7 @@ Primer::Application.routes.draw do
     resources :friends, controller: 'category_friendships'
     resources :parents, controller: 'category_relations'
   end
-  resources :quizes do
+  resources :quizzes do
     resources :prereqs, controller: 'quiz_dependencies'
     resources :postreqs, controller: 'quiz_dependencies'
   end

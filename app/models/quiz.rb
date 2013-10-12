@@ -1,5 +1,5 @@
 # A quiz represents a single unit of knowledge, the smallest element that can be taught and
-# evaluated atomically. Breaking an area of study down to its component quizes enables a
+# evaluated atomically. Breaking an area of study down to its component quizzes enables a
 # subject to be taught in incremental steps.
 #
 # A quiz belongs to at least one category object, which denotes the topic or category of the
@@ -10,9 +10,9 @@
 # Each quiz may have one or more lessons and questions, to teach and evaluate the student
 # on the relevant material.
 #
-# A quiz may depend on one or more other quizes, and may have one or more other
-# quizes which depend on it. This dependency graph creates a system of prerequisites for
-# quizes.
+# A quiz may depend on one or more other quizzes, and may have one or more other
+# quizzes which depend on it. This dependency graph creates a system of prerequisites for
+# quizzes.
 
 class Quiz < ActiveRecord::Base
 	# category association

@@ -1,4 +1,4 @@
-class QuizesController < ApplicationController
+class QuizzesController < ApplicationController
   load_and_authorize_resource
 
   include GraphHelper
