@@ -1,25 +1,10 @@
-<h1 id="header">Select a category to view topics</h1>
+<% provide(:title, 'All Categories') %>
+<h1>All Quizes</h1>
 
-<!-- this is the element our script attaches the SVG element to -->
-<div id="graph"></div>
 
-<script>
 
-  var data = <%= raw(@jsonNodes) %>
-
-  var graph = CategoryGraph();
-  graph("#graph", data);
-  graph.categoryNodeOnClick(categoryClickFunction);
-  graph.quizNodeOnClick(quizClickFunction);
-
-  function categoryClickFunction(d) {
-    d3.selectAll("g.node").classed("active", false);
-    d3.select(this).classed("active", true);
-    graph.showQuizes(d);
-  };
-
-  function quizClickFunction(d) {
-    window.location.href = d.url;
-  };
-
-</script>
+<% if @root_node %>
+<ul class="categories">
+  <%= render @root_node, recursive: true %>
+</ul>
+<% end %>

@@ -4,6 +4,7 @@ class Lesson < ActiveRecord::Base
 
   has_many :interactions, :class_name => "LessonInteraction"
   has_many :users, :through => :interactions
+  has_one :questions
 
   validates :name,  presence: true, length: { maximum: 50 }
   validates_presence_of :quiz

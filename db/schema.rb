@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011070411) do
+ActiveRecord::Schema.define(version: 20131012023618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,12 @@ ActiveRecord::Schema.define(version: 20131011070411) do
     t.uuid     "creator_id"
     t.string   "question"
     t.string   "answer"
+    t.string   "alt1"
+    t.string   "alt2"
+    t.string   "alt3"
+    t.string   "alt4"
+    t.string   "explanation"
+    t.uuid     "lesson_id"
   end
 
   add_index "questions", ["creator_id"], name: "index_questions_on_creator_id", using: :btree
