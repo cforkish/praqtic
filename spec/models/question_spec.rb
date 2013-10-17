@@ -5,12 +5,8 @@ describe Question do
   before do
     @eval = Question.new(question: "What is 2+2?")
 
-    # @correct = QuestionAnswer.new(answer: "4", is_correct: true);
     @correct = @eval.answers.build(answer: "4", is_correct: true);
-    # @correct.question = @eval
-    # @incorrect = QuestionAnswer.new(answer: "3")
     @incorrect = @eval.answers.build(answer: "3")
-    # @incorrect.question = @eval
 
     @cnode = Quiz.new(name: "Test Quiz")
     @eval.quiz = @cnode

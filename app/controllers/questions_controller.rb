@@ -10,6 +10,9 @@ class QuestionsController < ApplicationController
   def new
     @quiz = Quiz.find(params[:quiz_id])
     @question = @quiz.questions.build
+    @question.answers.build
+    @question.answers.build
+    @question.creator = current_user
   end
 
   def create

@@ -6,6 +6,8 @@ class Question < ActiveRecord::Base
   belongs_to :creator, :class_name => "User"
   belongs_to :lesson
 
+  accepts_nested_attributes_for :answers, allow_destroy: true
+
   validates_presence_of :quiz
   validates_presence_of :creator
   validates_presence_of :question

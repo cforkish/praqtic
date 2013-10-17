@@ -1,0 +1,7 @@
+<%= render 'shared/error_messages', object: @question  %>
+
+<%= f.label :answer %>
+<%= f.text_field :answer %>
+
+<%= f.check_box :is_correct %>
+<%= f.label :is_correct, "Correct" %>

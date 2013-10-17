@@ -86,8 +86,8 @@ ActiveRecord::Schema.define(version: 20131016015905) do
   add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
 
   create_table "lessons_question_answers", id: :uuid, force: true do |t|
-    t.integer "lesson_id"
-    t.integer "question_answer_id"
+    t.uuid "lesson_id"
+    t.uuid "question_answer_id"
   end
 
   create_table "question_answers", id: :uuid, force: true do |t|

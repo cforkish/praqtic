@@ -1,3 +1,3 @@
 <li>
-  <%= link_to question.question, question.id %>
+  <%= link_to question.question, quiz_question_path(@quiz.id, question) %>
 </li>

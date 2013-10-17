@@ -1,4 +1,4 @@
-<% provide(:title, @quiz.name) %>
+<% provide(:title, @question.quiz.name + '::' + @question.question) %>
 <div class="row">
   <% @category.parents.each do |parent| %>
     <%= link_to "&uparrow;".html_safe + parent.name, category_path(parent) %>

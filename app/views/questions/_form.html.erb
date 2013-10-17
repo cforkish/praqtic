@@ -1,0 +1,22 @@
+<%= form_for [@quiz, @question] do |f| %>
+  <% if @question.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <ul>
+      <% @question.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :question %>
+  <%= f.text_field :question %>
+
+  <%= f.fields_for :answers do |builder| %>
+    <%= render 'answer_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "Add Answer", f, :answers %>
+
+  <%= f.submit "Add Question", class: "btn btn-large btn-primary" %>
+<% end %>
