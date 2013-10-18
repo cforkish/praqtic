@@ -14,11 +14,7 @@ describe Question do
     @creator = User.new(name: "Test User")
     @eval.creator = @creator
 
-    Question.transaction do
-      @correct.save!
-      @incorrect.save!
-      @eval.save!
-    end
+    @eval.save!
   end
 
   subject { @eval }
@@ -51,7 +47,7 @@ describe Question do
   end
 
   describe "when only has one answer" do
-    before { @eval.answers.first.delete }
+    before { @eval.answers.delete(@eval.answers.first)
     it { should_not be_valid }
   end
 

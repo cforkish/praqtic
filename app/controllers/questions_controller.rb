@@ -31,6 +31,6 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:question, :answer, :alt1, :alt2, :alt3, :alt4)
+      params.require(:question).permit(:question, answers_attributes: [ :answer, :is_correct ])
     end
 end
