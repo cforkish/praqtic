@@ -13,4 +13,6 @@
     </ul>
   </section>
 
+  <%= link_to 'Remove', quiz_question_path(@quiz, @question), :confirm => 'Are you sure you want to remove this question?', :method => :delete %>
+
 </div>

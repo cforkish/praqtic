@@ -5,6 +5,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @quiz = Quiz.find(params[:quiz_id])
   end
 
   def new
@@ -26,6 +27,16 @@ class QuestionsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def update
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    flash[:success] = "Question removed."
+    redirect_to quiz_path(params[:quiz_id])
   end
 
   private
