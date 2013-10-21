@@ -3,13 +3,19 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-  $('form').on 'click', '.remove_fields', (event) ->
-    $(this).prev('input[type=hidden]').val('1')
-    $(this).closest('fieldset').remove()
+  window.initAddFields()
+  window.initRemoveFields()
+
+window.initAddFields = () ->
+  $('.add_fields').on 'click', (event) ->
+    newID = $('#next_answer_id').val()
+    $('#next_answer_id').val(parseInt(newID)+1)
+    regexp = new RegExp($(this).data('id'), 'g')
+    $('#answers').append($(this).data('fields').replace(regexp, newID))
+    window.initRemoveFields()
     event.preventDefault()
 
-  $('form').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
+window.initRemoveFields = () ->
+  $('.remove_field').on 'click', (event) ->
+    $(this).parents('.answer').remove()
     event.preventDefault()

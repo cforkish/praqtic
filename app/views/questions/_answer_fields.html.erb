@@ -1,11 +1,15 @@
-<div class="form-group">
-	<%= f.label :answer %>
-	<%= f.text_field :answer %>
 
-	<%= f.label :is_correct, :class => "checkbox" do %>
-		<%= f.check_box :is_correct %>Correct
-	<% end %>
+<div class="form-group answer">
 
-	<%= f.hidden_field :_destroy %>
-	<%= link_to "remove", '#', class: "remove_fields" %>
+  <%= f.label :answer, class: 'col-md-2 control-label' %>
+  <div class='col-md-8'>
+    <%= f.text_field :answer, class: 'form-control'  %>
+  </div>
+  <div class='col-md-1 checkbox'>
+    <%= f.check_box :is_correct %>
+  </div>
+  <div class='col-md-1'>
+    <div class="remove_field btn btn-mini btn-danger form-control">Remove</div>
+  </div>
+
 </div>

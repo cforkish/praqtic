@@ -13,14 +13,26 @@
   <div class="form-group">
     <%= f.label :question, class: 'col-md-2 control-label' %>
     <div class='col-md-10'>
-      <%= f.text_field :question, class: 'form-control'  %>
+      <%= f.text_field :question, class: 'col-md-10 form-control'  %>
     </div>
   </div>
 
-  <%= f.fields_for :answers do |builder| %>
-    <%= render 'answer_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_fields "Add Answer", f, :answers %>
+  <input id="next_answer_id" type="hidden" value="2">
 
-  <%= f.submit "Create Question", class: "btn btn-large btn-primary" %>
+  <div id="answers">
+    <%= f.fields_for :answers do |builder| %>
+      <%= render 'answer_fields', f: builder  %>
+    <% end %>
+  </div>
+
+  <div class="col-md-offset-2">
+    <%= link_to_add_answer "Add Answer", f, :answers %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <button type="submit" class="btn btn-primary">Create Question</button>
+    </div>
+  </div>
+
 <% end %>
