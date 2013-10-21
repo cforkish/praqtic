@@ -2,7 +2,7 @@
 
 
 <div class="row">
-  <section class="span4 offset2">
+  <div class="col-md-5 col-md-offset-2">
     <h2 style="text-align:left;">Lessons:</h2>
     <% if @quiz.lessons.count > 0 %>
       <ul class="lessons">
@@ -13,9 +13,9 @@
     <% end %>
 
     <%= link_to "+ Add Lesson", new_quiz_lesson_path(@quiz) %>
-  </section>
+  </div>
 
-  <section class="span4">
+  <div class="col-md-4">
     <h2 style="text-align:left;">Questions:</h2>
     <% if @quiz.questions.count > 0 %>
       <ul class="quizzes">
@@ -26,5 +26,5 @@
     <% end %>
 
     <%= link_to "+ Add Question", new_quiz_question_path(@quiz) %>
-  </section>
+  </div>
 </div>
