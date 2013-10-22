@@ -10,10 +10,18 @@
     </div>
   <% end %>
 
+  <!-- Question -->
   <div class="form-group">
     <%= f.label :question, class: 'col-md-2 control-label' %>
     <div class='col-md-10'>
       <%= f.text_field :question, class: 'col-md-10 form-control'  %>
+    </div>
+  </div>
+
+  <!-- Answers -->
+  <div class="row form-group">
+    <div class="col-md-2">
+      <h2 class="text-right control-label">Answers:</h2>
     </div>
   </div>
 
@@ -29,6 +37,7 @@
     <%= link_to_add_input "Add Answer", f, :answers %>
   </div>
 
+  <!-- References -->
   <div class="form-group">
     <%= f.label :explanation, class: 'col-md-2 control-label' %>
     <div class='col-md-10'>
@@ -36,15 +45,16 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row form-group">
     <div class="col-md-2">
-      <h2 class="text-right">References:</h2>
+      <h2 class="text-right control-label">References:</h2>
+    </div>
+    <div class="col-md-10">
+      <%= f.select(:lesson_ids, @quiz.lessons.collect {|l| [ l.name, l.id ] }, {},
+                                      { :multiple => true, :class => "chzn-select",
+                                        "data-placeholder" => "Select relevant references..." }) %>
     </div>
   </div>
-
-  <%= f.select(:TYPE, Lessons.collect {|p| [ p.name, p.id ] },
-                                           { :prompt => "Please select"},
-                                           { :multiple => true, :size => 5 }) %>
 
   <input id="next_lesson_id" type="hidden" value="1">
 

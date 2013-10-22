@@ -5,6 +5,7 @@
 jQuery ->
   window.initAddFields()
   window.initRemoveFields()
+  $('.chzn-select').chosen()
 
 window.initAddFields = () ->
   $('.add_fields').on 'click', (event) ->

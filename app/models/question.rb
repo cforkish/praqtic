@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
   has_and_belongs_to_many :lessons
 
   accepts_nested_attributes_for :answers, allow_destroy: true
+  accepts_nested_attributes_for :lessons, allow_destroy: false
 
   validates_presence_of :quiz
   validates_presence_of :creator

@@ -5,20 +5,23 @@ class LessonsController < ApplicationController
   end
 
   def new
-    @lesson.quiz = Quiz.find(params[:node])
+    @quiz = Quiz.find(params[:quiz_id])
+    @lesson = @quiz.lessons.build
     @lesson.creator = current_user
   end
 
   def create
+    @quiz = Quiz.find(params[:quiz_id])
+    @lesson = @quiz.lessons.build(params[:lesson])
+    @lesson.creator = current_user
+
     if @lesson.save
-      flash[:success] = "Lesson created!"
-      redirect_to @lesson
+      flash[:success] = "Reference created!"
+      redirect_to quiz_path(@quiz)
     else
       render 'new'
     end
   end
-
-
 
   private
 
