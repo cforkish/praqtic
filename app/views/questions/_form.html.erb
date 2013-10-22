@@ -14,7 +14,7 @@
   <div class="form-group">
     <%= f.label :question, class: 'col-md-2 control-label' %>
     <div class='col-md-10'>
-      <%= f.text_field :question, class: 'col-md-10 form-control'  %>
+      <%= f.text_area :question, class: 'col-md-10 form-control'  %>
     </div>
   </div>
 
@@ -25,19 +25,23 @@
     </div>
   </div>
 
-  <input id="next_answer_id" type="hidden" value="2">
+  <input id="next_id_answer" type="hidden" value="2">
 
-  <div id="answers">
+  <div id="container_answer">
     <%= f.fields_for :answers do |builder| %>
       <%= render 'answer_fields', f: builder  %>
     <% end %>
   </div>
 
-  <div class="col-md-offset-2">
-    <%= link_to_add_input "Add Answer", f, :answers %>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-2">
+      <div class="add_answer btn btn-mini btn-primary form-control">
+        <%= link_to_add_input "Add Answer", f, :answers %>
+      </div>
+    </div>
   </div>
 
-  <!-- References -->
+  <!-- Explanation -->
   <div class="form-group">
     <%= f.label :explanation, class: 'col-md-2 control-label' %>
     <div class='col-md-10'>
@@ -45,6 +49,7 @@
     </div>
   </div>
 
+  <!-- References -->
   <div class="row form-group">
     <div class="col-md-2">
       <h2 class="text-right control-label">References:</h2>
@@ -56,21 +61,25 @@
     </div>
   </div>
 
-  <input id="next_lesson_id" type="hidden" value="1">
+  <input id="next_id_lesson" type="hidden" value="1">
 
-  <div id="lessons">
+  <div id="container_lesson">
     <%= f.fields_for :lessons do |builder| %>
       <%= render 'lesson_fields', f: builder  %>
     <% end %>
   </div>
 
-  <div class="col-md-offset-2">
-    <%= link_to_add_input "Add Reference", f, :lessons %>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-2">
+      <div class="add_lesson btn btn-mini btn-primary form-control">
+        <%= link_to_add_input "Add Reference", f, :lessons %>
+      </div>
+    </div>
   </div>
 
   <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
-      <button type="submit" class="btn btn-primary">Create Question</button>
+      <button type="submit" class="btn btn-success">Create Question</button>
     </div>
   </div>
 

@@ -68,6 +68,15 @@ p {
   line-height: 1.7em;
 }
 
+.btn a {
+  color: white;
+  text-decoration: none;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
 
 /* header */
 

@@ -3,20 +3,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-  window.initAddFields()
-  window.initRemoveFields()
+  window.initAddField('answer')
+  window.initAddField('lesson')
   $('.chzn-select').chosen()
 
-window.initAddFields = () ->
-  $('.add_fields').on 'click', (event) ->
-    newID = $('#next_answer_id').val()
-    $('#next_answer_id').val(parseInt(newID)+1)
-    regexp = new RegExp($(this).data('id'), 'g')
-    $('#answers').append($(this).data('fields').replace(regexp, newID))
-    window.initRemoveFields()
+window.initAddField = (fieldType) ->
+  triggerClass = '.add_' + fieldType
+  $(triggerClass).on 'click', { fieldType: fieldType }, (event) ->
+    counterID = '#next_id_' + event.data.fieldType
+    containerID = '#container_' + event.data.fieldType
+
+    newID = $(event.data.counterID).val()
+    $(counterID).val(parseInt(newID)+1)
+    regexp = new RegExp($(this).children('a').data('id'), 'g')
+    $(containerID).append($(this).children('a').data('fields').replace(regexp, newID))
+    window.initRemoveFields(fieldType)
     event.preventDefault()
 
-window.initRemoveFields = () ->
-  $('.remove_field').on 'click', (event) ->
-    $(this).parents('.answer').remove()
+window.initRemoveFields = (fieldType) ->
+  triggerClass = '.remove_' + fieldType
+  $(triggerClass).on 'click', { fieldType: fieldType }, (event) ->
+    containerClass = '.' + event.data.fieldType
+    $(this).parents(containerClass).remove()
     event.preventDefault()
