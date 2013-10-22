@@ -3,7 +3,7 @@ class Question < ActiveRecord::Base
 
 	belongs_to :quiz
   belongs_to :creator, :class_name => "User"
-  belongs_to :lesson
+  has_and_belongs_to_many :lessons
 
   accepts_nested_attributes_for :answers, allow_destroy: true
 

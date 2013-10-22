@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131016015905) do
+ActiveRecord::Schema.define(version: 20131021054200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,15 +85,14 @@ ActiveRecord::Schema.define(version: 20131016015905) do
 
   add_index "lessons", ["creator_id"], name: "index_lessons_on_creator_id", using: :btree
 
-  create_table "lessons_question_answers", id: :uuid, force: true do |t|
+  create_table "lessons_questions", id: :uuid, force: true do |t|
     t.uuid "lesson_id"
-    t.uuid "question_answer_id"
+    t.uuid "question_id"
   end
 
   create_table "question_answers", id: :uuid, force: true do |t|
     t.uuid     "question_id"
     t.string   "answer"
-    t.string   "explanation"
     t.boolean  "is_correct",  default: false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -105,6 +104,7 @@ ActiveRecord::Schema.define(version: 20131016015905) do
     t.datetime "updated_at"
     t.uuid     "creator_id"
     t.string   "question"
+    t.string   "explanation"
   end
 
   add_index "questions", ["creator_id"], name: "index_questions_on_creator_id", using: :btree

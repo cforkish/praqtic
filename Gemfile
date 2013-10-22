@@ -31,6 +31,8 @@ gem 'jquery-rails', '2.2.1'
 gem 'turbolinks', '1.1.1'
 gem 'jquery-turbolinks'
 gem 'jbuilder', '1.0.2'
+gem 'compass-rails', github: 'Compass/compass-rails'
+gem 'chosen-rails'
 
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 gem 'bootstrap-will_paginate', '0.0.9'

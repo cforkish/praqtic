@@ -13,6 +13,7 @@ class QuestionsController < ApplicationController
     @question = @quiz.questions.build
     @question.answers.build
     @question.answers.build
+    @question.lessons.build
     @question.creator = current_user
   end
 
