@@ -13,8 +13,8 @@
   <!-- Question -->
   <div class="form-group">
     <%= f.label :question, class: 'col-md-2 control-label' %>
-    <div class='col-md-10'>
-      <%= f.text_area :question, class: 'col-md-10 form-control'  %>
+    <div class='col-md-8'>
+      <%= f.text_area :question, class: 'form-control'  %>
     </div>
   </div>
 
@@ -33,24 +33,25 @@
     <% end %>
   </div>
 
-  <div class="row">
+  <div class="form-group">
     <div class="col-md-offset-2 col-md-2">
       <div class="add_answer btn btn-mini btn-primary form-control">
         <%= link_to_add_input "Add Answer", f, :answers %>
       </div>
     </div>
   </div>
+  <br/>
 
   <!-- Explanation -->
   <div class="form-group">
     <%= f.label :explanation, class: 'col-md-2 control-label' %>
-    <div class='col-md-10'>
-      <%= f.text_area :explanation, class: 'col-md-10 form-control'  %>
+    <div class='col-md-8'>
+      <%= f.text_area :explanation, class: 'form-control'  %>
     </div>
   </div>
 
   <!-- References -->
-  <div class="row form-group">
+  <div class="form-group">
     <div class="col-md-2">
       <h2 class="text-right control-label">References:</h2>
     </div>
@@ -76,10 +77,11 @@
       </div>
     </div>
   </div>
+  <br/>
 
   <div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-      <button type="submit" class="btn btn-success">Create Question</button>
+    <div class="col-md-offset-2 col-md-8">
+      <button type="submit" class="btn btn-success btn-lg btn-block">Create Question</button>
     </div>
   </div>
 

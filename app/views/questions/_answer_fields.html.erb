@@ -1,15 +1,18 @@
 
 <div class="form-group answer">
-
   <%= f.label :answer, class: 'col-md-2 control-label' %>
   <div class='col-md-8'>
-    <%= f.text_field :answer, class: 'form-control'  %>
+    <div class="input-group">
+      <%= f.text_field :answer, class: 'form-control'  %>
+      <span class="input-group-addon">
+        <%= f.radio_button("answer", "is_correct", is_correct) %>
+      </span>
+    </div><!-- /input-group -->
   </div>
-  <div class='col-md-1 checkbox'>
+<!--   <div class='col-md-1 checkbox'>
     <%= f.check_box :is_correct %>
-  </div>
-  <div class='col-md-1'>
+  </div> -->
+  <div class='col-md-2'>
     <div class="remove_answer btn btn-mini btn-danger form-control">Remove</div>
   </div>
-
 </div>

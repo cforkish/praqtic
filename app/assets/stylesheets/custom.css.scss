@@ -50,7 +50,8 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
+  // margin-bottom: 30px;
+  margin-top: 10px;
   text-align: center;
 }
 
@@ -167,7 +168,7 @@ aside {
 }
 
 
-/* forms */
+/* forms
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
@@ -180,6 +181,8 @@ input, textarea, select, .uneditable-input {
 input {
   height: auto !important;
 }
+
+*/
 
 #error_explanation {
   color: #f00;
@@ -207,4 +210,14 @@ input {
       border-bottom: 1px solid $gray-lighter;
     }
   }
+}
+
+/* Question Form */
+
+.panel-primary small {
+  color: $gray-dark;
+}
+
+.panel-footer {
+  height: 30px;;
 }

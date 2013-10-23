@@ -1,4 +1,13 @@
 <% provide(:title, 'New Question') %>
-<h1>Add a question to "<%= @quiz.name %>"</h1>
+<div class="panel panel-primary">
 
-<%= render 'form' %>
+  <div class="panel-heading">
+    <h1><%= @quiz.name %> <small>Add a question</small></h1>
+  </div>
+
+  <div class="panel-body">
+    <div class="container">
+      <%= render 'form' %>
+    </div>
+  </div>
+</div>
