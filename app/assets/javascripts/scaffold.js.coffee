@@ -4,3 +4,5 @@ $ ->
     allow_single_deselect: true
     no_results_text: 'No results matched'
     width: '200px'
+
+  $('.container-panel-div-down').width($('.container-panel-div-down').width() + 62)

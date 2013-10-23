@@ -11,6 +11,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :quiz
   validates_presence_of :creator
   validates_presence_of :question
+  validate :must_have_lesson #todo: remove
   validate :must_have_correct_answer
 
 private
@@ -20,11 +21,15 @@ private
         return false
       elsif
         correct = answers.select {|a| a.is_correct? }
-        errors.add(:Answer, "You must provide at least one correct answer.") unless correct.size > 0
-        errors.add(:Answer, "You can only provide one correct answer.") if correct.size > 1
+        errors.add(:answer, "You must provide at least one correct answer.") unless correct.size > 0
+        errors.add(:answer, "You can only provide one correct answer.") if correct.size > 1
         return false
       else
         return true
       end
+  end
+
+  def must_have_lesson
+    errors.add(:lesson, "You need a lesson") unless lessons.size > 0
   end
 end

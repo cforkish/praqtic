@@ -21,6 +21,23 @@ class QuestionsController < ApplicationController
     @question = @quiz.questions.build(params[:question])
     @question.creator = current_user
 
+    @question.lessons.each do |l|
+      l.quiz = @quiz
+      l.creator = current_user
+      render 'new' unless l.save!
+    end
+
+    answers = params[:question][:answers_attributes]
+    puts 'DEBUG'
+    puts answers
+    # params[:answers_attributes].each do |a|
+    #   lessonIDs = a[:lesson_ids]
+    #   lessonIDs.each { |id|
+    #     lesson = Lesson.find(id)
+    #     @question.lessons << lesson
+    #   }
+    # end
+
     if @question.save
       flash[:success] = "Question created!"
       redirect_to quiz_path(@quiz)
@@ -42,6 +59,9 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:question, answers_attributes: [ :answer, :is_correct ])
+      params.require(:question).permit(:question,
+                                        answers_attributes: [ :answer, :is_correct ],
+                                        lessons_attributes: [ :name, :link ],
+                                        :lesson_ids => [])
     end
 end

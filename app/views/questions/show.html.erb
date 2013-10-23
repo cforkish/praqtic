@@ -5,7 +5,7 @@
     <%= @question.question %>
   </h1>
 
-  <section class="col-md-4 col-md-offset-2">
+  <div class="col-md-4 col-md-offset-2">
     <h2 style="text-align:left;">Answers:</h2>
 
     <ul class="answers">
@@ -13,6 +13,14 @@
     </ul>
 
   <%= link_to 'Remove', quiz_question_path(@quiz, @question), :confirm => 'Are you sure you want to remove this question?', :method => :delete %>
-  </section>
+  </div>
+
+  <div class="col-md-6">
+    <h2 style="text-align:left;">References:</h2>
+
+    <ul class="references">
+      <%= render @question.lessons %>
+    </ul>
+  </div>
 
 </div>

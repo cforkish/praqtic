@@ -14,7 +14,7 @@
   <div class="form-group">
     <%= f.label :question, class: 'col-md-2 control-label' %>
     <div class='col-md-8'>
-      <%= f.text_area :question, class: 'form-control'  %>
+      <%= f.text_area :question, :rows => "5", class: 'form-control'  %>
     </div>
   </div>
 
@@ -46,7 +46,7 @@
   <div class="form-group">
     <%= f.label :explanation, class: 'col-md-2 control-label' %>
     <div class='col-md-8'>
-      <%= f.text_area :explanation, class: 'form-control'  %>
+      <%= f.text_area :explanation, :rows => "3", class: 'form-control'  %>
     </div>
   </div>
 
@@ -55,11 +55,15 @@
     <div class="col-md-2">
       <h2 class="text-right control-label">References:</h2>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-8">
       <%= f.select(:lesson_ids, @quiz.lessons.collect {|l| [ l.name, l.id ] }, {},
-                                      { :multiple => true, :class => "chzn-select",
-                                        "data-placeholder" => "Select relevant references..." }) %>
+                                      { :multiple => true, :class => "form-control",
+                                        "data-placeholder" => "Select useful references..." }) %>
     </div>
+  </div>
+
+  <div class="col-md-offset-2">
+    <p style="padding-left:4px;">Or add a new reference:</p>
   </div>
 
   <input id="next_id_lesson" type="hidden" value="1">
@@ -78,6 +82,8 @@
     </div>
   </div>
   <br/>
+
+  <div class="container-panel-div-down"></div>
 
   <div class="form-group">
     <div class="col-md-offset-2 col-md-8">

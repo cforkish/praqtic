@@ -13,7 +13,7 @@ window.initAddField = (fieldType) ->
     counterID = '#next_id_' + event.data.fieldType
     containerID = '#container_' + event.data.fieldType
 
-    newID = $(event.data.counterID).val()
+    newID = $(counterID).val()
     $(counterID).val(parseInt(newID)+1)
     regexp = new RegExp($(this).children('a').data('id'), 'g')
     $(containerID).append($(this).children('a').data('fields').replace(regexp, newID))

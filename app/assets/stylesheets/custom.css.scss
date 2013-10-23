@@ -197,6 +197,23 @@ input {
   @extend .error;
 }
 
+/* Panel addons */
+
+.container-panel-div-down {
+  height: 1px;
+  border-color: #428bca !important;
+  border-top: 1px solid;
+  border-radius: 4px;
+  position:relative;
+  left: -31px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.panel-heading {
+  margin-bottom: 30px;
+}
+
 /* Users index */
 
 .users {
@@ -219,5 +236,13 @@ input {
 }
 
 .panel-footer {
-  height: 30px;;
+  height: 30px;
+}
+
+.input-group-addon {
+  height: 34px;
+}
+
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+  height: 40px;
 }

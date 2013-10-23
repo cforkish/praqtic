@@ -5,7 +5,7 @@
     <div class="input-group">
       <%= f.text_field :answer, class: 'form-control'  %>
       <span class="input-group-addon">
-        <%= f.radio_button("answer", "is_correct", is_correct) %>
+        <%= f.check_box :is_correct %>
       </span>
     </div><!-- /input-group -->
   </div>
