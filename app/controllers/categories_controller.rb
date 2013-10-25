@@ -11,11 +11,11 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    @parent = Category.find(params[:parent])
+    @parent = Category.friendly.find(params[:parent])
   end
 
   def create
-    @parent = Category.find(params[:parent])
+    @parent = Category.friendly.find(params[:parent])
     if @parent.nil?
       @parent = Category.first
     end

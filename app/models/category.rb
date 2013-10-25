@@ -16,6 +16,9 @@
 # content which fits in the category but not in any of its subcategories.
 
 class Category < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, :use => :slugged
+
   # parent-child association
   has_many :parent_relations, class_name: "CategoryRelation", foreign_key: "child_id"
   has_many :parents, through: :parent_relations, class_name: "Category"
@@ -35,6 +38,7 @@ class Category < ActiveRecord::Base
 
   # validations
   validates :name,  presence: true, length: { maximum: 50 }
+  validates_presence_of :slug
 
   # sorting
   default_scope { order(created_at: :asc) }

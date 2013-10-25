@@ -15,6 +15,9 @@
 # quizzes.
 
 class Quiz < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, :use => :slugged
+
 	# category association
   has_many :classifications
   has_many :categories, through: :classifications
@@ -32,7 +35,7 @@ class Quiz < ActiveRecord::Base
 
   # validations
   validates :name,  presence: true, length: { maximum: 50 }
-
+  validates_presence_of :slug
   after_save :validate_has_category
 
 private

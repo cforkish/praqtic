@@ -1,15 +1,16 @@
 class QuestionsController < ApplicationController
-  load_and_authorize_resource
+  load_resource :find_by => :slug
+  authorize_resource
 
   def index
   end
 
   def show
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.friendly.find(params[:quiz_id])
   end
 
   def new
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.friendly.find(params[:quiz_id])
     @question = @quiz.questions.build
     @question.answers.build
     @question.answers.build
@@ -17,7 +18,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.friendly.find(params[:quiz_id])
     @question = @quiz.questions.build(params[:question])
     @question.creator = current_user
 
@@ -26,17 +27,6 @@ class QuestionsController < ApplicationController
       l.creator = current_user
       render 'new' unless l.save!
     end
-
-    answers = params[:question][:answers_attributes]
-    puts 'DEBUG'
-    puts answers
-    # params[:answers_attributes].each do |a|
-    #   lessonIDs = a[:lesson_ids]
-    #   lessonIDs.each { |id|
-    #     lesson = Lesson.find(id)
-    #     @question.lessons << lesson
-    #   }
-    # end
 
     if @question.save
       flash[:success] = "Question created!"
@@ -50,7 +40,6 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find(params[:id])
     @question.destroy
     flash[:success] = "Question removed."
     redirect_to quiz_path(params[:quiz_id])

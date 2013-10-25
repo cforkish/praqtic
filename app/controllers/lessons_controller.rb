@@ -1,17 +1,18 @@
 class LessonsController < ApplicationController
-  load_and_authorize_resource
+  load_resource :find_by => :slug
+  authorize_resource
 
   def show
   end
 
   def new
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.friendly.find(params[:quiz_id])
     @lesson = @quiz.lessons.build
     @lesson.creator = current_user
   end
 
   def create
-    @quiz = Quiz.find(params[:quiz_id])
+    @quiz = Quiz.friendly.find(params[:quiz_id])
     @lesson = @quiz.lessons.build(params[:lesson])
     @lesson.creator = current_user
 

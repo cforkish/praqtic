@@ -1,4 +1,7 @@
 class Lesson < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, :use => :slugged
+
 	belongs_to :quiz
   belongs_to :creator, :class_name => "User"
 
@@ -10,4 +13,5 @@ class Lesson < ActiveRecord::Base
   validates_presence_of :quiz
   validates_presence_of :creator
   validates_presence_of :link
+  validates_presence_of :slug
 end

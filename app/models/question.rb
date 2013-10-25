@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :short_name, :use => :slugged
   has_many :answers, :class_name => "QuestionAnswer", :inverse_of => :question, dependent: :destroy
 
 	belongs_to :quiz
@@ -11,10 +13,15 @@ class Question < ActiveRecord::Base
   validates_presence_of :quiz
   validates_presence_of :creator
   validates_presence_of :question
-  validate :must_have_lesson #todo: remove
+  validates_presence_of :slug
   validate :must_have_correct_answer
 
 private
+  def short_name
+    shortname = question.length > 20 ? question[0..20] : question
+    "#{shortname}"
+  end
+
   def must_have_correct_answer
       if answers.size < 2
         errors.add(:Answer, "You must provide at least one correct and one incorrect answer.")
@@ -27,9 +34,5 @@ private
       else
         return true
       end
-  end
-
-  def must_have_lesson
-    errors.add(:lesson, "You need a lesson") unless lessons.size > 0
   end
 end

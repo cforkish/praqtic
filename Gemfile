@@ -37,6 +37,8 @@ gem 'chosen-rails'
 gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 gem 'bootstrap-will_paginate', '0.0.9'
 
+gem 'friendly_id', '~> 5.0.0'
+
 group :doc do
   gem 'sdoc', '0.3.20', require: false
 end
