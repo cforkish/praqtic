@@ -1,5 +1,9 @@
 <% provide(:title, @question.quiz.name + '::' + @question.question) %>
 <div class="row">
+  <%= link_to "&uparrow;".html_safe + @question.quiz.name, @question.quiz %>
+</div>
+
+<div class="row">
 
   <h1>
     <%= @question.question %>

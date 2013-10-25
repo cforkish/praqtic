@@ -1,8 +1,11 @@
 <% provide(:title, @quiz.name) %>
 
+<div class="row">
+  <h1><%=@quiz.name%></h1>
+</div>
 
 <div class="row">
-  <div class="col-md-5 col-md-offset-2">
+  <div class="col-md-6 col-md-offset-2">
     <h2 style="text-align:left;">Lessons:</h2>
     <% if @quiz.lessons.count > 0 %>
       <ul class="lessons">

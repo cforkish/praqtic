@@ -57,7 +57,7 @@
     </div>
     <div class="col-md-8">
       <%= f.select(:lesson_ids, @quiz.lessons.collect {|l| [ l.name, l.id ] }, {},
-                                      { :multiple => true, :class => "form-control",
+                                      { :multiple => true, :class => "chzn-select form-control",
                                         "data-placeholder" => "Select useful references..." }) %>
     </div>
   </div>
