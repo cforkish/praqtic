@@ -1,4 +1,5 @@
 Primer::Application.routes.draw do
+
   resources :users, except: :new
   resources :sessions, only: [:new, :create, :destroy]
   resources :categories do
@@ -6,10 +7,13 @@ Primer::Application.routes.draw do
     resources :parents, controller: 'category_relations'
   end
   resources :quizzes do
-    resources :questions
+    resources :questions do
+      resources :interactions, controller: 'question_interactions'
+    end
     resources :lessons
     resources :prereqs, controller: 'quiz_dependencies'
     resources :postreqs, controller: 'quiz_dependencies'
+    get 'do', on: :member
   end
   resources :classifications
   resources :graph

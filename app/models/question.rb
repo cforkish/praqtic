@@ -1,11 +1,13 @@
 class Question < ActiveRecord::Base
   extend FriendlyId
   friendly_id :short_name, :use => :slugged
+
   has_many :answers, :class_name => "QuestionAnswer", :inverse_of => :question, dependent: :destroy
+  has_and_belongs_to_many :lessons
+  has_many :interactions, :class_name => "QuestionInteraction"
 
 	belongs_to :quiz
   belongs_to :creator, :class_name => "User"
-  has_and_belongs_to_many :lessons
 
   accepts_nested_attributes_for :answers, allow_destroy: true
   accepts_nested_attributes_for :lessons, allow_destroy: false

@@ -23,6 +23,9 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def do
+  end
+
 
 
   private

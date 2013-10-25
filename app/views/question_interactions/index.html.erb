@@ -1,0 +1,25 @@
+<h1>Listing question_interactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @question_interactions.each do |question_interaction| %>
+      <tr>
+        <td><%= link_to 'Show', question_interaction %></td>
+        <td><%= link_to 'Edit', edit_question_interaction_path(question_interaction) %></td>
+        <td><%= link_to 'Destroy', question_interaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Question interaction', new_question_interaction_path %>
