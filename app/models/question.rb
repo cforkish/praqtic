@@ -18,6 +18,12 @@ class Question < ActiveRecord::Base
   validates_presence_of :slug
   validate :must_have_correct_answer
 
+  def next
+    question = quiz.questions.where("id > ?", id).order("id ASC").first
+    question = quiz.questions.first unless question
+    return question
+  end
+
 private
   def short_name
     shortname = question.length > 20 ? question[0..20] : question
