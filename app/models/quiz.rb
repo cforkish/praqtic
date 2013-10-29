@@ -25,6 +25,7 @@ class Quiz < ActiveRecord::Base
   # content associations
   has_many :lessons
   has_many :questions
+  has_many :interactions, class_name: "QuizInteraction"
 
   # dependency associations
   has_many :dependencies, foreign_key: "postreq_id"

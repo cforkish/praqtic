@@ -15,6 +15,7 @@ Primer::Application.routes.draw do
     resources :postreqs, controller: 'quiz_dependencies'
     get 'do', on: :member
     post 'submit_question', on: :member
+    get 'report', on: :member
   end
   resources :classifications
   resources :graph

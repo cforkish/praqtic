@@ -26,7 +26,10 @@ class QuizzesController < ApplicationController
   def do
     if params.has_key?(:question)
       @question = @quiz.questions.friendly.find(params[:question])
+      @quizInteraction = @quiz.interactions.find(params[:quiz_interaction])
     else
+      @quizInteraction = @quiz.interactions.build(user: current_user)
+      @quizInteraction.save!
       @question = @quiz.questions.first
     end
   end
@@ -34,6 +37,7 @@ class QuizzesController < ApplicationController
   def submit_question
     @question = @quiz.questions.friendly.find(params[:question])
     @answer = @question.answers.find(params[:answer_id])
+    @quizInteraction = @quiz.interactions.find(params[:quiz_interaction])
 
     score = 1
     if @answer.is_correct
@@ -43,11 +47,21 @@ class QuizzesController < ApplicationController
       score = 0
     end
 
-    interaction = @question.interactions.build(:user => current_user, :score => score)
+    interaction = @question.interactions.build(:user => current_user,
+                    :quiz_interaction => @quizInteraction, :score => score)
     interaction.save!
+    @quizInteraction.save!
 
     @question = @question.next
-    redirect_to do_quiz_path(@quiz, :question => @question.friendly_id)
+    if @question == Question.first
+      redirect_to report_quiz_path(@quiz, :quiz_interaction => @quizInteraction.id)
+    else
+      redirect_to do_quiz_path(@quiz, :question => @question.friendly_id, :quiz_interaction => @quizInteraction.id)
+    end
+  end
+
+  def report
+    @quizInteraction = @quiz.interactions.find(params[:quiz_interaction])
   end
 
 

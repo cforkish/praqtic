@@ -6,6 +6,7 @@
 <%= form_tag( {controller: "quizzes", action: "submit_question"}, class: "form-horizontal") do %>
 
   <%= hidden_field_tag 'question', question.id %>
+  <%= hidden_field_tag 'quiz_interaction', @quizInteraction.id %>
 
   <% question.answers.each_with_index do |a, index| %>
     <div class="form-group">
