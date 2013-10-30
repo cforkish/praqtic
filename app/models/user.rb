@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
 
   has_many :lessons, :foreign_key => :creator_id
-  has_many :interactions, :class_name => "LessonInteraction"
+  has_many :lesson_interactions #, :class_name => "LessonInteraction"
+  has_many :questions, :foreign_key => :creator_id
+  has_many :user_tracked_questions
+  has_many :tracked_questions, :through => :user_tracked_questions
+  has_many :question_interactions
 
   before_save do
     email.downcase!
