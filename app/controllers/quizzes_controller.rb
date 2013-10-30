@@ -52,6 +52,12 @@ class QuizzesController < ApplicationController
     interaction.save!
     @quizInteraction.save!
 
+    # trackedQuestion = @question.tracking_users.build
+    # trackedQuestion.user = current_user
+    # trackedQuestion.save!
+    @question.tracking_users << current_user
+    # trackedQuestion = @question.user_tracked_questions.create! :user => current_user
+
     @question = @question.next
     if @question == Question.first
       redirect_to report_quiz_path(@quiz, :quiz_interaction => @quizInteraction.id)

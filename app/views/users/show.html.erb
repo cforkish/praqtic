@@ -9,3 +9,9 @@
     </section>
   </aside>
 </div>
+
+<div class="row">
+  <h1>Tracked Questions</h1>
+  <li>
+    <%= render partial: "tracked_question", collection: @user.tracked_questions %>
+</div>

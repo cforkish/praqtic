@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   has_many :lessons, :foreign_key => :creator_id
   has_many :lesson_interactions #, :class_name => "LessonInteraction"
   has_many :questions, :foreign_key => :creator_id
-  has_many :user_tracked_questions
-  has_many :tracked_questions, :through => :user_tracked_questions
+  has_and_belongs_to_many :tracked_questions, class_name: "Question", foreign_key: "user_id",
+                              association_foreign_key: "question_id", join_table: "user_tracked_questions"
   has_many :question_interactions
 
   before_save do
