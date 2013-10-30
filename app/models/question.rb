@@ -5,8 +5,12 @@ class Question < ActiveRecord::Base
   has_many :answers, :class_name => "QuestionAnswer", :inverse_of => :question, dependent: :destroy
   has_and_belongs_to_many :lessons
   has_many :interactions, :class_name => "QuestionInteraction"
-  has_and_belongs_to_many :tracking_users, class_name: "User", foreign_key: "question_id",
-                              association_foreign_key: "user_id", join_table: "user_tracked_questions"
+  has_many :user_tracked_questions
+  has_many :tracking_users, :through => :user_tracked_questions,
+              class_name: "User", :source => :user
+
+  # has_and_belongs_to_many :tracking_users, class_name: "User", foreign_key: "question_id",
+  #                             association_foreign_key: "user_id", join_table: "user_tracked_questions"
 
 	belongs_to :quiz
   belongs_to :creator, :class_name => "User"

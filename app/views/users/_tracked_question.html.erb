@@ -1,13 +1,11 @@
 <div class='row'>
-  <li>
-    <div class='col-md-offset-2 col-md-2'>
-      <%= tracked_question.question %>
-    </div>
-    <div class='col-md-2'>
-      Created at: <%= tracked_question.created_at %>
-    </div>
-    <div class='col-md-2'>
-      Updated at: <%= tracked_question.updated_at %>
-    </div>
-  </li>
+  <div class='col-md-offset-2 col-md-2'>
+    <%= tracked_question.question.question %>
+  </div>
+  <div class='col-md-3'>
+    Created at: <%= tracked_question.created_at %>
+  </div>
+  <div class='col-md-3'>
+    Updated at: <%= tracked_question.updated_at %>
+  </div>
 </div>

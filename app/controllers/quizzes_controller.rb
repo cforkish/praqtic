@@ -52,11 +52,12 @@ class QuizzesController < ApplicationController
     interaction.save!
     @quizInteraction.save!
 
-    # trackedQuestion = @question.tracking_users.build
-    # trackedQuestion.user = current_user
-    # trackedQuestion.save!
-    @question.tracking_users << current_user
-    # trackedQuestion = @question.user_tracked_questions.create! :user => current_user
+    trackedQuestion = @question.user_tracked_questions.find_by(:user => current_user)
+    if (trackedQuestion)
+      trackedQuestion.touch
+    else
+      @question.tracking_users << current_user
+    end
 
     @question = @question.next
     if @question == Question.first
