@@ -21,10 +21,6 @@ html {
   overflow-y: scroll;
 }
 
-body {
-  padding-top: 51px;
-}
-
 section {
   overflow: auto;
 }
@@ -210,9 +206,9 @@ input {
   margin-bottom: 30px;
 }
 
-.panel-heading {
-  margin-bottom: 30px;
-}
+// .panel-heading {
+//   margin-bottom: 30px;
+// }
 
 /* Users index */
 
@@ -260,17 +256,17 @@ input {
 }
 
 .sidebar-left {
-  background-color: $gray-darker;
   width: 200px;
   float: left;
 }
 
 .main-content {
-  margin-left: 200px;
   float: left;
+  overflow: hidden;
+  width: 530px;
 }
 
 .sidebar-right {
   width: 250px;
-  float: right;
+  margin-left: 730px;
 }
