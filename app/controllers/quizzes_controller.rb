@@ -25,17 +25,28 @@ class QuizzesController < ApplicationController
 
   def create
     # @quiz = Quiz.new(params[:quiz])
+    #   puts 'DEBUG'
+    #   puts @quiz.classifications.inspect
+    #   puts @quiz.categories.inspect
     @quiz.creator = current_user
 
+    # save classifications with existing categories
     @quiz.classifications.each do |c|
-      # c.quiz = @quiz
-      # # classification = @quiz.classifications.build(:category => c.category)
-      # classification = classification.new(:quiz => @quiz, :category => c.category)
-      puts 'DEBUG'
-      puts c.inspect
-      render 'new' unless c.save!
+      # puts 'DEBUG' + c.inspect
+      # if c.category
+        render 'new' unless c.save!
+      # end
     end
 
+    # save classifications with new categories
+    # newCats = params[:quiz][:classifications_attributes]
+    # newCats.each do |c|
+    #   puts 'DEBUG'
+    #   puts @c.inspect
+    #   cat = Category.create!(c[:category])
+    #   classification = @quiz.classifications.build(:category => cat)
+    #   render 'new' unless classification.save!
+    # end
     if @quiz.save
       flash[:success] = "Quiz created!"
       redirect_to quiz_path(@quiz)
@@ -98,8 +109,8 @@ class QuizzesController < ApplicationController
 
     def quiz_params
       params.require(:quiz).permit(:name, :caption, :description,
-                classification_attributes: [ :quiz, :category, category_attributes: [ :name ] ],
-                :category_ids => [] )
+                categories_attributes: [ :name ],
+                category_ids: [] )
     end
 
 end

@@ -1,18 +1,14 @@
 
 <div class="classification">
 
-  <%= f.fields_for :category do |builder| %>
     <div class="form-group">
-      <%= builder.label :name, class: 'col-md-2 control-label' %>
+      <%= f.label :name, class: 'col-md-2 control-label' %>
       <div class='col-md-8'>
-        <%= builder.text_field :name, class: 'form-control'  %>
+        <%= f.text_field :name, class: 'form-control'  %>
       </div>
       <div class='col-md-2'>
         <div class="remove_classification btn btn-mini btn-danger form-control">Remove</div>
       </div>
     </div>
-  <% end %>
-
-  <%= hidden_field_tag 'quiz', @quiz.id %>
 
 </div>

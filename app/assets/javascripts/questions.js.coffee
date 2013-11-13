@@ -5,7 +5,7 @@
 jQuery ->
   window.initAddField('answer')
   window.initAddField('lesson')
-  window.initAddField('category')
+  window.initAddField('classification')
   $('.chzn-select').chosen()
 
 window.initAddField = (fieldType) ->

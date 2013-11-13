@@ -38,6 +38,7 @@ class Quiz < ActiveRecord::Base
 
 
   accepts_nested_attributes_for :categories, allow_destroy: false
+  accepts_nested_attributes_for :classifications, allow_destroy: true
 
   # validations
   validates :name,  presence: true, length: { maximum: 50 }

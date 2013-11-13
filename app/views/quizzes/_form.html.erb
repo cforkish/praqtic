@@ -34,7 +34,7 @@
     </div>
   </div>
 
-  <!-- Categories -->
+  <!-- Existing Categories -->
   <div class="form-group">
     <div class="col-md-2">
       <h2 class="text-right control-label">Tags:</h2>
@@ -45,6 +45,29 @@
                                         "data-placeholder" => "Select existing tags..." }) %>
     </div>
   </div>
+
+  <div class="col-md-offset-2">
+    <p style="padding-left:4px;">Or add a new tag:</p>
+  </div>
+
+  <!-- New Categories -->
+
+  <input id="next_id_classification" type="hidden" value="1">
+
+  <div id="container_classification">
+    <%= f.fields_for :categories do |builder| %>
+      <%= render 'category_fields', f: builder  %>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-2">
+      <div class="add_classification btn btn-mini btn-primary form-control">
+        <%= link_to_add_input "Add Tag", f, :categories %>
+      </div>
+    </div>
+  </div>
+  <br/>
 
   <div class="form-group">
     <div class="col-md-offset-2 col-md-8">
