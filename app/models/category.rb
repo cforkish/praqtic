@@ -33,7 +33,7 @@ class Category < ActiveRecord::Base
   has_many :inverse_friends, through: :inverse_friendships, source: :category
 
   # content association
-  has_many :classifications
+  has_many :classifications, :inverse_of => :category, dependent: :destroy
   has_many :quizzes, through: :classifications
 
   # validations

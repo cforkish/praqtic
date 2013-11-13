@@ -1,4 +1,4 @@
-<% provide(:title, @question.quiz.name + '::' + @question.question) %>
+<% provide(:title, @question.quiz.name + '::' + @question.content) %>
 <div class="row">
   <%= link_to "&uparrow;".html_safe + @question.quiz.name, @question.quiz %>
 </div>
@@ -6,7 +6,7 @@
 <div class="row">
 
   <h1>
-    <%= @question.question %>
+    <%= @question.content %>
   </h1>
 
   <div class="col-md-4 col-md-offset-2">

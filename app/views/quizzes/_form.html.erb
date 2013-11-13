@@ -1,0 +1,55 @@
+<%= form_for @quiz, :html => {:class => 'form-horizontal', :role => 'form'} do |f| %>
+  <% if @quiz.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+      <ul>
+      <% @quiz.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Name -->
+  <div class="form-group">
+    <%= f.label :name, class: 'col-md-2 control-label' %>
+    <div class='col-md-8'>
+      <%= f.text_field :name, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <!-- Caption -->
+  <div class="form-group">
+    <%= f.label :caption, class: 'col-md-2 control-label' %>
+    <div class='col-md-8'>
+      <%= f.text_field :caption, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div class="form-group">
+    <%= f.label :description, class: 'col-md-2 control-label' %>
+    <div class='col-md-8'>
+      <%= f.text_area :description, :rows => "5", class: 'form-control'  %>
+    </div>
+  </div>
+
+  <!-- Categories -->
+  <div class="form-group">
+    <div class="col-md-2">
+      <h2 class="text-right control-label">Tags:</h2>
+    </div>
+    <div class="col-md-8">
+      <%= f.select(:category_ids, Category.all.collect {|c| [ c.name, c.id ] }, {},
+                                      { :multiple => true, :class => "chzn-select form-control",
+                                        "data-placeholder" => "Select existing tags..." }) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-8">
+      <button type="submit" class="btn btn-success btn-lg btn-block">Create Quiz</button>
+    </div>
+  </div>
+
+<% end %>

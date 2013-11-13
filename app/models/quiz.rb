@@ -19,7 +19,7 @@ class Quiz < ActiveRecord::Base
   friendly_id :name, :use => :slugged
 
 	# category association
-  has_many :classifications
+  has_many :classifications, :inverse_of => :quiz, dependent: :destroy
   has_many :categories, through: :classifications
 
   # content associations
@@ -34,14 +34,19 @@ class Quiz < ActiveRecord::Base
   has_many :post_dependencies, class_name: "Dependency", foreign_key: "prereq_id"
   has_many :postreqs, through: :post_dependencies, class_name: "Quiz"
 
+  belongs_to :creator, :class_name => "User"
+
+
+  accepts_nested_attributes_for :categories, allow_destroy: false
+
   # validations
   validates :name,  presence: true, length: { maximum: 50 }
-  validates_presence_of :slug
-  after_save :validate_has_category
+  validates_presence_of :slug, :description, :caption, :creator
+  validate :validate_has_category
 
 private
   def validate_has_category
-    if categories.count < 1
+    if categories.size < 1
       errors.add(:categories, "must belong to at least one category")
       return false
     end

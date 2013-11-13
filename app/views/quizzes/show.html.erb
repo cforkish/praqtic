@@ -4,6 +4,12 @@
   <h1><%=@quiz.name%></h1>
 </div>
 
+<div class="row text-center">
+  <% @quiz.categories.each do |c| %>
+    <%= c.name %>
+  <% end %>
+</div>
+
 <div class="row">
   <div class="col-md-6 col-md-offset-2">
     <h2 style="text-align:left;">Lessons:</h2>

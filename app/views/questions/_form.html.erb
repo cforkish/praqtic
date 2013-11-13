@@ -10,11 +10,19 @@
     </div>
   <% end %>
 
-  <!-- Question -->
+  <!-- Name -->
   <div class="form-group">
-    <%= f.label :question, class: 'col-md-2 control-label' %>
+    <%= f.label :name, class: 'col-md-2 control-label' %>
     <div class='col-md-8'>
-      <%= f.text_area :question, :rows => "5", class: 'form-control'  %>
+      <%= f.text_field :name, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="form-group">
+    <%= f.label :content, class: 'col-md-2 control-label' %>
+    <div class='col-md-8'>
+      <%= f.text_area :content, :rows => "5", class: 'form-control'  %>
     </div>
   </div>
 
