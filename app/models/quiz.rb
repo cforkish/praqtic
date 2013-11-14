@@ -45,8 +45,48 @@ class Quiz < ActiveRecord::Base
   validates_presence_of :slug, :description, :caption, :creator
   validate :validate_has_category
 
+
+  # before_validation :logBV
+  # after_validation :logAV
+  # before_save :logBS
+  # after_save :logAS
+  # before_create :logBC
+  # after_create :logAC
+  # after_commit :logACommit
+  # after_rollback :logAR
+  # after_touch :logAT
+
+  def logBV
+    logger.error "quiz BEFORE VALIDATION"
+  end
+  def logAV
+    logger.error "quiz AFTER VALIDATION"
+  end
+  def logBS
+    logger.error "quiz BEFORE SAVE"
+  end
+  def logAS
+    logger.error "quiz AFTER SAVE"
+  end
+  def logBC
+    logger.error "quiz BEFORE CREATE"
+  end
+  def logAC
+    logger.error "quiz AFTER CREATE"
+  end
+  def logACommit
+    logger.error "quiz AFTER COMMIT"
+  end
+  def logAR
+    logger.error "quiz AFTER ROLLBACK"
+  end
+  def logAT
+    logger.error "quiz AFTER TOUCH"
+  end
+
 private
   def validate_has_category
+    logger.error "quiz VALIDATE HAS CATEGORY"
     if categories.size < 1
       errors.add(:categories, "must belong to at least one category")
       return false

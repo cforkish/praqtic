@@ -9,6 +9,46 @@ class Classification < ActiveRecord::Base
   accepts_nested_attributes_for :category, allow_destroy: false
   accepts_nested_attributes_for :quiz, allow_destroy: false
 
-  validates_presence_of :quiz
+  # validates_presence_of :quiz
   validates_presence_of :category
+
+
+  # before_validation :logBV
+  # after_validation :logAV
+  # before_save :logBS
+  # after_save :logAS
+  # before_create :logBC
+  # after_create :logAC
+  # after_commit :logACommit
+  # after_rollback :logAR
+  # after_touch :logAT
+
+
+  def logBV
+    logger.error "class BEFORE VALIDATION"
+  end
+  def logAV
+    logger.error "class AFTER VALIDATION"
+  end
+  def logBS
+    logger.error "class BEFORE SAVE"
+  end
+  def logAS
+    logger.error "class AFTER SAVE"
+  end
+  def logBC
+    logger.error "class BEFORE CREATE"
+  end
+  def logAC
+    logger.error "class AFTER CREATE"
+  end
+  def logACommit
+    logger.error "class AFTER COMMIT"
+  end
+  def logAR
+    logger.error "class AFTER ROLLBACK"
+  end
+  def logAT
+    logger.error "class AFTER TOUCH"
+  end
 end

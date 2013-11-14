@@ -43,4 +43,43 @@ class Category < ActiveRecord::Base
   # sorting
   default_scope { order(created_at: :asc) }
 
+  # before_validation :logBV
+  # after_validation :logAV
+  # before_save :logBS
+  # after_save :logAS
+  # before_create :logBC
+  # after_create :logAC
+  # after_commit :logACommit
+  # after_rollback :logAR
+  # after_touch :logAT
+
+
+  def logBV
+    logger.error "cat BEFORE VALIDATION"
+  end
+  def logAV
+    logger.error "cat AFTER VALIDATION"
+  end
+  def logBS
+    logger.error "cat BEFORE SAVE"
+  end
+  def logAS
+    logger.error "cat AFTER SAVE"
+  end
+  def logBC
+    logger.error "cat BEFORE CREATE"
+  end
+  def logAC
+    logger.error "cat AFTER CREATE"
+  end
+  def logACommit
+    logger.error "cat AFTER COMMIT"
+  end
+  def logAR
+    logger.error "cat AFTER ROLLBACK"
+  end
+  def logAT
+    logger.error "cat AFTER TOUCH"
+  end
+
 end

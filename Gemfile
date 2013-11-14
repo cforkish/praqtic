@@ -14,6 +14,7 @@ group :development, :test do
   gem 'guard-rspec', '2.5.0'
   gem 'spork-rails', github: 'sporkrb/spork-rails'
   gem 'guard-spork', '1.5.0'
+  gem 'debugger'
 end
 
 group :test do

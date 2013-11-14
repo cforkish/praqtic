@@ -12,6 +12,7 @@ class QuizzesController < ApplicationController
   end
 
   def new
+      logger.error "QUIZ NEW"
   end
 
   def create
@@ -24,37 +25,24 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    # @quiz = Quiz.new(params[:quiz])
-    #   puts 'DEBUG'
-    #   puts @quiz.classifications.inspect
-    #   puts @quiz.categories.inspect
     @quiz.creator = current_user
 
-    # save classifications with existing categories
-    @quiz.classifications.each do |c|
-      # puts 'DEBUG' + c.inspect
-      # if c.category
-        render 'new' unless c.save!
-      # end
-    end
-
-    # save classifications with new categories
-    # newCats = params[:quiz][:classifications_attributes]
-    # newCats.each do |c|
-    #   puts 'DEBUG'
-    #   puts @c.inspect
-    #   cat = Category.create!(c[:category])
-    #   classification = @quiz.classifications.build(:category => cat)
-    #   render 'new' unless classification.save!
-    # end
-    if @quiz.save
+    if @quiz.classifications.size > 0
+      @quiz.classifications.each do |c|
+        unless c.save
+          render 'new'
+          return
+        end
+      end
       flash[:success] = "Quiz created!"
       redirect_to quiz_path(@quiz)
     else
+      @quiz.save # attempt save to get errors
       render 'new'
     end
   end
 
+  # Do quiz
   def do
     if params.has_key?(:question)
       @question = @quiz.questions.friendly.find(params[:question])
