@@ -1,6 +1,9 @@
-<tr class='tr-url' url="<%= admin_quiz_path(quiz) %>">
+<tr id='quiz_<%= quiz.friendly_id %>' class='tr-url' url="<%= admin_quiz_path(quiz) %>">
   <td><%= quiz.name %></td>
   <td><%= quiz.creator ? quiz.creator.name : 'nil' %></td>
   <td><%= quiz.questions.size %></td>
   <td><%= quiz.lessons.size %></td>
+  <td>
+    <%= link_to 'Delete Quiz', admin_destroy_path('quiz', quiz.id), :confirm => 'Are you sure you want to delete this quiz?', :method => :delete, class: 'btn btn-xs btn-danger' %>
+  </td>
 </tr>

@@ -7,7 +7,7 @@
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th>Name</th><th>Creator</th><th>Quizzes</th><th>Lessons</th>
+      <th>Name</th><th>Creator</th><th>Quizzes</th><th>Lessons</th><th>Remove</th>
     </tr>
   </thead>
   <%= render :partial => 'category', :collection => @categories %>
@@ -18,7 +18,7 @@
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th>Name</th><th>Creator</th><th>Questions</th><th>Lessons</th>
+      <th>Name</th><th>Creator</th><th>Questions</th><th>Lessons</th><th>Remove</th>
     </tr>
   </thead>
   <%= render :partial => 'quiz', :collection => @quizzes %>
@@ -29,7 +29,7 @@
 <table class="table table-striped table-hover">
   <thead>
     <tr>
-      <th>Name</th><th>Creator</th><th>Quizzes</th><th>Questions</th>
+      <th>Name</th><th>Creator</th><th>Quizzes</th><th>Questions</th><th>Remove</th>
     </tr>
   </thead>
   <%= render :partial => 'lesson', :collection => @lessons %>

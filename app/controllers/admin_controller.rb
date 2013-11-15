@@ -28,4 +28,26 @@ class AdminController < ApplicationController
     @category = Category.friendly.find(params[:id])
   end
 
+  def destroy
+    @klass = params[:klass]
+    case @klass
+    when "quiz"
+      @object = Quiz.friendly.find(params[:id])
+      @object.destroy
+    when "tag"
+      @object = Category.friendly.find(params[:id])
+      @object.destroy
+    when "source"
+      @object = Lesson.friendly.find(params[:id])
+      @object.destroy
+    end
+
+    flash[:success] = @klass.capitalize + ' deleted.'
+
+    respond_to do |format|
+      format.html { redirect_to admin_path }
+      format.js
+    end
+  end
+
 end
