@@ -1,0 +1,36 @@
+<% provide(:title, 'Admin') %>
+
+<h1>Admin</h1>
+
+<h3 class='text-center'>Tags</h3>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th><th>Creator</th><th>Quizzes</th><th>Lessons</th>
+    </tr>
+  </thead>
+  <%= render :partial => 'category', :collection => @categories %>
+</table>
+
+<h3 class='text-center'>Quizzes</h3>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th><th>Creator</th><th>Questions</th><th>Lessons</th>
+    </tr>
+  </thead>
+  <%= render :partial => 'quiz', :collection => @quizzes %>
+</table>
+
+<h3 class='text-center'>Sources</h3>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th><th>Creator</th><th>Quizzes</th><th>Questions</th>
+    </tr>
+  </thead>
+  <%= render :partial => 'lesson', :collection => @lessons %>
+</table>

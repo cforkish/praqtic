@@ -5,9 +5,9 @@
 class Classification < ActiveRecord::Base
   belongs_to :quiz, :inverse_of => :classifications
   belongs_to :category, :inverse_of => :classifications
+  belongs_to :creator, :class_name => "User"
 
-  validates_presence_of :quiz
-  validates_presence_of :category
+  validates_presence_of :quiz, :category, :creator
 
 
   # before_validation :logBV

@@ -35,10 +35,13 @@ class Category < ActiveRecord::Base
   # content association
   has_many :classifications, :inverse_of => :category, dependent: :destroy
   has_many :quizzes, through: :classifications
+  has_many :lessons, :through => :quizzes
+
+  belongs_to :creator, :class_name => "User"
 
   # validations
   validates :name,  presence: true, length: { maximum: 50 }
-  validates_presence_of :slug
+  validates_presence_of :slug, :creator
 
   # sorting
   default_scope { order(created_at: :asc) }

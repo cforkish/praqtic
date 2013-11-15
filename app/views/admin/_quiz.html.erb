@@ -1,0 +1,6 @@
+<tr class='tr-url' url="<%= admin_quiz_path(quiz) %>">
+  <td><%= quiz.name %></td>
+  <td><%= quiz.creator ? quiz.creator.name : 'nil' %></td>
+  <td><%= quiz.questions.size %></td>
+  <td><%= quiz.lessons.size %></td>
+</tr>

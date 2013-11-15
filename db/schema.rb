@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131113021633) do
+ActiveRecord::Schema.define(version: 20131115014757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20131113021633) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.uuid     "creator_id"
   end
 
+  add_index "categories", ["creator_id"], name: "index_categories_on_creator_id", using: :btree
   add_index "categories", ["slug"], name: "index_categories_on_slug", unique: true, using: :btree
 
   create_table "category_friendships", id: :uuid, force: true do |t|
@@ -53,10 +55,12 @@ ActiveRecord::Schema.define(version: 20131113021633) do
     t.uuid     "quiz_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.uuid     "creator_id"
   end
 
   add_index "classifications", ["category_id", "quiz_id"], name: "index_classifications_on_category_id_and_quiz_id", unique: true, using: :btree
   add_index "classifications", ["category_id"], name: "index_classifications_on_category_id", using: :btree
+  add_index "classifications", ["creator_id"], name: "index_classifications_on_creator_id", using: :btree
   add_index "classifications", ["quiz_id"], name: "index_classifications_on_quiz_id", using: :btree
 
   create_table "dependencies", id: :uuid, force: true do |t|
@@ -106,6 +110,14 @@ ActiveRecord::Schema.define(version: 20131113021633) do
   create_table "lessons_questions", id: :uuid, force: true do |t|
     t.uuid "lesson_id"
     t.uuid "question_id"
+  end
+
+  create_table "posts", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "question_answers", id: :uuid, force: true do |t|

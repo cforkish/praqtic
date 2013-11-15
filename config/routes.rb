@@ -30,6 +30,11 @@ Primer::Application.routes.draw do
   get '/about'   => 'pages#about'
   get '/contact' => 'pages#contact'
 
+  get '/admin'   => 'admin#index'
+  get '/admin/category/:id' => 'admin#category', as: :admin_category
+  get '/admin/quiz/:id' => 'admin#quiz', as: :admin_quiz
+  get '/admin/lesson/:id' => 'admin#lesson', as: :admin_lesson
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

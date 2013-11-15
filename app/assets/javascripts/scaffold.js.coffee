@@ -6,3 +6,6 @@ $ ->
     width: '200px'
 
   $('.container-panel-div-down').width($('.container-panel-div-down').width() + 62)
+
+  $('tr.tr-url').on 'click', (event) ->
+    window.location = $(this).attr("url")

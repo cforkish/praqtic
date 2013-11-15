@@ -1,0 +1,6 @@
+<tr class='tr-url' url="<%= admin_category_path(category) %>">
+  <td><%= category.name %></td>
+  <td><%= category.creator ? category.creator.name : 'nil' %></td>
+  <td><%= category.quizzes.size %></td>
+  <td><%= category.lessons.size %></td>
+</tr>
