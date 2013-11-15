@@ -12,34 +12,18 @@ class QuizzesController < ApplicationController
   end
 
   def new
-      logger.error "QUIZ NEW"
-  end
-
-  def create
-    if @quiz.save
-      flash[:success] = "Quiz created!"
-      redirect_to @quiz
-    else
-      render 'new'
-    end
   end
 
   def create
     @quiz.creator = current_user
 
-    if @quiz.classifications.size > 0
-      @quiz.classifications.each do |c|
-        unless c.save
-          render 'new'
-          return
-        end
-      end
+    if @quiz.save
       flash[:success] = "Quiz created!"
       redirect_to quiz_path(@quiz)
     else
-      @quiz.save # attempt save to get errors
       render 'new'
     end
+
   end
 
   # Do quiz

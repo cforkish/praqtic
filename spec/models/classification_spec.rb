@@ -3,9 +3,9 @@ require 'spec_helper'
 describe Classification do
 
   before do
-    @classification = Classification.new()
-    @classification.quiz = Quiz.new(name: "Addition")
-    @classification.category = Category.new(name: "Arithmetic")
+    @category = Category.create(name: "Test Category")
+    @quiz = Quiz.new(name: "Test Quiz", description: "Desc", caption: "cap")
+    @classification = @quiz.classifications.build(category: @category)
   end
 
   subject { @classification }

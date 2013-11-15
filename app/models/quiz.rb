@@ -19,7 +19,7 @@ class Quiz < ActiveRecord::Base
   friendly_id :name, :use => :slugged
 
 	# category association
-  has_many :classifications, :inverse_of => :quiz, dependent: :destroy
+  has_many :classifications, autosave: true, :inverse_of => :quiz, dependent: :destroy
   has_many :categories, through: :classifications
 
   # content associations

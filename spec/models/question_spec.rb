@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Question do
 
   before do
-    @eval = Question.new(question: "What is 2+2?")
+    @eval = Question.new(name: "2+2", content: "What is 2+2?")
 
     @correct = @eval.answers.build(answer: "4", is_correct: true);
     @incorrect = @eval.answers.build(answer: "3")
@@ -47,7 +47,7 @@ describe Question do
   end
 
   describe "when only has one answer" do
-    before { @eval.answers.delete(@eval.answers.first)
+    before { @eval.answers.delete(@eval.answers.first) }
     it { should_not be_valid }
   end
 
