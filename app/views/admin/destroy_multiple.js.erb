@@ -1,0 +1,26 @@
+<% @quizzes.each do |q| %>
+<% puts 'DEBUG1 ' + q.name %>
+
+  $('#quiz_<%= q.friendly_id %>').fadeOut(200, function() {
+      $(this).remove();
+    });
+
+<% end %>
+
+<% @lessons.each do |l| %>
+<% puts 'DEBUG1 ' + l.name %>
+
+  $('#source_<%= l.friendly_id %>').fadeOut(200, function() {
+      $(this).remove();
+    });
+
+<% end %>
+
+<% @categories.each do |c| %>
+<% puts 'DEBUG1 ' + c.name %>
+
+  $('#tag_<%= c.friendly_id %>').fadeOut(200, function() {
+      $(this).remove();
+    });
+
+<% end %>

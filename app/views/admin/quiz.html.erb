@@ -1,0 +1,7 @@
+<% provide(:title, 'Admin::' + @quiz.name) %>
+
+<h1><%= @quiz.name %> </h1>
+<br />
+<div class="row text-center">
+  <%= link_to 'Delete Quiz', admin_destroy_path('quiz', @quiz.id), :confirm => 'Are you sure you want to delete this quiz?', :method => :delete, class: 'btn btn-mini btn-danger' %>
+</div>

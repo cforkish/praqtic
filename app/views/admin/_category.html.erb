@@ -1,0 +1,10 @@
+<tr id='tag_<%= category.friendly_id %>' class='tr-url' url='<%= admin_category_path(category) %>'>
+  <td><%= check_box_tag "categories[]", category.id %></td>
+  <td><%= category.name %></td>
+  <td><%= category.creator ? category.creator.name : 'nil' %></td>
+  <td><%= category.quizzes.size %></td>
+  <td><%= category.lessons.size %></td>
+  <td>
+    <%= link_to 'Delete Tag', admin_destroy_path('tag', category.id), data: { confirm: 'Are you sure you want to delete this tag?' }, :method => :delete, :remote => true, class: 'btn btn-xs btn-danger' %>
+  </td>
+</tr>

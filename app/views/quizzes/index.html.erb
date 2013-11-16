@@ -1,0 +1,8 @@
+<% provide(:title, 'All Quizzes') %>
+<h1>All Quizzes</h1>
+
+<ul class="quizzes">
+  <%= render @quizzes %>
+</ul>
+
+<%= link_to "+ Create Quiz", new_quiz_path %>

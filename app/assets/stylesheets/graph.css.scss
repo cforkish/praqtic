@@ -1,0 +1,51 @@
+// Place all the styles related to the Graph controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.node-label {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.node-label.quiz {
+  text-align: center;
+  vertical-align: middle;
+  font: 8px sans-serif;
+}
+
+.node {
+  font: 10px sans-serif;
+  cursor: pointer;
+}
+
+.node.category circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node.quiz circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node.active circle {
+  fill: #BCF5A9;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.link.quiz {
+  stroke-width: 1.5px;
+}
+
+.link.friend {
+  stroke: #A4A4A4;
+  stroke-width: 2px;
+  stroke-dasharray: 5,5;
+}

@@ -1,0 +1,7 @@
+<% provide(:title, 'Admin::' + @lesson.name) %>
+
+<h1><%= @lesson.name %> </h1>
+<br />
+<div class="row text-center">
+  <%= link_to 'Delete Source', admin_destroy_path('source', @lesson.id), :confirm => 'Are you sure you want to delete this source?', :method => :delete, class: 'btn btn-mini btn-danger' %>
+</div>

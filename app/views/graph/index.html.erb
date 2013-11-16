@@ -1,0 +1,16 @@
+<!-- this is the element our script attaches the SVG element to -->
+<div id="graph"></div>
+
+<script>
+
+  var data = <%= raw(@jsonNodes) %>
+
+  function clickFunction(d) {
+    window.location.href = d.url;
+  };
+
+  var graph = CategoryGraph();
+  graph("#graph", data);
+  graph.categoryNodeOnClick(clickFunction);
+
+</script>

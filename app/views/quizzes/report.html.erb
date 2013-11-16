@@ -1,0 +1,7 @@
+<% provide(:title, @quiz.name) %>
+
+<div class="row">
+  <h1><%= @quiz.name %></h1>
+  <h2>You answered <%= @quizInteraction.num_correct %> out of <%= @quizInteraction.question_interactions.size %>
+      questions correctly. </h2>
+</div>

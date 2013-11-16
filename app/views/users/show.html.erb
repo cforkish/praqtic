@@ -1,0 +1,17 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h1>
+        <%= gravatar_for @user, size: 75 %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+
+<div class="row">
+  <h1>Tracked Questions</h1>
+</div>
+
+<%= render partial: "tracked_question", collection: @user.user_tracked_questions %>

@@ -1,0 +1,102 @@
+<%= form_for [@quiz, @question], :html => {:class => 'form-horizontal', :role => 'form'} do |f| %>
+  <% if @question.errors.any? %>
+    <div class="error_messages">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+      <ul>
+      <% @question.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!-- Name -->
+  <div class="form-group">
+    <%= f.label :name, class: 'col-md-2 control-label' %>
+    <div class='col-md-8'>
+      <%= f.text_field :name, class: 'form-control'  %>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="form-group">
+    <%= f.label :content, class: 'col-md-2 control-label' %>
+    <div class='col-md-8'>
+      <%= f.text_area :content, :rows => "5", class: 'form-control'  %>
+    </div>
+  </div>
+
+  <!-- Answers -->
+  <div class="row form-group">
+    <div class="col-md-2">
+      <h2 class="text-right control-label">Answers:</h2>
+    </div>
+  </div>
+
+  <input id="next_id_answer" type="hidden" value="2">
+
+  <div id="container_answer">
+    <%= f.fields_for :answers do |builder| %>
+      <%= render 'answer_fields', f: builder  %>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-2">
+      <div class="add_answer btn btn-mini btn-primary form-control">
+        <%= link_to_add_input "Add Answer", f, :answers %>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <!-- Explanation -->
+  <div class="form-group">
+    <%= f.label :explanation, class: 'col-md-2 control-label' %>
+    <div class='col-md-8'>
+      <%= f.text_area :explanation, :rows => "3", class: 'form-control'  %>
+    </div>
+  </div>
+
+  <!-- References -->
+  <div class="form-group">
+    <div class="col-md-2">
+      <h2 class="text-right control-label">References:</h2>
+    </div>
+    <div class="col-md-8">
+      <%= f.select(:lesson_ids, @quiz.lessons.collect {|l| [ l.name, l.id ] }, {},
+                                      { :multiple => true, :class => "chzn-select form-control",
+                                        "data-placeholder" => "Select useful references..." }) %>
+    </div>
+  </div>
+
+  <div class="col-md-offset-2">
+    <p style="padding-left:4px;">Or add a new reference:</p>
+  </div>
+
+  <input id="next_id_lesson" type="hidden" value="1">
+
+  <div id="container_lesson">
+    <%= f.fields_for :lessons do |builder| %>
+      <%= render 'lesson_fields', f: builder  %>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-2 col-md-2">
+      <div class="add_lesson btn btn-mini btn-primary form-control">
+        <%= link_to_add_input "Add Reference", f, :lessons %>
+      </div>
+    </div>
+  </div>
+  <br/>
+
+  <div class="container-panel-div-down"></div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-8">
+      <button type="submit" class="btn btn-success btn-lg btn-block">Create Question</button>
+    </div>
+  </div>
+
+<% end %>
