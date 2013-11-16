@@ -9,6 +9,6 @@ $ ->
   $('.container-panel-div-down').width($('.container-panel-div-down').width() + 62)
 
   # turn whole table rows into links
-  $('tr.tr-url[id*=_]').on 'click', (event) ->
+  $('tr.tr-url').on 'click', (event) ->
     if event.target.nodeName != 'INPUT' and event.target.nodeName != 'A'
       window.location = $(this).attr("url")
