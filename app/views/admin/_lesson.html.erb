@@ -1,9 +1,10 @@
 <tr id='source<%= lesson.friendly_id %>' class='tr-url' url='<%= admin_lesson_path(lesson) %>'>
+  <td><%= check_box_tag "lessons[]", lesson.id %></td>
   <td><%= lesson.name %></td>
   <td><%= lesson.creator ? lesson.creator.name : 'nil' %></td>
   <td><%= lesson.quizzes.size %></td>
   <td><%= lesson.questions.size %></td>
   <td>
-    <%= link_to 'Delete Source', admin_destroy_path('source', lesson.id), :confirm => 'Are you sure you want to delete this source?', :method => :delete, class: 'btn btn-xs btn-danger' %>
+    <%= link_to 'Delete Source', admin_destroy_path('source', lesson.id), data: { confirm: 'Are you sure you want to delete this source?' }, :method => :delete, :remote => true, class: 'btn btn-xs btn-danger' %>
   </td>
 </tr>

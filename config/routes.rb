@@ -35,6 +35,7 @@ Primer::Application.routes.draw do
   get '/admin/quiz/:id' => 'admin#quiz', as: :admin_quiz
   get '/admin/lesson/:id' => 'admin#lesson', as: :admin_lesson
   delete '/admin/destroy/:klass/:id'  => 'admin#destroy', as: :admin_destroy
+  delete '/admin/destroy_multiple'    =>  'admin#destroy_multiple'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

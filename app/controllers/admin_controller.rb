@@ -50,4 +50,33 @@ class AdminController < ApplicationController
     end
   end
 
+
+  def destroy_multiple
+    categoryIDs = params[:categories]
+    @categories = []
+    if categoryIDs
+      @categories = Category.find(categoryIDs)
+      Category.destroy(categoryIDs)
+    end
+
+    @lessons = []
+    lessonIDs = params[:lessons]
+    if lessonIDs
+      @lessons = Lesson.find(lessonIDs)
+      Lesson.destroy(lessonIDs)
+    end
+
+    @quizzes = []
+    quizIDs = params[:quizzes]
+    if quizIDs
+      @quizzes = Quiz.find(quizIDs)
+      Quiz.destroy(quizIDs)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to admin_path }
+      format.js
+    end
+  end
+
 end
