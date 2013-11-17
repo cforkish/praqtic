@@ -1,8 +1,6 @@
 class CategoriesController < ApplicationController
   load_and_authorize_resource
 
-  include GraphHelper
-
   def index
     @root_node = Category.first
   end
@@ -37,9 +35,6 @@ class CategoriesController < ApplicationController
     flash[:success] = "Category removed."
     redirect_to categories_path
   end
-
-end
-
 
   private
 

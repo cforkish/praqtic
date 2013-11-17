@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Primer::Application.load_tasks
+Praqtic::Application.load_tasks

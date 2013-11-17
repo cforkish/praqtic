@@ -1,4 +1,4 @@
-Primer::Application.routes.draw do
+Praqtic::Application.routes.draw do
 
   resources :users, except: :new
   resources :sessions, only: [:new, :create, :destroy]
