@@ -13,6 +13,8 @@ class CategoriesController < ApplicationController
   end
 
   def create
+    @category.creator = current_user
+
     @parent = Category.friendly.find(params[:parent])
     if @parent.nil?
       @parent = Category.first

@@ -17,6 +17,11 @@ class QuizzesController < ApplicationController
   def create
     @quiz.creator = current_user
 
+    @quiz.classifications.each do |c|
+      c.creator = current_user
+      c.category.creator = current_user if c.category.new_record?
+    end
+
     if @quiz.save
       flash[:success] = "Quiz created!"
       redirect_to quiz_path(@quiz)
