@@ -33,6 +33,7 @@ class QuestionsController < ApplicationController
     end
 
     if @question.save
+      @question.tracking_users << current_user if @quiz.is_private
       flash[:success] = "Question created!"
       redirect_to quiz_path(@quiz)
     else
@@ -52,7 +53,7 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:content, :name,
+      params.require(:question).permit(:content, :name, :explanation,
                                         answers_attributes: [ :answer, :is_correct ],
                                         lessons_attributes: [ :name, :link ],
                                         :lesson_ids => [])

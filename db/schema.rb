@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119025811) do
+ActiveRecord::Schema.define(version: 20131119033531) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 20131119025811) do
     t.string   "description"
     t.string   "caption"
     t.uuid     "creator_id"
-    t.boolean  "private",     default: false
+    t.boolean  "is_private",  default: false
   end
 
   add_index "quizzes", ["creator_id"], name: "index_quizzes_on_creator_id", using: :btree
