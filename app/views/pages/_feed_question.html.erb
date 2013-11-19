@@ -1,0 +1,18 @@
+<li>
+  <div class='panel panel-info'>
+    <div class='panel-heading'>
+      <div class='panel-title'><%= feed_question.name %></div>
+      <%= feed_question.content %>
+    </div>
+    <div class='panel-body'>
+      <ul>
+        <% feed_question.answers.each_with_index do |a, index| %>
+          <li>
+              <%= (index + 65).chr %>) &nbsp;
+              <%= a.answer %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</li>

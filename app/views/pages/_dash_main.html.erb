@@ -1,5 +1,8 @@
 <div class='container'>
-  <div class='row'>
+  <div class='question-feed'>
     <h1>Dashboard</h1>
+    <ul>
+      <%= render :partial => 'feed_question', :collection => @feedQuestions %>
+    </ul>
   </div>
 </div>

@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   def home
     if signed_in?
       @user = current_user
+      @feedQuestions = @user.tracked_questions
       render 'dash'
     end
   end
