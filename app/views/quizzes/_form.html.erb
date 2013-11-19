@@ -34,15 +34,21 @@
     </div>
   </div>
 
+  <!-- Private -->
+  <div class="form-group">
+    <%= f.label :private, class: 'col-md-2 control-label' %>
+    <div class='col-md-8 checkbox'>
+      <%= f.check_box :private %>Check this box if you'd like to keep this quiz private.
+    </div>
+  </div>
+
   <!-- Existing Categories -->
   <div class="form-group">
-    <div class="col-md-2">
-      <h2 class="text-right control-label">Tags:</h2>
-    </div>
+    <%= f.label :tags, class: 'col-md-2 control-label' %>
     <div class="col-md-8">
       <%= f.select(:category_ids, Category.all.collect {|c| [ c.name, c.id ] }, {},
                                       { :multiple => true, :class => "chzn-select form-control",
-                                        "data-placeholder" => "Select existing tags..." }) %>
+                                        "data-placeholder" => "Choose existing tags..." }) %>
     </div>
   </div>
 
@@ -51,7 +57,6 @@
   </div>
 
   <!-- New Categories -->
-
   <input id="next_id_classification" type="hidden" value="1">
 
   <div id="container_classification">

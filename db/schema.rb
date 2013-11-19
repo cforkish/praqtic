@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131115014757) do
+ActiveRecord::Schema.define(version: 20131119025811) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,14 @@ ActiveRecord::Schema.define(version: 20131115014757) do
     t.uuid "question_id"
   end
 
+  create_table "posts", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "question_answers", id: :uuid, force: true do |t|
     t.uuid     "question_id"
     t.string   "answer"
@@ -162,6 +170,7 @@ ActiveRecord::Schema.define(version: 20131115014757) do
     t.string   "description"
     t.string   "caption"
     t.uuid     "creator_id"
+    t.boolean  "private",     default: false
   end
 
   add_index "quizzes", ["creator_id"], name: "index_quizzes_on_creator_id", using: :btree
