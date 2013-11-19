@@ -66,12 +66,12 @@
     <div class="col-md-8">
       <%= f.select(:lesson_ids, @quiz.lessons.collect {|l| [ l.name, l.id ] }, {},
                                       { :multiple => true, :class => "chzn-select form-control",
-                                        "data-placeholder" => "Select useful references..." }) %>
+                                        "data-placeholder" => "Cite your sources..." }) %>
     </div>
   </div>
 
   <div class="col-md-offset-2">
-    <p style="padding-left:4px;">Or add a new reference:</p>
+    <p style="padding-left:4px;">Or add a new source:</p>
   </div>
 
   <input id="next_id_lesson" type="hidden" value="1">
@@ -85,7 +85,7 @@
   <div class="row">
     <div class="col-md-offset-2 col-md-2">
       <div class="add_lesson btn btn-mini btn-primary form-control">
-        <%= link_to_add_input "Add Reference", f, :lessons %>
+        <%= link_to_add_input "Add Source", f, :lessons %>
       </div>
     </div>
   </div>

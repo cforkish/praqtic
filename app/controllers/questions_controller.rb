@@ -23,9 +23,13 @@ class QuestionsController < ApplicationController
     @question.creator = current_user
 
     @question.lessons.each do |l|
-      l.quiz = @quiz
-      l.creator = current_user
-      render 'new' unless l.save!
+      if l.name && l.name.length > 0
+        l.quiz = @quiz
+        l.creator = current_user
+        # render 'new' unless l.save!
+      else
+        @question.lessons.delete(l)
+      end
     end
 
     if @question.save

@@ -18,8 +18,13 @@ class QuizzesController < ApplicationController
     @quiz.creator = current_user
 
     @quiz.classifications.each do |c|
-      c.creator = current_user
-      c.category.creator = current_user if c.category.new_record?
+      if c.category.name && c.category.name.length > 0
+        c.creator = current_user
+        c.category.creator = current_user if c.category.new_record?
+      else
+        @quiz.categories.delete(c.category)
+        @quiz.classifications.delete(c)
+      end
     end
 
     if @quiz.save

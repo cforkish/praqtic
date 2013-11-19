@@ -7,7 +7,7 @@ class Question < ActiveRecord::Base
   has_many :interactions, :class_name => "QuestionInteraction"
   has_many :user_tracked_questions
   has_many :tracking_users, :through => :user_tracked_questions,
-              class_name: "User", :source => :user
+              class_name: "User", :source => :user, :dependent => :destroy
 
 	belongs_to :quiz
   belongs_to :creator, :class_name => "User"
