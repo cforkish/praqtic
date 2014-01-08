@@ -82,14 +82,14 @@ p {
   margin-left: 20px;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
+  color: black;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 13px;
   font-weight: bold;
   line-height: 1;
   &:hover {
-    color: white;
+    color: $gray-light;
     text-decoration: none;
   }
 }
