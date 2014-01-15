@@ -258,6 +258,15 @@ input {
 .sidebar-left {
   width: 200px;
   float: left;
+
+  ul {
+    margin-left: 0px;
+    padding: 0;
+    list-style: none;
+    li {
+      margin-left: 0px;
+    }
+  }
 }
 
 .main-content {
