@@ -1,5 +1,11 @@
 Praqtic::Application.routes.draw do
 
+  namespace :api, :defaults => {:format => :json} do
+    namespace :v1 do
+      resources :lessons
+    end
+  end
+
   resources :users, except: :new
   resources :sessions, only: [:new, :create, :destroy]
   resources :categories do
