@@ -5,5 +5,5 @@ class QuestionInteraction < ActiveRecord::Base
 
   validates_presence_of :question
   validates_presence_of :user
-  validates_presence_of :quiz_interaction
+  # validates_presence_of :quiz_interaction
 end

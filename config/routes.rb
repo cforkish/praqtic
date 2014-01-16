@@ -43,6 +43,8 @@ Praqtic::Application.routes.draw do
   delete '/admin/destroy/:klass/:id'  => 'admin#destroy', as: :admin_destroy
   delete '/admin/destroy_multiple'    =>  'admin#destroy_multiple'
 
+  post '/feed_questions/submit'          =>  'feed#submit_answer'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
